@@ -5,61 +5,18 @@ import Section from '../ui/Section';
 import { PAYMENT_METHODS } from '../../content/platform';
 import { color, motion, radius } from '../../theme/tokens';
 
-/**
- * Payment-method trust row.
- *
- * These are typographic wordmarks, NOT the official brand marks. Licensed
- * logo assets must be sourced from each provider before launch — approximating
- * a payment brand's mark is a trademark problem as much as a fidelity one.
- */
 export default function PaymentStrip() {
   return (
-    <Section id="payment-methods-strip" tone="light" density="tight">
-      <Typography
-        variant="overline"
-        component="p"
-        sx={{ textAlign: 'center', color: color.neutral[400], mb: 3.5 }}
-      >
-        Payments processed through SSLCOMMERZ
-      </Typography>
-
-      <Stack
-        direction="row"
-        sx={{ flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: { xs: 1.25, md: 2 } }}
-      >
-        {PAYMENT_METHODS.map((m) => (
-          <Stack
-            key={m.name}
-            direction="row"
-            spacing={1.25}
-            title={m.category}
-            sx={{
-              alignItems: 'center',
-              px: 2.25,
-              py: 1.375,
-              borderRadius: `${radius.md}px`,
-              border: `1px solid ${color.neutral[200]}`,
-              bgcolor: color.neutral[0],
-              filter: 'grayscale(1)',
-              opacity: 0.62,
-              transition: `filter ${motion.base} ${motion.ease}, opacity ${motion.base} ${motion.ease}, border-color ${motion.base} ${motion.ease}`,
-              '&:hover': { filter: 'none', opacity: 1, borderColor: color.brand[200] },
-            }}
-          >
-            <Box component={m.icon} sx={{ width: 16, height: 16, color: color.neutral[500] }} aria-hidden />
-            <Typography sx={{ fontSize: '0.9375rem', fontWeight: 700, color: color.neutral[700] }}>
-              {m.name}
-            </Typography>
-          </Stack>
-        ))}
+    <Section id="payment-methods-strip" tone="subtle" density="tight">
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 2.5, md: 5 }} sx={{ alignItems: { md: 'center' }, justifyContent: 'space-between' }}>
+        <Box sx={{ minWidth: 220 }}>
+          <Typography sx={{ fontSize: '.68rem', fontWeight: 800, letterSpacing: '.11em', textTransform: 'uppercase', color: color.neutral[400] }}>Payment infrastructure</Typography>
+          <Typography sx={{ mt: .6, fontSize: '.95rem', fontWeight: 700, color: color.neutral[800] }}>Flexible ways for families to pay.</Typography>
+        </Box>
+        <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1, justifyContent: { md: 'flex-end' } }}>
+          {PAYMENT_METHODS.map((m) => <Stack key={m.name} direction="row" spacing={.8} alignItems="center" title={m.category} sx={{ px: 1.5, py: .85, borderRadius: radius.md, bgcolor: '#fff', border: `1px solid ${color.neutral[200]}`, transition: `all ${motion.base} ${motion.ease}`, '&:hover': { borderColor: color.brand[200], transform: 'translateY(-2px)', boxShadow: '0 8px 22px rgba(15,23,42,.06)' } }}><Box component={m.icon} sx={{ width: 15, height: 15, color: color.brand[600] }} aria-hidden /><Typography sx={{ fontSize: '.76rem', fontWeight: 700, color: color.neutral[700] }}>{m.name}</Typography></Stack>)}
+        </Stack>
       </Stack>
-
-      <Typography
-        variant="caption"
-        sx={{ display: 'block', textAlign: 'center', mt: 3, color: color.neutral[400] }}
-      >
-        Wordmark placeholders — official brand assets pending licensing
-      </Typography>
     </Section>
   );
 }
