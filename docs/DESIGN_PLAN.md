@@ -344,8 +344,22 @@ depends on an animation running in order to be visible.
 
 Both views are reproduced as synthetic mockups instead (`DashboardMockup`, `PhoneMockup`, data in
 `src/components/product/mockData.ts`), modelled on the real product's information architecture but
-referencing students by masked ID and cohort only. `dashboard.png` and `Payment Summary.png` are
-clean and may be used.
+referencing students by masked ID and cohort only. These are still used on the Features page and in
+the Home product showcase.
+
+**The hero uses the two clean real captures.** `DashboardScreenshot` and `PhoneScreenshot` render
+`dashboard.png` and `payment-summary.png` (downscaled to `*-hero.png`, 816 KB → 484 KB).
+
+| Concern | Handling |
+|---|---|
+| Source is 3566px wide — illegible if fitted to the column | Scaled past the frame and cropped: 240% / 16:11 on desktop, 190% / 16:8.8 on mobile |
+| Sidebar has a printed helpline number | Both crops keep the visible slice under ~50% of source height, which cuts above it |
+| Capture is branded **"eEducation"** | Does not match this site's wordmark — **reshoot under the launch brand before go-live** |
+| Real app uses a light-blue gradient | Reads slightly apart from the indigo system; accepted as the cost of real UI |
+
+`students-list.png` and `app-home.png` remain in `src/assets/images/` but are **not imported**, so
+they are never bundled. Consider moving them out of `src/` entirely so they cannot be picked up by
+accident.
 
 ## 10. Immediate Next Actions
 
