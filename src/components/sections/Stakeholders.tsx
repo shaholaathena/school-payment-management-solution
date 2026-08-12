@@ -10,48 +10,20 @@ import StakeholderCard from '../ui/StakeholderCard';
 import { STAKEHOLDERS } from '../../content/home';
 import { color, radius, shadow } from '../../theme/tokens';
 
-function FlowStrip() {
-  const nodes = ['School creates the fee', 'Parent receives and pays', 'Records stay in sync'];
-
-  return (
-    <Box sx={{ mb: { xs: 5, md: 7 }, p: { xs: 2, md: 2.25 }, borderRadius: `${radius.xl}px`, bgcolor: color.ink[900], backgroundImage: 'radial-gradient(circle at 20% 0%, rgba(99,102,241,0.24), transparent 35%), radial-gradient(circle at 90% 100%, rgba(6,182,212,0.14), transparent 32%)', boxShadow: shadow.xl }}>
-      <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1.5, md: 0 }}>
-        {nodes.map((node, i) => (
-          <Stack key={node} direction="row" spacing={1.5} sx={{ flex: 1, alignItems: 'center', minWidth: 0, px: { xs: 1, md: 2 }, py: 1.5, borderRight: { md: i < nodes.length - 1 ? '1px solid rgba(255,255,255,0.10)' : 'none' }, borderBottom: { xs: i < nodes.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none', md: 'none' } }}>
-            <Box sx={{ width: 32, height: 32, flexShrink: 0, borderRadius: '50%', display: 'grid', placeItems: 'center', bgcolor: 'rgba(129,140,248,0.14)', color: '#A5B4FC' }}>
-              <CheckCircle2 size={17} strokeWidth={2} />
-            </Box>
-            <Box sx={{ minWidth: 0 }}>
-              <Typography sx={{ color: '#fff', fontSize: '0.82rem', fontWeight: 700 }}>{node}</Typography>
-              <Typography sx={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.68rem', mt: 0.25 }}>Step {i + 1}</Typography>
-            </Box>
-            {i < nodes.length - 1 && <ArrowRight size={15} color="rgba(255,255,255,0.28)" style={{ marginLeft: 'auto', flexShrink: 0 }} />}
-          </Stack>
-        ))}
-      </Stack>
-    </Box>
-  );
-}
-
 export default function Stakeholders() {
+  const nodes = ['School creates the fee', 'Parent receives and pays', 'Records stay in sync'];
   return (
-    <Section id="stakeholders" tone="subtle">
-      <SectionHeading
-        eyebrow="One platform, three audiences"
-        title="A better experience for everyone around the payment"
-        description="Schools get control, parents get clarity, and students stay connected to the information they need."
-      />
-
-      <Reveal><FlowStrip /></Reveal>
-
-      <Grid container spacing={2.5}>
-        {STAKEHOLDERS.map((s, i) => (
-          <Grid size={{ xs: 12, md: 4 }} key={s.role}>
-            <Reveal delay={i * 90} sx={{ height: '100%' }}>
-              <StakeholderCard {...s} />
-            </Reveal>
+    <Section id="stakeholders" tone="subtle" density="loose">
+      <SectionHeading eyebrow="One platform, three audiences" title="Every side of the payment gets a better experience" description="A connected flow keeps the school in control while making payment clearer for families." />
+      <Reveal>
+        <Box sx={{ mt: { xs: 5, md: 7 }, mb: { xs: 5, md: 7 }, p: { xs: 2, md: 2.5 }, borderRadius: `${radius['2xl']}px`, bgcolor: color.ink[900], backgroundImage: 'radial-gradient(circle at 0% 0%, rgba(99,102,241,0.30), transparent 34%), radial-gradient(circle at 100% 100%, rgba(6,182,212,0.16), transparent 32%)', boxShadow: shadow.xl }}>
+          <Grid container spacing={1.5} alignItems="stretch">
+            {nodes.map((node, i) => <Grid size={{ xs: 12, md: 4 }} key={node}><Stack direction="row" spacing={1.5} sx={{ height: '100%', alignItems: 'center', p: { xs: 2, md: 2.5 }, borderRadius: `${radius.lg}px`, bgcolor: 'rgba(255,255,255,0.055)', border: '1px solid rgba(255,255,255,0.08)' }}><Box sx={{ width: 36, height: 36, flexShrink: 0, borderRadius: '50%', display: 'grid', placeItems: 'center', bgcolor: 'rgba(129,140,248,0.16)', color: '#A9B2FF' }}><CheckCircle2 size={18} /></Box><Box sx={{ minWidth: 0, flex: 1 }}><Typography sx={{ color: '#fff', fontSize: '0.86rem', fontWeight: 700 }}>{node}</Typography><Typography sx={{ color: 'rgba(255,255,255,0.42)', fontSize: '0.68rem', mt: 0.4 }}>Step {i + 1}</Typography></Box>{i < 2 && <ArrowRight size={15} color="rgba(255,255,255,0.3)" />}</Stack></Grid>)}
           </Grid>
-        ))}
+        </Box>
+      </Reveal>
+      <Grid container spacing={2}>
+        {STAKEHOLDERS.map((s, i) => <Grid size={{ xs: 12, md: 4 }} key={s.role}><Reveal delay={i * 80} sx={{ height: '100%' }}><Box sx={{ height: '100%', '&:hover': { transform: 'translateY(-4px)' }, transition: 'transform 220ms var(--ease)' }}><StakeholderCard {...s} /></Box></Reveal></Grid>)}
       </Grid>
     </Section>
   );
