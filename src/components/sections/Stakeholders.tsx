@@ -8,23 +8,19 @@ import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import StakeholderCard from '../ui/StakeholderCard';
 import { STAKEHOLDERS } from '../../content/home';
-import { color, radius, shadow } from '../../theme/tokens';
+import { color, radius } from '../../theme/tokens';
 
 export default function Stakeholders() {
-  const nodes = ['School creates the fee', 'Parent receives and pays', 'Records stay in sync'];
-  return (
-    <Section id="stakeholders" tone="subtle" density="loose">
-      <SectionHeading eyebrow="One platform, three audiences" title="Every side of the payment gets a better experience" description="A connected flow keeps the school in control while making payment clearer for families." />
-      <Reveal>
-        <Box sx={{ mt: { xs: 5, md: 7 }, mb: { xs: 5, md: 7 }, p: { xs: 2, md: 2.5 }, borderRadius: `${radius['2xl']}px`, bgcolor: color.ink[900], backgroundImage: 'radial-gradient(circle at 0% 0%, rgba(99,102,241,0.30), transparent 34%), radial-gradient(circle at 100% 100%, rgba(6,182,212,0.16), transparent 32%)', boxShadow: shadow.xl }}>
-          <Grid container spacing={1.5} alignItems="stretch">
-            {nodes.map((node, i) => <Grid size={{ xs: 12, md: 4 }} key={node}><Stack direction="row" spacing={1.5} sx={{ height: '100%', alignItems: 'center', p: { xs: 2, md: 2.5 }, borderRadius: `${radius.lg}px`, bgcolor: 'rgba(255,255,255,0.055)', border: '1px solid rgba(255,255,255,0.08)' }}><Box sx={{ width: 36, height: 36, flexShrink: 0, borderRadius: '50%', display: 'grid', placeItems: 'center', bgcolor: 'rgba(129,140,248,0.16)', color: '#A9B2FF' }}><CheckCircle2 size={18} /></Box><Box sx={{ minWidth: 0, flex: 1 }}><Typography sx={{ color: '#fff', fontSize: '0.86rem', fontWeight: 700 }}>{node}</Typography><Typography sx={{ color: 'rgba(255,255,255,0.42)', fontSize: '0.68rem', mt: 0.4 }}>Step {i + 1}</Typography></Box>{i < 2 && <ArrowRight size={15} color="rgba(255,255,255,0.3)" />}</Stack></Grid>)}
-          </Grid>
-        </Box>
-      </Reveal>
-      <Grid container spacing={2}>
-        {STAKEHOLDERS.map((s, i) => <Grid size={{ xs: 12, md: 4 }} key={s.role}><Reveal delay={i * 80} sx={{ height: '100%' }}><Box sx={{ height: '100%', '&:hover': { transform: 'translateY(-4px)' }, transition: 'transform 220ms var(--ease)' }}><StakeholderCard {...s} /></Box></Reveal></Grid>)}
-      </Grid>
-    </Section>
-  );
+  const nodes = ['Create fees', 'Pay with ease', 'Stay in sync'];
+  return <Section id="stakeholders" tone="subtle" density="loose">
+    <SectionHeading eyebrow="One connected experience" title="Built around the people behind every payment." description="Schools get control. Parents get clarity. Records stay connected from collection to reconciliation." />
+    <Reveal>
+      <Box sx={{ mt: { xs: 5, md: 6 }, mb: { xs: 5, md: 6 }, p: { xs: 1.25, md: 1.75 }, borderRadius: `${radius['2xl']}px`, bgcolor: color.ink[900], backgroundImage: 'linear-gradient(110deg, #151936 0%, #20285a 52%, #16223c 100%)' }}>
+        <Grid container spacing={1}>
+          {nodes.map((node, i) => <Grid size={{ xs: 12, md: 4 }} key={node}><Stack direction="row" spacing={1.25} alignItems="center" sx={{ minHeight: { md: 90 }, p: 2, borderRadius: radius.lg, bgcolor: 'rgba(255,255,255,.055)', border: '1px solid rgba(255,255,255,.08)' }}><Box sx={{ width: 34, height: 34, flexShrink: 0, borderRadius: '50%', bgcolor: 'rgba(129,140,248,.15)', color: '#A9B2FF', display: 'grid', placeItems: 'center' }}><CheckCircle2 size={17} /></Box><Box sx={{ flex: 1 }}><Typography sx={{ color: '#fff', fontWeight: 750, fontSize: '.85rem' }}>{node}</Typography><Typography sx={{ color: 'rgba(255,255,255,.4)', fontSize: '.67rem', mt: .3 }}>Step {i + 1}</Typography></Box>{i < 2 && <ArrowRight size={15} color="rgba(255,255,255,.3)" />}</Stack></Grid>)}
+        </Grid>
+      </Box>
+    </Reveal>
+    <Grid container spacing={1.5}>{STAKEHOLDERS.map((s, i) => <Grid size={{ xs: 12, md: 4 }} key={s.role}><Reveal delay={i * 70} sx={{ height: '100%' }}><Box sx={{ height: '100%', transition: 'transform 220ms var(--ease)', '&:hover': { transform: 'translateY(-4px)' } }}><StakeholderCard {...s} /></Box></Reveal></Grid>)}</Grid>
+  </Section>;
 }
