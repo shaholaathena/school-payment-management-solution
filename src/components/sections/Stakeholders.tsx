@@ -2,71 +2,30 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import StakeholderCard from '../ui/StakeholderCard';
 import { STAKEHOLDERS } from '../../content/home';
-import { color, radius } from '../../theme/tokens';
+import { color, radius, shadow } from '../../theme/tokens';
 
-/** Visualises the three-party flow the platform sits in the middle of. */
 function FlowStrip() {
-  const nodes = ['School raises the fee', 'Guardian is notified and pays', 'Records update everywhere'];
+  const nodes = ['School creates the fee', 'Parent receives and pays', 'Records stay in sync'];
 
   return (
-    <Box
-      sx={{
-        mb: { xs: 5, md: 7 },
-        p: { xs: 2.5, md: 3 },
-        borderRadius: `${radius.xl}px`,
-        bgcolor: color.neutral[0],
-        border: `1px solid ${color.neutral[200]}`,
-      }}
-    >
-      <Stack
-        direction={{ xs: 'column', md: 'row' }}
-        spacing={{ xs: 2, md: 0 }}
-        sx={{ alignItems: { md: 'center' } }}
-      >
-        {nodes.map((n, i) => (
-          <Stack
-            key={n}
-            direction="row"
-            spacing={2}
-            sx={{ alignItems: 'center', flex: 1, minWidth: 0 }}
-          >
-            <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', flexGrow: 1, minWidth: 0 }}>
-              <Box
-                sx={{
-                  width: 26,
-                  height: 26,
-                  flexShrink: 0,
-                  borderRadius: '50%',
-                  display: 'grid',
-                  placeItems: 'center',
-                  bgcolor: color.brand[50],
-                  border: `1px solid ${color.brand[100]}`,
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  color: color.brand[700],
-                }}
-              >
-                {i + 1}
-              </Box>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: color.neutral[700] }}>
-                {n}
-              </Typography>
-            </Stack>
-
-            {i < nodes.length - 1 && (
-              <ArrowRight
-                size={16}
-                strokeWidth={2}
-                aria-hidden
-                style={{ color: color.neutral[300], flexShrink: 0 }}
-              />
-            )}
+    <Box sx={{ mb: { xs: 5, md: 7 }, p: { xs: 2, md: 2.25 }, borderRadius: `${radius.xl}px`, bgcolor: color.ink[900], backgroundImage: 'radial-gradient(circle at 20% 0%, rgba(99,102,241,0.24), transparent 35%), radial-gradient(circle at 90% 100%, rgba(6,182,212,0.14), transparent 32%)', boxShadow: shadow.xl }}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1.5, md: 0 }}>
+        {nodes.map((node, i) => (
+          <Stack key={node} direction="row" spacing={1.5} sx={{ flex: 1, alignItems: 'center', minWidth: 0, px: { xs: 1, md: 2 }, py: 1.5, borderRight: { md: i < nodes.length - 1 ? '1px solid rgba(255,255,255,0.10)' : 'none' }, borderBottom: { xs: i < nodes.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none', md: 'none' } }}>
+            <Box sx={{ width: 32, height: 32, flexShrink: 0, borderRadius: '50%', display: 'grid', placeItems: 'center', bgcolor: 'rgba(129,140,248,0.14)', color: '#A5B4FC' }}>
+              <CheckCircle2 size={17} strokeWidth={2} />
+            </Box>
+            <Box sx={{ minWidth: 0 }}>
+              <Typography sx={{ color: '#fff', fontSize: '0.82rem', fontWeight: 700 }}>{node}</Typography>
+              <Typography sx={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.68rem', mt: 0.25 }}>Step {i + 1}</Typography>
+            </Box>
+            {i < nodes.length - 1 && <ArrowRight size={15} color="rgba(255,255,255,0.28)" style={{ marginLeft: 'auto', flexShrink: 0 }} />}
           </Stack>
         ))}
       </Stack>
@@ -79,15 +38,13 @@ export default function Stakeholders() {
     <Section id="stakeholders" tone="subtle">
       <SectionHeading
         eyebrow="One platform, three audiences"
-        title="Connecting schools, parents and students"
-        description="Each group gets the view that fits their role — working from the same underlying records."
+        title="A better experience for everyone around the payment"
+        description="Schools get control, parents get clarity, and students stay connected to the information they need."
       />
 
-      <Reveal>
-        <FlowStrip />
-      </Reveal>
+      <Reveal><FlowStrip /></Reveal>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={2.5}>
         {STAKEHOLDERS.map((s, i) => (
           <Grid size={{ xs: 12, md: 4 }} key={s.role}>
             <Reveal delay={i * 90} sx={{ height: '100%' }}>
