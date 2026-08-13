@@ -25,22 +25,22 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
   return (
     <Reveal>
       <Box sx={{ position: 'relative', py: { xs: 5, md: 8 }, borderTop: index === 0 ? 'none' : `1px solid ${color.neutral[200]}` }}>
-        <Grid container spacing={{ xs: 4, md: 8 }} alignItems="center">
+        <Grid container spacing={{ xs: 4, md: 8 }} sx={{ alignItems: 'center' }}>
           <Grid size={{ xs: 12, md: 6 }} sx={{ order: { md: flip ? 2 : 1 } }}>
-            <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
+            <Stack direction="row" spacing={2} sx={{ alignItems: 'center', mb: 3 }}>
               <Box sx={{ width: 50, height: 50, borderRadius: `${radius.lg}px`, display: 'grid', placeItems: 'center', bgcolor: color.brand[50], border: `1px solid ${color.brand[100]}`, color: color.brand[600] }}><Icon size={23} strokeWidth={1.9} /></Box>
               <Box><Typography variant="overline" sx={{ color: color.neutral[400], letterSpacing: '0.12em' }}>{feature.index} · {feature.category}</Typography><Typography variant="h3" component="h2">{feature.title}</Typography></Box>
             </Stack>
             <Typography variant="h5" sx={{ maxWidth: '25ch', mb: 1.5 }}>{feature.headline}</Typography>
             <Typography variant="body1" sx={{ color: color.neutral[600], maxWidth: '54ch', lineHeight: 1.75, mb: 2.5 }}>{feature.description}</Typography>
-            <Stack direction="row" spacing={1.25} alignItems="center"><Box sx={{ width: 20, height: 20, borderRadius: '50%', display: 'grid', placeItems: 'center', bgcolor: color.success[50], color: color.success[600] }}><Check size={12} strokeWidth={3} /></Box><Typography variant="body2" sx={{ fontWeight: 700 }}>{feature.outcome}</Typography></Stack>
+            <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center' }}><Box sx={{ width: 20, height: 20, borderRadius: '50%', display: 'grid', placeItems: 'center', bgcolor: color.success[50], color: color.success[600] }}><Check size={12} strokeWidth={3} /></Box><Typography variant="body2" sx={{ fontWeight: 700 }}>{feature.outcome}</Typography></Stack>
             <StatusNote status={feature.status} />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }} sx={{ order: { md: flip ? 1 : 2 } }}>
             <Box sx={{ p: { xs: 2.5, md: 3.5 }, borderRadius: `${radius['2xl']}px`, bgcolor: index % 3 === 0 ? color.neutral[50] : color.neutral[0], border: `1px solid ${color.neutral[200]}`, boxShadow: shadow.sm, transition: `transform ${motion.base} ${motion.ease}, box-shadow ${motion.base} ${motion.ease}`, '&:hover': { transform: 'translateY(-4px)', boxShadow: shadow.lg } }}>
-              <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2.5 }}><Typography variant="overline" sx={{ color: color.neutral[400] }}>What it includes</Typography><ArrowUpRight size={17} color={color.neutral[300]} /></Stack>
+              <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center', mb: 2.5 }}><Typography variant="overline" sx={{ color: color.neutral[400] }}>What it includes</Typography><ArrowUpRight size={17} color={color.neutral[300]} /></Stack>
               <Stack component="ul" spacing={1.5} sx={{ listStyle: 'none', m: 0, p: 0 }}>
-                {feature.details.map((d) => <Stack key={d} component="li" direction="row" spacing={1.5} alignItems="flex-start"><Box sx={{ mt: '8px', width: 6, height: 6, flexShrink: 0, borderRadius: '50%', bgcolor: color.brand[400] }} /><Typography variant="body2" sx={{ color: color.neutral[700], lineHeight: 1.65 }}>{d}</Typography></Stack>)}
+                {feature.details.map((d) => <Stack key={d} component="li" direction="row" spacing={1.5} sx={{ alignItems: 'flex-start' }}><Box sx={{ mt: '8px', width: 6, height: 6, flexShrink: 0, borderRadius: '50%', bgcolor: color.brand[400] }} /><Typography variant="body2" sx={{ color: color.neutral[700], lineHeight: 1.65 }}>{d}</Typography></Stack>)}
               </Stack>
             </Box>
           </Grid>

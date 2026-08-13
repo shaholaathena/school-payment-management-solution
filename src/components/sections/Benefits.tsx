@@ -1,27 +1,175 @@
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { ArrowUpRight, Check, Sparkles } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import { BENEFITS } from '../../content/home';
-import { color, radius, shadow } from '../../theme/tokens';
+import { color, motion, radius, shadow } from '../../theme/tokens';
+
+/**
+ * Supporting detail for the featured card only. Each line is a capability
+ * already described in `src/content/features.ts` — the bento gives the lead
+ * benefit more room, not more claims.
+ */
+const FEATURED_DETAIL = [
+  'Dues generated against published fee structures',
+  'SMS and email reminders on due dates',
+  'Push notifications through the mobile apps',
+];
+
+/** span-2 cards sit at either end of the two rows, so neither row reads as a grid of equals. */
+const SPAN: Record<number, number> = { 0: 2, 1: 1, 2: 1, 3: 2 };
 
 export default function Benefits() {
   return (
     <Section id="benefits" tone="light" density="loose">
-      <Box sx={{ display: 'grid', gridTemplateColumns: { md: 'minmax(0,1fr) auto' }, gap: 4, alignItems: 'end', mb: { xs: 5, md: 7 } }}>
-        <SectionHeading eyebrow="Why institutions choose it" title="Less chasing. More visibility." description="Bring collections, payments and records into one experience designed around the everyday work of schools." />
-        <Stack direction="row" spacing={1} alignItems="center" sx={{ px: 1.5, py: 1, borderRadius: radius.pill, bgcolor: color.brand[50], color: color.brand[700], border: `1px solid ${color.brand[100]}` }}><Sparkles size={14} /><Typography sx={{ fontSize: '.72rem', fontWeight: 750 }}>Designed for daily operations</Typography></Stack>
-      </Box>
-      <Grid container spacing={1.5}>
+      <SectionHeading
+        align="left"
+        eyebrow="Why institutions choose it"
+        title="Less chasing. More visibility."
+        description="The platform is judged on four things: how quickly money arrives, how clearly it can be seen, how it feels to families, and whether it holds up under scrutiny."
+        titleMaxWidth="14ch"
+      />
+
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
+          gap: { xs: 2, md: 2.5 },
+        }}
+      >
         {BENEFITS.map((b, i) => {
           const featured = i === 0;
-          return <Grid size={{ xs: 12, sm: 6, lg: i === 0 ? 6 : 3 }} key={b.title}><Reveal delay={i * 70} sx={{ height: '100%' }}><Box sx={{ height: '100%', minHeight: { xs: 235, md: featured ? 330 : 260 }, p: { xs: 3, md: 3.5 }, position: 'relative', overflow: 'hidden', borderRadius: `${radius.xl}px`, bgcolor: featured ? color.ink[900] : '#fff', color: featured ? '#fff' : color.neutral[900], border: `1px solid ${featured ? 'rgba(255,255,255,.08)' : color.neutral[200]}`, boxShadow: featured ? shadow.lg : '0 8px 28px rgba(15,23,42,.035)', transition: 'transform 240ms var(--ease), box-shadow 240ms var(--ease)', '&:hover': { transform: 'translateY(-5px)', boxShadow: shadow.lg }, '&:before': { content: '""', position: 'absolute', width: 250, height: 250, right: -110, bottom: -130, borderRadius: '50%', background: featured ? 'rgba(99,102,241,.22)' : color.brand[50] } }}><Stack direction="row" justifyContent="space-between" sx={{ position: 'relative', zIndex: 1 }}><Box sx={{ width: 46, height: 46, borderRadius: radius.md, display: 'grid', placeItems: 'center', bgcolor: featured ? 'rgba(255,255,255,.1)' : color.brand[50], color: featured ? '#A9B2FF' : color.brand[600] }}><b.icon size={20} /></Box><Box sx={{ width: 30, height: 30, borderRadius: '50%', display: 'grid', placeItems: 'center', bgcolor: featured ? 'rgba(255,255,255,.08)' : color.neutral[50], color: featured ? '#fff' : color.neutral[500] }}><ArrowUpRight size={14} /></Box></Stack><Typography variant="h4" sx={{ position: 'relative', zIndex: 1, mt: featured ? 8 : 6, mb: 1.25, color: 'inherit' }}>{b.title}</Typography><Stack direction="row" spacing={.8} sx={{ position: 'relative', zIndex: 1, alignItems: 'flex-start' }}><Check size={15} color={featured ? '#A9B2FF' : color.success[600]} style={{ marginTop: 4, flexShrink: 0 }} /><Typography sx={{ fontSize: '.86rem', lineHeight: 1.65, color: featured ? 'rgba(255,255,255,.62)' : color.neutral[600], maxWidth: 42 + 'ch' }}>{b.description}</Typography></Stack></Box></Reveal></Grid>;
+
+          return (
+            <Reveal
+              key={b.title}
+              delay={i * 70}
+              sx={{
+                display: 'flex',
+                gridColumn: { lg: `span ${SPAN[i]}` },
+                ...(featured && { gridColumn: { sm: 'span 2', lg: 'span 2' } }),
+              }}
+            >
+              <Box
+                sx={{
+                  flex: 1,
+                  position: 'relative',
+                  overflow: 'hidden',
+                  p: { xs: 3, md: featured ? 4.5 : 3.5 },
+                  minHeight: { md: featured ? 340 : 260 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  borderRadius: `${radius['2xl']}px`,
+                  bgcolor: featured ? color.ink[900] : color.neutral[0],
+                  color: featured ? '#fff' : color.neutral[950],
+                  border: `1px solid ${featured ? 'rgba(255,255,255,0.08)' : color.surface.line}`,
+                  boxShadow: featured ? shadow.lg : 'none',
+                  transition: `transform ${motion.base} ${motion.ease}, box-shadow ${motion.base} ${motion.ease}, border-color ${motion.base} ${motion.ease}`,
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                    boxShadow: featured ? shadow.xl : shadow.lg,
+                    borderColor: featured ? 'rgba(255,255,255,0.16)' : color.brand[200],
+                  },
+                }}
+              >
+                {featured && (
+                  <Box
+                    aria-hidden
+                    sx={{
+                      position: 'absolute',
+                      inset: 0,
+                      backgroundImage:
+                        'radial-gradient(at 88% 4%, rgba(79,70,229,0.36) 0px, transparent 50%), radial-gradient(at 6% 96%, rgba(6,182,212,0.14) 0px, transparent 45%)',
+                    }}
+                  />
+                )}
+
+                <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <Box
+                    sx={{
+                      width: featured ? 52 : 44,
+                      height: featured ? 52 : 44,
+                      mb: 2.5,
+                      borderRadius: `${radius.md}px`,
+                      display: 'grid',
+                      placeItems: 'center',
+                      bgcolor: featured ? 'rgba(255,255,255,0.09)' : color.brand[50],
+                      border: `1px solid ${featured ? 'rgba(255,255,255,0.14)' : color.brand[100]}`,
+                      color: featured ? '#A9B2FF' : color.brand[600],
+                    }}
+                  >
+                    <b.icon size={featured ? 23 : 20} strokeWidth={1.9} aria-hidden />
+                  </Box>
+
+                  <Typography
+                    variant={featured ? 'h3' : 'h4'}
+                    component="h3"
+                    sx={{ mb: 1.5, color: 'inherit', maxWidth: featured ? '14ch' : 'none' }}
+                  >
+                    {b.title}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: featured ? 'rgba(255,255,255,0.64)' : color.neutral[600],
+                      maxWidth: '46ch',
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {b.description}
+                  </Typography>
+
+                  {featured && (
+                    <Stack
+                      component="ul"
+                      spacing={1.25}
+                      sx={{
+                        listStyle: 'none',
+                        m: 0,
+                        p: 0,
+                        mt: 'auto',
+                        pt: 4,
+                      }}
+                    >
+                      {FEATURED_DETAIL.map((d) => (
+                        <Stack
+                          key={d}
+                          component="li"
+                          direction="row"
+                          spacing={1.25}
+                          sx={{ alignItems: 'center' }}
+                        >
+                          <Box
+                            sx={{
+                              width: 18,
+                              height: 18,
+                              flexShrink: 0,
+                              borderRadius: '50%',
+                              display: 'grid',
+                              placeItems: 'center',
+                              bgcolor: 'rgba(103,232,249,0.14)',
+                              color: color.accent[300],
+                            }}
+                          >
+                            <Check size={11} strokeWidth={3} aria-hidden />
+                          </Box>
+                          <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.78)' }}>
+                            {d}
+                          </Typography>
+                        </Stack>
+                      ))}
+                    </Stack>
+                  )}
+                </Box>
+              </Box>
+            </Reveal>
+          );
         })}
-      </Grid>
+      </Box>
     </Section>
   );
 }

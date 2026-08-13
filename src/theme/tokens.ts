@@ -39,7 +39,7 @@ export const color = {
     800: '#131A32',
     900: '#0B1020',
   },
-  /** Neutral slate ramp */
+  /** Neutral slate ramp. 900 is the body text navy; 950 is display-heading navy. */
   neutral: {
     0: '#FFFFFF',
     50: '#F8FAFC',
@@ -52,6 +52,19 @@ export const color = {
     700: '#334155',
     800: '#1E293B',
     900: '#0F172A',
+    950: '#080D1A',
+  },
+  /**
+   * Page surfaces. Separate from `neutral` because these are *backgrounds*
+   * chosen for the editorial layout, not steps on the text ramp — a section
+   * should pick `surface.muted` / `surface.lavender`, never guess a neutral.
+   */
+  surface: {
+    canvas: '#FFFFFF',
+    muted: '#F7F9FC',
+    lavender: '#F5F6FE',
+    line: '#E8ECF3',
+    lineStrong: '#D9E0EA',
   },
   success: { 50: '#ECFDF5', 500: '#10B981', 600: '#059669', 700: '#047857' },
   warning: { 50: '#FFFBEB', 500: '#F59E0B', 600: '#D97706', 700: '#B45309' },
@@ -71,6 +84,14 @@ export const gradient = {
   `,
   /** Subtle light-section wash */
   lightSurface: `linear-gradient(180deg, ${color.neutral[50]} 0%, ${color.neutral[0]} 100%)`,
+  /** Hero backdrop — one lavender bloom, one cool bloom. Deliberately faint. */
+  heroWash: `
+    radial-gradient(1100px 520px at 78% -8%, rgba(99,102,241,0.10) 0%, transparent 62%),
+    radial-gradient(760px 420px at 4% 8%, rgba(6,182,212,0.055) 0%, transparent 60%),
+    linear-gradient(180deg, ${color.surface.lavender} 0%, ${color.neutral[0]} 72%)
+  `,
+  /** Hairline used to separate editorial rows */
+  rule: `linear-gradient(90deg, ${color.surface.lineStrong} 0%, ${color.surface.line} 45%, transparent 100%)`,
 } as const;
 
 export const font = {
@@ -117,6 +138,11 @@ export const shadow = {
   '2xl': '0 32px 64px -12px rgba(15,23,42,0.16)',
   /** For product UI floating over dark surfaces */
   onDark: '0 24px 64px -12px rgba(0,0,0,0.5)',
+  /**
+   * Real product screenshots. Heavier and cooler than `xl` so a screenshot
+   * reads as a physical artifact sitting on the page rather than a card.
+   */
+  artifact: '0 2px 4px rgba(15,23,42,0.04), 0 18px 32px -12px rgba(15,23,42,0.14), 0 48px 80px -32px rgba(30,27,75,0.22)',
   /** Brand-tinted lift for primary buttons */
   brand: '0 8px 20px -6px rgba(79,70,229,0.45)',
 } as const;

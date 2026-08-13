@@ -1,54 +1,194 @@
-import { useState } from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { BarChart3, CheckCircle2, Receipt, Smartphone } from 'lucide-react';
+import { Check } from 'lucide-react';
+import Eyebrow from '../ui/Eyebrow';
 import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
-import { color, motion, radius, shadow } from '../../theme/tokens';
-import dashboard from '../../assets/images/dashboard.png';
+import SectionHeading from '../ui/SectionHeading';
+import ScreenArtifact, { type ScreenArtifactProps } from '../product/ScreenArtifact';
+import { color } from '../../theme/tokens';
+import dashboardHero from '../../assets/images/dashboard-hero.png';
+import paymentSummaryHero from '../../assets/images/payment-summary-hero.png';
 import studentsList from '../../assets/images/students-list.png';
 import appHome from '../../assets/images/app-home.png';
 
-type ViewKey = 'overview' | 'transactions' | 'guardian';
-const VIEWS: { key: ViewKey; label: string; caption: string; icon: typeof BarChart3 }[] = [
-  { key: 'overview', label: 'Collection overview', caption: 'See received, outstanding and monthwise collection at a glance.', icon: BarChart3 },
-  { key: 'transactions', label: 'Students & records', caption: 'Work with real student and payment-management screens.', icon: Receipt },
-  { key: 'guardian', label: 'Guardian app', caption: 'Show families a simple view of their education payments.', icon: Smartphone },
+const DEMO_NOTE = 'Screenshot from a demo environment — figures are sample data.';
+
+interface Panel {
+  eyebrow: string;
+  title: string;
+  description: string;
+  bullets: string[];
+  artifact: ScreenArtifactProps;
+  /** Puts the artifact on the left */
+  flip?: boolean;
+  /** Full-width artifact below the copy, for wide crops */
+  stacked?: boolean;
+}
+
+/**
+ * Crops are chosen for privacy as much as composition — see ScreenArtifact.
+ * `students-list` is pinned to the filter and toolbar region because every row
+ * beneath it carries a student name, guardian number and home address, and
+ * `app-home` is pinned to the dues list because the top of that screen shows a
+ * named student and their photograph.
+ */
+const PANELS: Panel[] = [
+  {
+    eyebrow: 'Collection overview',
+    title: 'See the whole collection at a glance.',
+    description:
+      'The dashboard opens on payable, received and outstanding for the institution, with monthwise dues collection underneath. Admission collection sits in the same view, so the position is one screen rather than three reports.',
+    bullets: ['Payable against received', 'Monthwise dues collection', 'Admissions in the same view'],
+    artifact: {
+      src: dashboardHero,
+      alt: 'School portal dashboard showing payable, received and outstanding amounts with a monthwise dues collection chart',
+      variant: 'browser',
+      ratio: 1.62,
+      focus: '0% 0%',
+      label: 'School Portal — Dashboard',
+      note: DEMO_NOTE,
+    },
+  },
+  {
+    eyebrow: 'Family experience',
+    title: 'Make every payment easy to understand.',
+    description:
+      'A guardian opens a due and sees what it is made of — each fee head, the month it belongs to, and the total. Nothing has to be worked out from a notice or a phone call, and payment starts from the same screen.',
+    bullets: ['Fee-by-fee breakdown', 'Total shown before paying', 'Card, mobile banking or net banking'],
+    flip: true,
+    artifact: {
+      src: paymentSummaryHero,
+      alt: 'Mobile payment summary screen showing a total fee and a breakdown by month and fee type',
+      variant: 'phone',
+      label: 'Payment summary',
+      note: DEMO_NOTE,
+    },
+  },
+  {
+    eyebrow: 'Student records',
+    title: 'Keep student records connected.',
+    description:
+      'Students are searchable by name, ID, class, section, campus and status. Fees are raised against those records rather than a separate list, which is what keeps a payment traceable back to a student.',
+    bullets: ['Filter by class, section and campus', 'Records exportable for finance', 'Payments tied to the student'],
+    stacked: true,
+    artifact: {
+      src: studentsList,
+      alt: 'Student list screen showing search and filter controls and the student records toolbar',
+      variant: 'browser',
+      ratio: 3.2,
+      focus: '0% 0%',
+      label: 'School Portal — Student List',
+      note: `${DEMO_NOTE} Cropped above the record rows.`,
+    },
+  },
+  {
+    eyebrow: 'Mobile app',
+    title: 'Give families a simpler experience.',
+    description:
+      'The Android and iOS apps present outstanding dues as a list a guardian can select from, with the total updating as they choose what to settle. Payment and history stay in the same place.',
+    bullets: ['Outstanding dues as a checklist', 'Pay from the app', 'Android and iOS'],
+    artifact: {
+      src: appHome,
+      alt: 'Mobile app dues list showing selectable monthly fees with a pay now action',
+      variant: 'detail',
+      ratio: 1.32,
+      focus: '50% 97%',
+      note: `${DEMO_NOTE} Cropped to the dues list.`,
+    },
+  },
 ];
 
-const SCREENSHOTS: Record<ViewKey, string> = { overview: dashboard, transactions: studentsList, guardian: appHome };
-const ALT: Record<ViewKey, string> = { overview: 'Education Payments dashboard screenshot', transactions: 'Education Payments students list screenshot', guardian: 'Education Payments guardian app screenshot' };
+function PanelCopy({ panel }: { panel: Panel }) {
+  return (
+    <Box>
+      <Box sx={{ mb: 2.5 }}>
+        <Eyebrow onDark rule>
+          {panel.eyebrow}
+        </Eyebrow>
+      </Box>
+
+      <Typography variant="h3" component="h3" sx={{ color: '#fff', maxWidth: '17ch', mb: 2 }}>
+        {panel.title}
+      </Typography>
+
+      <Typography
+        variant="body1"
+        sx={{ color: 'rgba(255,255,255,0.62)', maxWidth: '48ch', lineHeight: 1.75 }}
+      >
+        {panel.description}
+      </Typography>
+
+      <Stack component="ul" spacing={1.25} sx={{ listStyle: 'none', m: 0, p: 0, mt: 3.5 }}>
+        {panel.bullets.map((b) => (
+          <Stack key={b} component="li" direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
+            <Box
+              sx={{
+                width: 18,
+                height: 18,
+                flexShrink: 0,
+                borderRadius: '50%',
+                display: 'grid',
+                placeItems: 'center',
+                bgcolor: 'rgba(103,232,249,0.14)',
+                color: color.accent[300],
+              }}
+            >
+              <Check size={11} strokeWidth={3} aria-hidden />
+            </Box>
+            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.80)' }}>
+              {b}
+            </Typography>
+          </Stack>
+        ))}
+      </Stack>
+    </Box>
+  );
+}
 
 export default function ProductShowcase() {
-  const [view, setView] = useState<ViewKey>('overview');
-  return <Section id="product" tone="dark" density="loose">
-    <Grid container spacing={{ xs: 5, md: 8 }} alignItems="center">
-      <Grid size={{ xs: 12, md: 4 }}>
-        <Reveal>
-          <Typography sx={{ color: '#A9B2FF', fontSize: '.7rem', fontWeight: 800, letterSpacing: '.12em', textTransform: 'uppercase' }}>Inside the platform</Typography>
-          <Typography variant="h2" sx={{ color: '#fff', mt: 1.5, maxWidth: 430 }}>See the real product, not a concept mockup.</Typography>
-          <Typography sx={{ color: 'rgba(255,255,255,.58)', mt: 2, lineHeight: 1.7, maxWidth: 420 }}>Explore actual screens from the education payment platform across administration, student management and the family experience.</Typography>
-        </Reveal>
-        <Stack spacing={1} sx={{ mt: 4 }}>
-          {VIEWS.map((v) => { const active = v.key === view; return <Box key={v.key} component="button" type="button" onClick={() => setView(v.key)} aria-pressed={active} sx={{ width: '100%', textAlign: 'left', cursor: 'pointer', p: 1.5, borderRadius: radius.lg, bgcolor: active ? 'rgba(255,255,255,.085)' : 'transparent', border: `1px solid ${active ? 'rgba(255,255,255,.18)' : 'rgba(255,255,255,.07)'}`, transition: `all ${motion.base} ${motion.ease}`, '&:hover': { bgcolor: 'rgba(255,255,255,.065)', transform: 'translateX(3px)' } }}><Stack direction="row" spacing={1.25} alignItems="center"><Box sx={{ width: 38, height: 38, flexShrink: 0, borderRadius: radius.md, display: 'grid', placeItems: 'center', bgcolor: active ? color.brand[600] : 'rgba(255,255,255,.07)', color: active ? '#fff' : 'rgba(255,255,255,.5)' }}><v.icon size={17} /></Box><Box><Typography sx={{ color: '#fff', fontSize: '.82rem', fontWeight: 750 }}>{v.label}</Typography><Typography sx={{ color: 'rgba(255,255,255,.42)', fontSize: '.7rem', mt: .25 }}>{v.caption}</Typography></Box></Stack></Box>; })}
-        </Stack>
-        <Stack direction="row" spacing={.8} alignItems="center" sx={{ mt: 3 }}><CheckCircle2 size={14} color="#67E8F9" /><Typography sx={{ color: 'rgba(255,255,255,.4)', fontSize: '.7rem' }}>Real screenshots from the product assets</Typography></Stack>
-      </Grid>
-      <Grid size={{ xs: 12, md: 8 }}>
-        <Reveal>
-          <Box sx={{ p: { xs: .75, md: 1.25 }, borderRadius: `${radius['2xl']}px`, bgcolor: 'rgba(255,255,255,.045)', border: '1px solid rgba(255,255,255,.09)', boxShadow: shadow.onDark }}>
-            <Box key={view} sx={{ position: 'relative', overflow: 'hidden', borderRadius: `${radius.xl}px`, bgcolor: '#fff', animation: `showcaseIn ${motion.slow} ${motion.ease}`, '@keyframes showcaseIn': { from: { opacity: 0, transform: 'translateY(10px)' }, to: { opacity: 1, transform: 'none' } } }}>
-              <Box sx={{ px: 2, py: 1.2, display: 'flex', alignItems: 'center', gap: 1, bgcolor: color.neutral[50], borderBottom: `1px solid ${color.neutral[200]}` }}>
-                {['#FF5F57', '#FEBC2E', '#28C840'].map((c) => <Box key={c} sx={{ width: 9, height: 9, borderRadius: '50%', bgcolor: c }} />)}
-                <Typography sx={{ ml: 1, fontSize: 10, color: color.neutral[400], fontWeight: 600 }}>{ALT[view]}</Typography>
+  return (
+    <Section id="product" tone="dark" density="loose">
+      <SectionHeading
+        align="left"
+        onDark
+        eyebrow="Inside the product"
+        title="The actual screens, not an illustration of them."
+        description="Every image below is a screenshot of the working platform, cropped only to keep sample student data off a public page."
+        titleMaxWidth="19ch"
+      />
+
+      <Stack spacing={{ xs: 8, md: 12 }}>
+        {PANELS.map((panel) => (
+          <Reveal key={panel.title}>
+            {panel.stacked ? (
+              <Box>
+                <Box sx={{ maxWidth: 620, mb: { xs: 4, md: 5 } }}>
+                  <PanelCopy panel={panel} />
+                </Box>
+                <ScreenArtifact {...panel.artifact} onDark />
               </Box>
-              <Box component="img" src={SCREENSHOTS[view]} alt={ALT[view]} sx={{ display: 'block', width: '100%', height: 'auto', maxHeight: { md: 570 }, objectFit: 'contain', objectPosition: 'top center' }} />
-            </Box>
-          </Box>
-        </Reveal>
-      </Grid>
-    </Grid>
-  </Section>;
+            ) : (
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1fr) minmax(0, 1.15fr)' },
+                  gap: { xs: 5, md: 8 },
+                  alignItems: 'center',
+                }}
+              >
+                <Box sx={{ order: { md: panel.flip ? 2 : 1 } }}>
+                  <PanelCopy panel={panel} />
+                </Box>
+                <Box sx={{ order: { md: panel.flip ? 1 : 2 } }}>
+                  <ScreenArtifact {...panel.artifact} onDark />
+                </Box>
+              </Box>
+            )}
+          </Reveal>
+        ))}
+      </Stack>
+    </Section>
+  );
 }

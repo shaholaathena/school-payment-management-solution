@@ -40,6 +40,14 @@
   --neutral-600: #475569;
   --neutral-700: #334155;
   --neutral-900: #0f172a;
+  --neutral-950: #080d1a;
+
+  /* Page surfaces */
+  --surface-canvas: #ffffff;
+  --surface-muted: #f7f9fc;
+  --surface-lavender: #f5f6fe;
+  --surface-line: #e8ecf3;
+  --surface-line-strong: #d9e0ea;
 
   /* Status */
   --success-500: #10b981;
@@ -66,6 +74,8 @@
   --shadow-xl: 0 20px 24px -4px rgba(15, 23, 42, 0.09), 0 8px 8px -4px rgba(15, 23, 42, 0.03);
   --shadow-2xl: 0 32px 64px -12px rgba(15, 23, 42, 0.16);
   --shadow-on-dark: 0 24px 64px -12px rgba(0, 0, 0, 0.5);
+  --shadow-artifact: 0 2px 4px rgba(15, 23, 42, 0.04), 0 18px 32px -12px rgba(15, 23, 42, 0.14),
+    0 48px 80px -32px rgba(30, 27, 75, 0.22);
 
   /* Motion */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -120,5 +130,33 @@ body {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/**
+ * Hero ecosystem loop. A short dash travels the connector path once every
+ * cycle, reading as a payment moving between school, family and record.
+ * Motion is opt-in: without the media query the dash simply sits still,
+ * so the diagram is complete and legible with animation disabled.
+ */
+.ecosystem-pulse {
+  stroke-dasharray: var(--pulse-dash);
+  stroke-dashoffset: var(--pulse-len);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ecosystem-pulse {
+    opacity: 1;
+    animation: ecosystemPulse 7s linear infinite;
+  }
+
+  @keyframes ecosystemPulse {
+    from {
+      stroke-dashoffset: var(--pulse-len);
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 }
