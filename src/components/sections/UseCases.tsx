@@ -1,115 +1,110 @@
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { ArrowUpRight } from 'lucide-react';
+import Eyebrow from '../ui/Eyebrow';
 import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import { USE_CASES } from '../../content/home';
-import { color, font, motion } from '../../theme/tokens';
-
-const COLUMNS = [
-  { key: 'problem', label: 'The problem' },
-  { key: 'solution', label: 'Platform response' },
-  { key: 'outcome', label: 'Outcome' },
-] as const;
+import { color, font, motion, radius } from '../../theme/tokens';
 
 /**
- * Rows rather than cards. Six use cases as six cards would be a wall of
- * equal boxes; as a ruled list they read like a table of contents, and the
- * problem → response → outcome columns stay aligned down the page.
+ * A two-column grid whose gridlines are the container's own background showing
+ * through a 1px gap — one hairline between cells, none doubled, and no borders
+ * to keep in sync when the grid wraps.
  */
 export default function UseCases() {
   return (
-    <Section id="use-cases" tone="subtle" density="loose">
+    <Section id="use-cases" tone="light">
       <SectionHeading
-        align="left"
         eyebrow="Use cases"
         title="Where it earns its place."
-        description="The recurring situations institutions described, what the platform does about each, and what changes as a result."
-        titleMaxWidth="15ch"
+        description="The situations institutions run into every term, and how the platform answers them."
       />
 
-      <Box sx={{ borderTop: `1px solid ${color.surface.lineStrong}` }}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
+          gap: '1px',
+          overflow: 'hidden',
+          borderRadius: `${radius['2xl']}px`,
+          border: `1px solid ${color.surface.line}`,
+          bgcolor: color.surface.line,
+        }}
+      >
         {USE_CASES.map((uc, i) => (
-          <Reveal key={uc.title} delay={(i % 3) * 60}>
+          <Reveal key={uc.title} delay={(i % 2) * 80} sx={{ display: 'flex', bgcolor: color.surface.card }}>
             <Box
               sx={{
-                display: 'grid',
-                gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 0.78fr) minmax(0, 2.22fr)' },
-                gap: { xs: 2.5, lg: 5 },
-                py: { xs: 4, md: 5 },
-                px: { xs: 0, lg: 2 },
-                mx: { lg: -2 },
-                borderBottom: `1px solid ${color.surface.line}`,
-                transition: `background ${motion.base} ${motion.ease}`,
-                '&:hover': { bgcolor: color.neutral[0] },
-                '&:hover .use-case-index': { color: color.brand[600] },
+                flex: 1,
+                p: { xs: 3.5, lg: 4.5 },
+                bgcolor: color.surface.card,
+                transition: `background-color ${motion.base} ${motion.ease}`,
+                '&:hover': { bgcolor: color.surface.muted },
               }}
             >
-              <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
-                <Typography
-                  className="use-case-index"
-                  component="span"
-                  sx={{
-                    fontFamily: font.mono,
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    color: color.neutral[400],
-                    flexShrink: 0,
-                    transition: `color ${motion.base} ${motion.ease}`,
-                  }}
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </Typography>
-
-                <Typography variant="h4" component="h3" sx={{ color: color.neutral[950] }}>
-                  {uc.title}
-                </Typography>
-              </Box>
-
-              <Box
-                sx={{
-                  display: 'grid',
-                  gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' },
-                  gap: { xs: 2.5, md: 4 },
-                }}
+              <Typography
+                sx={{ fontFamily: font.mono, fontSize: '0.75rem', color: color.neutral[500] }}
               >
-                {COLUMNS.map((col, ci) => (
-                  <Box
-                    key={col.key}
-                    sx={{
-                      pl: { md: ci === 0 ? 0 : 3 },
-                      borderLeft: {
-                        xs: 'none',
-                        md: ci === 0 ? 'none' : `1px solid ${color.surface.line}`,
-                      },
-                    }}
-                  >
+                {String(i + 1).padStart(2, '0')}
+              </Typography>
+
+              <Typography variant="h5" component="h3" sx={{ mt: 2 }}>
+                {uc.title}
+              </Typography>
+
+              <Box component="dl" sx={{ m: 0, mt: 2.5 }}>
+                <Box sx={{ mb: 2 }}>
+                  <Box component="dt">
                     <Typography
                       variant="overline"
-                      component="p"
-                      sx={{
-                        mb: 1,
-                        fontSize: '0.6875rem',
-                        color: col.key === 'outcome' ? color.brand[600] : color.neutral[400],
-                      }}
+                      component="span"
+                      sx={{ fontSize: '0.62rem', color: color.neutral[500] }}
                     >
-                      {col.label}
-                    </Typography>
-
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontSize: '0.875rem',
-                        lineHeight: 1.7,
-                        color: col.key === 'outcome' ? color.neutral[800] : color.neutral[600],
-                        fontWeight: col.key === 'outcome' ? 600 : 400,
-                      }}
-                    >
-                      {uc[col.key]}
+                      Problem
                     </Typography>
                   </Box>
-                ))}
+                  <Typography
+                    component="dd"
+                    variant="body2"
+                    sx={{ m: 0, mt: 0.75, color: color.neutral[500] }}
+                  >
+                    {uc.problem}
+                  </Typography>
+                </Box>
+
+                <Box>
+                  <Box component="dt">
+                    <Eyebrow size="sm">Platform response</Eyebrow>
+                  </Box>
+                  <Typography
+                    component="dd"
+                    variant="body2"
+                    sx={{ m: 0, mt: 0.75, color: color.neutral[900] }}
+                  >
+                    {uc.solution}
+                  </Typography>
+                </Box>
               </Box>
+
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{
+                  mt: 2.5,
+                  pt: 2,
+                  alignItems: 'flex-start',
+                  borderTop: `1px solid ${color.surface.line}`,
+                  color: color.brand[700],
+                }}
+              >
+                <ArrowUpRight size={15} strokeWidth={2.25} style={{ flexShrink: 0, marginTop: 3 }} aria-hidden />
+                <Typography sx={{ fontSize: '0.875rem', fontWeight: 500, lineHeight: 1.6 }}>
+                  {uc.outcome}
+                </Typography>
+              </Stack>
             </Box>
           </Reveal>
         ))}

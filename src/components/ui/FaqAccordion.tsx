@@ -3,10 +3,9 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { Plus } from 'lucide-react';
-import { color, font, motion, radius } from '../../theme/tokens';
+import { color, font, motion } from '../../theme/tokens';
 
 export interface FaqItem {
   question: string;
@@ -20,15 +19,15 @@ export interface FaqAccordionProps {
 }
 
 /**
- * Keyboard-accessible FAQ list. MUI's AccordionSummary renders a real
- * `<button aria-expanded>` with `aria-controls`, so Tab / Enter / Space work
- * without extra handlers. The icon rotates 45° to become a close affordance.
+ * Ruled rows, not cards: a bottom hairline per item, an indigo question when
+ * open, and a chevron that rotates. MUI's AccordionSummary renders a real
+ * `<button aria-expanded>` with `aria-controls`, so keyboard support comes free.
  */
 export default function FaqAccordion({ items, defaultOpen = null }: FaqAccordionProps) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
 
   return (
-    <Stack spacing={1.5}>
+    <Box>
       {items.map((item, i) => {
         const expanded = open === i;
 
@@ -38,25 +37,6 @@ export default function FaqAccordion({ items, defaultOpen = null }: FaqAccordion
             expanded={expanded}
             onChange={(_, isExpanded) => setOpen(isExpanded ? i : null)}
             slotProps={{ transition: { timeout: 240 } }}
-            sx={{
-              position: 'relative',
-              borderColor: expanded ? color.brand[200] : color.surface.line,
-              // Brand rail on the open item — the active state readable at a
-              // glance while scanning a long list.
-              '&::after': {
-                content: '""',
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                bottom: 0,
-                width: 3,
-                borderRadius: '3px 0 0 3px',
-                bgcolor: color.brand[600],
-                opacity: expanded ? 1 : 0,
-                transition: `opacity ${motion.base} ${motion.ease}`,
-              },
-              '&:hover': { borderColor: expanded ? color.brand[200] : color.surface.lineStrong },
-            }}
           >
             <AccordionSummary
               aria-controls={`faq-panel-${i}`}
@@ -66,20 +46,19 @@ export default function FaqAccordion({ items, defaultOpen = null }: FaqAccordion
                   sx={{
                     width: 30,
                     height: 30,
-                    borderRadius: `${radius.sm}px`,
+                    borderRadius: '50%',
                     display: 'grid',
                     placeItems: 'center',
-                    bgcolor: expanded ? color.brand[600] : color.surface.muted,
-                    color: expanded ? color.neutral[0] : color.brand[600],
-                    transition: `background ${motion.base} ${motion.ease}, color ${motion.base} ${motion.ease}`,
+                    bgcolor: expanded ? color.brand[600] : color.brand[50],
+                    color: expanded ? color.surface.canvas : color.brand[700],
+                    transition: `background-color ${motion.base} ${motion.ease}, color ${motion.base} ${motion.ease}`,
                   }}
                 >
                   <Plus size={16} strokeWidth={2.5} aria-hidden />
                 </Box>
               }
               sx={{
-                px: { xs: 2.5, md: 3 },
-                minHeight: 68,
+                // The Plus rotates 45° into a × when the row opens.
                 '& .MuiAccordionSummary-expandIconWrapper': {
                   transition: `transform ${motion.base} ${motion.ease}`,
                 },
@@ -92,11 +71,11 @@ export default function FaqAccordion({ items, defaultOpen = null }: FaqAccordion
                 sx={{
                   pr: 2,
                   fontFamily: font.display,
-                  fontSize: { xs: '0.9375rem', md: '1.0625rem' },
-                  fontWeight: 700,
-                  letterSpacing: '-0.015em',
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  letterSpacing: '-0.012em',
                   lineHeight: 1.45,
-                  color: expanded ? color.brand[700] : color.neutral[950],
+                  color: expanded ? color.brand[700] : color.neutral[900],
                   transition: `color ${motion.base} ${motion.ease}`,
                 }}
               >
@@ -104,10 +83,10 @@ export default function FaqAccordion({ items, defaultOpen = null }: FaqAccordion
               </Typography>
             </AccordionSummary>
 
-            <AccordionDetails id={`faq-panel-${i}`} sx={{ px: { xs: 2.5, md: 3 }, pb: 3 }}>
+            <AccordionDetails id={`faq-panel-${i}`}>
               <Typography
                 variant="body2"
-                sx={{ color: color.neutral[600], maxWidth: '64ch', lineHeight: 1.75 }}
+                sx={{ color: color.neutral[500], maxWidth: '68ch', lineHeight: 1.7 }}
               >
                 {item.answer}
               </Typography>
@@ -115,6 +94,6 @@ export default function FaqAccordion({ items, defaultOpen = null }: FaqAccordion
           </Accordion>
         );
       })}
-    </Stack>
+    </Box>
   );
 }

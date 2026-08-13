@@ -1,12 +1,13 @@
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import Button from '../ui/Button';
 import Eyebrow from '../ui/Eyebrow';
 import Reveal from '../ui/Reveal';
-import Section from '../ui/Section';
-import { color, gradient, radius, shadow } from '../../theme/tokens';
+import { color, radius, shadow } from '../../theme/tokens';
+import paymentSummary from '../../assets/images/payment-summary-hero.png';
 
 export interface CtaBandProps {
   title?: string;
@@ -14,122 +15,123 @@ export interface CtaBandProps {
   primaryLabel?: string;
   secondaryLabel?: string;
   secondaryTo?: string;
-  /** Right-hand list. Defaults to what a demo actually covers. */
-  points?: string[];
 }
 
-const DEFAULT_POINTS = [
-  'Your fee structures, by class, section and campus',
-  'The payment methods your merchant setup supports',
-  'The reporting your finance team needs at period close',
-];
-
+/**
+ * Pintex `banner-1`: a rounded gradient band with the pitch on the left and a
+ * device peeking in from the right. The gradient runs dark→brand so the white
+ * copy sits on the deep end (AA-safe) while the bright end frames the screen.
+ * Copy props stay overridable — inner pages reuse this band with their own line.
+ */
 export default function CtaBand({
   title = 'Make school payments simpler.',
-  description = 'A demo runs against your institution’s actual setup rather than a generic walkthrough.',
+  description = 'A demo runs against your institution’s actual setup — your fee structures, your payment methods, your reporting.',
   primaryLabel = 'Book a Demo',
   secondaryLabel = 'Explore Features',
   secondaryTo = '/features',
-  points = DEFAULT_POINTS,
 }: CtaBandProps) {
   return (
-    <Section tone="light" density="normal">
-      <Reveal>
-        <Box
-          sx={{
-            position: 'relative',
-            overflow: 'hidden',
-            borderRadius: `${radius['3xl']}px`,
-            border: `1px solid ${color.surface.line}`,
-            bgcolor: color.neutral[0],
-            boxShadow: shadow.lg,
-          }}
-        >
-          {/* Brand rule along the top edge instead of a full gradient fill */}
-          <Box
-            aria-hidden
-            sx={{ position: 'absolute', insetInline: 0, top: 0, height: 3, background: gradient.brand }}
-          />
-
-          <Box
-            aria-hidden
-            sx={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `linear-gradient(${color.surface.line} 1px, transparent 1px), linear-gradient(90deg, ${color.surface.line} 1px, transparent 1px)`,
-              backgroundSize: '64px 64px',
-              opacity: 0.45,
-              maskImage: 'radial-gradient(ellipse 70% 100% at 100% 0%, black 0%, transparent 70%)',
-            }}
-          />
-
+    <Box component="section" id="demo" sx={{ pb: { xs: 10, lg: 14 }, bgcolor: color.surface.canvas }}>
+      <Container>
+        <Reveal>
           <Box
             sx={{
               position: 'relative',
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.1fr) minmax(0, 0.9fr)' },
-              gap: { xs: 5, md: 8 },
-              alignItems: 'center',
-              px: { xs: 3, sm: 5, md: 7 },
-              py: { xs: 5, md: 7 },
+              overflow: 'hidden',
+              borderRadius: `${radius['3xl']}px`,
+              backgroundImage: `linear-gradient(115deg, ${color.brand[900]} 0%, ${color.brand[800]} 44%, ${color.brand[600]} 100%)`,
+              boxShadow: shadow.lift,
             }}
           >
-            <Box>
-              <Box sx={{ mb: 2.5 }}>
-                <Eyebrow rule>Get started</Eyebrow>
-              </Box>
-
-              <Typography variant="h2" component="h2" sx={{ maxWidth: '13ch', mb: 2 }}>
-                {title}
-              </Typography>
-
-              <Typography variant="subtitle1" sx={{ color: color.neutral[600], maxWidth: '44ch' }}>
-                {description}
-              </Typography>
-
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 4 }}>
-                <Button to="/contact" size="lg" endIcon={<ArrowRight size={17} />}>
-                  {primaryLabel}
-                </Button>
-                <Button to={secondaryTo} size="lg" variant="secondary">
-                  {secondaryLabel}
-                </Button>
-              </Stack>
-            </Box>
+            <Box
+              aria-hidden
+              className="grid-faint grid-faint--on-dark"
+              sx={{ position: 'absolute', inset: 0, opacity: 0.18, pointerEvents: 'none' }}
+            />
 
             <Box
               sx={{
-                p: { xs: 2.5, md: 3.5 },
-                borderRadius: `${radius['2xl']}px`,
-                bgcolor: color.surface.muted,
-                border: `1px solid ${color.surface.line}`,
+                position: 'relative',
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', lg: '1.15fr 0.85fr' },
+                gap: { xs: 5, lg: 6 },
+                alignItems: 'center',
+                px: { xs: 3.5, sm: 5, lg: 8 },
+                pt: { xs: 6, lg: 9 },
+                pb: { xs: 6, lg: 0 },
               }}
             >
-              <Typography variant="overline" component="p" sx={{ mb: 2.5, color: color.neutral[400] }}>
-                What we cover
-              </Typography>
+              <Box sx={{ py: { lg: 9 } }}>
+                <Eyebrow onDark>Get started</Eyebrow>
 
-              <Stack component="ul" spacing={0} sx={{ listStyle: 'none', m: 0, p: 0 }}>
-                {points.map((p, i) => (
-                  <Box
-                    key={p}
-                    component="li"
+                <Typography
+                  variant="h2"
+                  component="h2"
+                  sx={{ mt: 2, maxWidth: '16ch', color: color.ink.foreground }}
+                >
+                  {title}
+                </Typography>
+
+                <Typography
+                  sx={{ mt: 2.5, maxWidth: '50ch', fontSize: '1rem', lineHeight: 1.65, color: 'rgba(243,245,249,0.82)' }}
+                >
+                  {description}
+                </Typography>
+
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 4 }}>
+                  <Button
+                    to="/contact"
+                    size="lg"
+                    endIcon={<ArrowRight size={16} />}
                     sx={{
-                      py: 1.75,
-                      borderTop: i === 0 ? 'none' : `1px solid ${color.surface.line}`,
-                      fontSize: '0.875rem',
-                      lineHeight: 1.65,
-                      color: color.neutral[700],
+                      bgcolor: color.surface.canvas,
+                      color: color.brand[700],
+                      '&:hover': { bgcolor: color.brand[50] },
                     }}
                   >
-                    {p}
-                  </Box>
-                ))}
-              </Stack>
+                    {primaryLabel}
+                  </Button>
+                  <Button to={secondaryTo} size="lg" variant="inverse">
+                    {secondaryLabel}
+                  </Button>
+                </Stack>
+
+                <Stack direction="row" spacing={1} sx={{ mt: 3, alignItems: 'center' }}>
+                  <Check size={15} strokeWidth={2.5} color={color.accent.sky} aria-hidden />
+                  <Typography sx={{ fontSize: '0.8125rem', color: 'rgba(243,245,249,0.72)' }}>
+                    Walked through against your own fee structure
+                  </Typography>
+                </Stack>
+              </Box>
+
+              {/* Device peeking in from the right — hidden below lg */}
+              <Box
+                sx={{
+                  display: { xs: 'none', lg: 'block' },
+                  position: 'relative',
+                  alignSelf: 'flex-end',
+                }}
+              >
+                <Box
+                  component="img"
+                  src={paymentSummary}
+                  alt=""
+                  aria-hidden
+                  loading="lazy"
+                  sx={{
+                    display: 'block',
+                    width: 260,
+                    mx: 'auto',
+                    mt: 6,
+                    borderRadius: `${radius.shot}px ${radius.shot}px 0 0`,
+                    boxShadow: shadow.onDark,
+                  }}
+                />
+              </Box>
             </Box>
           </Box>
-        </Box>
-      </Reveal>
-    </Section>
+        </Reveal>
+      </Container>
+    </Box>
   );
 }

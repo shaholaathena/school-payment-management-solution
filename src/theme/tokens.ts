@@ -5,66 +5,100 @@
  *   1. `src/theme/index.ts`   → the MUI theme (component styling)
  *   2. `src/theme/global.css` → CSS custom properties (raw CSS access)
  *
- * ⚠️ BRAND: the indigo below is a considered placeholder, not an approved
- * brand palette. Confirm against official SSLCOMMERZ / SSLWIRELESS brand
- * guidelines before launch and change `brand` here — everything downstream
- * follows automatically.
+ * Values are ported from the approved design
+ * (https://vision-to-life-builder.lovable.app), whose palette is authored in
+ * oklch. The hex below is the sRGB rendering of those oklch values — keep both
+ * in the comment so the source of truth stays traceable.
  */
 
+/**
+ * ⚠️ CONTRAST — `brand[600]` (#0099F2) is the brand colour, and at 3.07:1 on
+ * white it clears WCAG AA for large text and UI graphics but NOT for normal
+ * text (4.5:1). So the ramp splits two ways:
+ *
+ *   • `brand[600]` — fills, icons, graphics, the logo mark, display headings
+ *   • `brand[700]` — any small text on a light surface, and any icon sitting on
+ *     a `brand[50]`/`brand[100]` chip (4.95:1 on canvas, 4.64:1 on muted)
+ *
+ * Reach for 700 when the colour is carrying words. Never use 600 for body or
+ * label text on white.
+ *
+ * ⚠️ One known failure remains by design decision: the primary button is
+ * `brand[600]` with a white label, which is 3.07:1. Fixing it means either
+ * dropping the fill to `brand[700]` (5.02:1) or switching the label to
+ * `neutral[950]` (5.99:1) — both change the button's look, so it is a brand
+ * call rather than something to silently patch.
+ */
 export const color = {
-  /** Deep indigo — primary brand ramp */
+  /** Azure — primary brand. hsl(202, 100%, 47%) */
   brand: {
-    50: '#EEF1FF',
-    100: '#E0E4FF',
-    200: '#C6CCFE',
-    300: '#A3ABFC',
-    400: '#8287F8',
-    500: '#6366F1',
-    600: '#4F46E5',
-    700: '#4338CA',
-    800: '#3730A3',
-    900: '#2E2A7A',
-    950: '#1E1B4B',
+    50: '#EFF8FE',
+    100: '#D8EEFD',
+    200: '#B0DDFB',
+    300: '#74C6F8',
+    400: '#2FADF5',
+    500: '#0BA0F3',
+    600: '#0099F2', // --primary
+    700: '#0073BC', // text-safe on light AND muted surfaces
+    800: '#0A5F99',
+    900: '#0D4E7C',
+    950: '#0A3352',
   },
-  /** Cyan — used only for the accent gradient terminus and small highlights */
+  /**
+   * Sky + teal accents, used on ink surfaces and for small highlights.
+   * `sky` reads 9.5:1 on `ink.900`, so it is safe for the on-dark eyebrows.
+   */
   accent: {
-    300: '#67E8F9',
-    400: '#22D3EE',
-    500: '#06B6D4',
-    600: '#0891B2',
+    sky: '#6FC5F7', // --accent-sky
+    teal: '#39B7CB', // --accent-teal
+    300: '#6FC5F7',
+    400: '#39B7CB',
+    500: '#39B7CB',
+    600: '#2E93A3',
   },
-  /** Dark navy surfaces (hero, security band, footer) */
+  /** Dark navy surfaces (journey band, stakeholder panel, final CTA). */
   ink: {
-    700: '#1B2340',
-    800: '#131A32',
-    900: '#0B1020',
+    700: '#1E2842', // --secondary-foreground
+    800: '#16203C',
+    900: '#0E172F', // --ink
+    /** Text on ink */
+    foreground: '#F3F5F9', // --ink-foreground
+    /** Muted text on ink */
+    muted: '#A3ABBD', // --ink-muted
   },
-  /** Neutral slate ramp. 900 is the body text navy; 950 is display-heading navy. */
+  /** Neutral ramp. 900/950 are the display navy; 500 is body-muted. */
   neutral: {
     0: '#FFFFFF',
-    50: '#F8FAFC',
-    100: '#F1F5F9',
-    200: '#E5EAF1',
-    300: '#CBD5E1',
-    400: '#94A3B8',
-    500: '#64748B',
-    600: '#475569',
-    700: '#334155',
-    800: '#1E293B',
-    900: '#0F172A',
-    950: '#080D1A',
+    50: '#FDFDFF', // --background
+    100: '#F3F6FB', // --surface
+    200: '#F0F2F8', // --muted
+    300: '#DFE3EB', // --border
+    400: '#9AA1B1',
+    500: '#61697A', // --muted-foreground
+    600: '#4B5468',
+    700: '#333D52',
+    800: '#1E2842',
+    900: '#101A2F', // --foreground
+    950: '#0B1426',
   },
   /**
    * Page surfaces. Separate from `neutral` because these are *backgrounds*
    * chosen for the editorial layout, not steps on the text ramp — a section
-   * should pick `surface.muted` / `surface.lavender`, never guess a neutral.
+   * should pick `surface.muted`, never guess a neutral.
    */
   surface: {
-    canvas: '#FFFFFF',
-    muted: '#F7F9FC',
-    lavender: '#F5F6FE',
-    line: '#E8ECF3',
-    lineStrong: '#D9E0EA',
+    /** Page background — a hair cooler than pure white */
+    canvas: '#FDFDFF',
+    /** Cards and panels */
+    card: '#FFFFFF',
+    /** Alternating section background */
+    muted: '#F3F6FB',
+    /** Inset wells inside cards */
+    well: '#F0F2F8',
+    /** Tinted panel (accent/40 in the source design) */
+    tint: '#F1F9FE',
+    line: '#DFE3EB',
+    lineStrong: '#D2D8E3',
   },
   success: { 50: '#ECFDF5', 500: '#10B981', 600: '#059669', 700: '#047857' },
   warning: { 50: '#FFFBEB', 500: '#F59E0B', 600: '#D97706', 700: '#B45309' },
@@ -72,31 +106,24 @@ export const color = {
 } as const;
 
 export const gradient = {
-  /** Primary action / emphasis */
-  brand: `linear-gradient(135deg, ${color.brand[600]} 0%, ${color.brand[500]} 100%)`,
+  /** Primary action. Flat, not a gradient — kept as a token so callers are uniform. */
+  brand: color.brand[600],
   /** Display text emphasis on dark surfaces */
-  displayOnDark: `linear-gradient(105deg, #A9B2FF 0%, ${color.accent[300]} 100%)`,
-  /** Large dark surface wash — restrained, three low-opacity blooms */
+  displayOnDark: `linear-gradient(105deg, ${color.accent.sky} 0%, ${color.accent.teal} 100%)`,
+  /** The single soft wash under the hero. One bloom, very low opacity. */
+  heroWash: `linear-gradient(180deg, rgba(0,153,242,0.07) 0%, transparent 60%)`,
+  /** Large dark surface wash — restrained blooms for ink sections */
   darkSurface: `
-    radial-gradient(at 16% 12%, rgba(79,70,229,0.34) 0px, transparent 52%),
-    radial-gradient(at 84% 24%, rgba(6,182,212,0.20) 0px, transparent 50%),
-    radial-gradient(at 52% 96%, rgba(99,102,241,0.18) 0px, transparent 55%)
+    radial-gradient(at 16% 12%, rgba(0,153,242,0.28) 0px, transparent 52%),
+    radial-gradient(at 84% 24%, rgba(57,183,203,0.14) 0px, transparent 50%)
   `,
   /** Subtle light-section wash */
-  lightSurface: `linear-gradient(180deg, ${color.neutral[50]} 0%, ${color.neutral[0]} 100%)`,
-  /** Hero backdrop — one lavender bloom, one cool bloom. Deliberately faint. */
-  heroWash: `
-    radial-gradient(1100px 520px at 78% -8%, rgba(99,102,241,0.10) 0%, transparent 62%),
-    radial-gradient(760px 420px at 4% 8%, rgba(6,182,212,0.055) 0%, transparent 60%),
-    linear-gradient(180deg, ${color.surface.lavender} 0%, ${color.neutral[0]} 72%)
-  `,
-  /** Hairline used to separate editorial rows */
-  rule: `linear-gradient(90deg, ${color.surface.lineStrong} 0%, ${color.surface.line} 45%, transparent 100%)`,
+  lightSurface: `linear-gradient(180deg, ${color.surface.muted} 0%, ${color.surface.canvas} 100%)`,
 } as const;
 
 export const font = {
-  display: '"Plus Jakarta Sans", "Inter", system-ui, sans-serif',
-  body: '"Inter", system-ui, -apple-system, "Segoe UI", sans-serif',
+  display: '"Sora", "Plus Jakarta Sans", system-ui, sans-serif',
+  body: '"Manrope", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif',
   mono: 'ui-monospace, "SF Mono", Menlo, monospace',
 } as const;
 
@@ -115,49 +142,66 @@ export const space = {
   16: '64px',
   20: '80px',
   24: '96px',
+  28: '112px',
   32: '128px',
 } as const;
 
+/**
+ * Radii. `--radius` in the source design is 12px; panels are `radius + 8` and
+ * screenshot frames `radius + 4`, which is why those two have their own names.
+ */
 export const radius = {
-  sm: 8,
-  md: 10,
-  lg: 14,
-  xl: 18,
-  '2xl': 24,
-  '3xl': 32,
+  sm: 6,
+  md: 8,
+  lg: 12,
+  /** Screenshot / product artifact frames */
+  shot: 16,
+  /** Cards and panels */
+  panel: 20,
+  /** @deprecated Alias of `panel`, kept for inner pages not yet ported. */
+  xl: 20,
+  '2xl': 16,
+  '3xl': 24,
   pill: 999,
 } as const;
 
-/** Layered, low-opacity shadows. No heavy single drop shadows. */
+/** Two shadows carry the whole design: resting and lifted. */
 export const shadow = {
-  xs: '0 1px 2px rgba(15,23,42,0.05)',
-  sm: '0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04)',
-  md: '0 4px 8px -2px rgba(15,23,42,0.08), 0 2px 4px -2px rgba(15,23,42,0.04)',
-  lg: '0 12px 16px -4px rgba(15,23,42,0.08), 0 4px 6px -2px rgba(15,23,42,0.03)',
-  xl: '0 20px 24px -4px rgba(15,23,42,0.09), 0 8px 8px -4px rgba(15,23,42,0.03)',
-  '2xl': '0 32px 64px -12px rgba(15,23,42,0.16)',
+  xs: '0 1px 2px rgba(16,26,47,0.05)',
+  /** Resting state for panels */
+  soft: '0 1px 2px rgba(16,26,47,0.05), 0 12px 32px -18px rgba(16,26,47,0.22)',
+  /** Hover / raised state, and the resting state for screenshots */
+  lift: '0 2px 4px rgba(16,26,47,0.04), 0 28px 60px -30px rgba(16,26,47,0.30)',
+  sm: '0 1px 2px rgba(16,26,47,0.05)',
+  md: '0 1px 2px rgba(16,26,47,0.05), 0 12px 32px -18px rgba(16,26,47,0.22)',
+  lg: '0 2px 4px rgba(16,26,47,0.04), 0 28px 60px -30px rgba(16,26,47,0.30)',
+  xl: '0 2px 4px rgba(16,26,47,0.04), 0 28px 60px -30px rgba(16,26,47,0.30)',
+  '2xl': '0 32px 64px -12px rgba(16,26,47,0.16)',
   /** For product UI floating over dark surfaces */
   onDark: '0 24px 64px -12px rgba(0,0,0,0.5)',
-  /**
-   * Real product screenshots. Heavier and cooler than `xl` so a screenshot
-   * reads as a physical artifact sitting on the page rather than a card.
-   */
-  artifact: '0 2px 4px rgba(15,23,42,0.04), 0 18px 32px -12px rgba(15,23,42,0.14), 0 48px 80px -32px rgba(30,27,75,0.22)',
-  /** Brand-tinted lift for primary buttons */
-  brand: '0 8px 20px -6px rgba(79,70,229,0.45)',
+  /** Real product screenshots */
+  artifact: '0 2px 4px rgba(16,26,47,0.04), 0 28px 60px -30px rgba(16,26,47,0.30)',
 } as const;
 
 /** One easing, three durations. Consistency is the point. */
 export const motion = {
-  ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+  ease: 'cubic-bezier(0.22, 1, 0.36, 1)',
   easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
   fast: '150ms',
-  base: '250ms',
-  slow: '450ms',
+  base: '350ms',
+  slow: '700ms',
 } as const;
 
-/** Vertical rhythm between page sections. */
-export const sectionPadding = { xs: 10, md: 16 } as const;
+/** Vertical rhythm between page sections — 80px mobile, 112px desktop. */
+export const sectionPadding = { xs: 10, md: 14 } as const;
+
+/** Layout frame shared by every section and the navbar. */
+export const layout = {
+  /** max-w-7xl */
+  maxWidth: 1280,
+  gutter: { xs: 2.5, lg: 4 },
+  navHeight: 72,
+} as const;
 
 export const zIndex = {
   base: 0,

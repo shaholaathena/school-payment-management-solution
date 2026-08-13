@@ -215,7 +215,7 @@ export default function Contact() {
                         placeItems: 'center',
                         bgcolor: color.brand[50],
                         border: `1px solid ${color.brand[100]}`,
-                        color: color.brand[600],
+                        color: color.brand[700],
                       }}
                     >
                       <Box component={h.icon} sx={{ width: 18, height: 18 }} aria-hidden />

@@ -4,18 +4,17 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
+import MuiLink from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
 import Logo from './Logo';
 import { brand, CTA, NAV_ITEMS } from '../../content/site';
-import { color, motion, radius, zIndex } from '../../theme/tokens';
-
-const NAV_HEIGHT = 72;
+import { color, layout, motion, radius, zIndex } from '../../theme/tokens';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -31,10 +30,24 @@ export default function Navbar() {
     };
   }, [open]);
 
+  /**
+   * Exact match on path *and* hash. Two items can share a path — "How it works"
+   * (`/how-it-works`) and "Security" (`/how-it-works#technology`) — so matching
+   * on path alone would light both up at once.
+   */
   const isActive = (to: string) => {
-    const [path] = to.split('#');
-    return path === '/' ? pathname === '/' : pathname === path;
+    const [path, anchor] = to.split('#');
+    const target = path === '' ? '/' : path;
+    if (pathname !== target) return false;
+    return anchor ? hash === `#${anchor}` : hash === '';
   };
+
+  /**
+   * The bar is only transparent over the landing page's light hero. Inner pages
+   * open on a dark `PageHero`, where transparent navy-on-navy links would be
+   * unreadable — so those get the solid treatment from the first frame.
+   */
+  const transparent = pathname === '/' && !scrolled;
 
   return (
     <>
@@ -44,19 +57,24 @@ export default function Navbar() {
         component="header"
         sx={{
           zIndex: zIndex.navbar,
-          // Transparent over the hero, opaque once the page moves — the bar
-          // should never draw a hard edge across the hero on first paint.
-          bgcolor: scrolled ? 'rgba(255,255,255,0.86)' : 'transparent',
+          // Transparent over the hero, opaque once the page moves, so the bar
+          // never draws a hard edge across the hero on first paint.
+          bgcolor: transparent ? 'transparent' : 'rgba(253,253,255,0.86)',
           backgroundImage: 'none',
-          borderBottom: `1px solid ${scrolled ? color.surface.line : 'transparent'}`,
-          backdropFilter: scrolled ? 'blur(16px) saturate(180%)' : 'none',
+          borderBottom: `1px solid ${transparent ? 'transparent' : color.surface.line}`,
+          backdropFilter: transparent ? 'none' : 'blur(16px) saturate(180%)',
           transition: `background-color ${motion.base} ${motion.easeInOut}, border-color ${motion.base} ${motion.easeInOut}`,
         }}
       >
         <Container>
           <Toolbar
             disableGutters
-            sx={{ height: NAV_HEIGHT, minHeight: NAV_HEIGHT, gap: 1 }}
+            sx={{
+              height: layout.navHeight,
+              minHeight: layout.navHeight,
+              justifyContent: 'space-between',
+              gap: 3,
+            }}
           >
             <Logo />
 
@@ -65,7 +83,7 @@ export default function Navbar() {
               aria-label="Main navigation"
               direction="row"
               spacing={0.25}
-              sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center', ml: 4, flexGrow: 1 }}
+              sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center' }}
             >
               {NAV_ITEMS.map((item) => {
                 const active = isActive(item.to);
@@ -77,30 +95,15 @@ export default function Navbar() {
                     to={item.to}
                     aria-current={active ? 'page' : undefined}
                     sx={{
-                      position: 'relative',
-                      px: 1.5,
+                      px: 1.75,
                       py: 1,
-                      borderRadius: `${radius.sm}px`,
+                      borderRadius: `${radius.md}px`,
                       fontSize: '0.875rem',
-                      fontWeight: active ? 700 : 550,
+                      fontWeight: 500,
                       textDecoration: 'none',
-                      color: active ? color.neutral[950] : color.neutral[600],
-                      transition: `color ${motion.fast} ${motion.ease}`,
-                      '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        left: 12,
-                        right: 12,
-                        bottom: 4,
-                        height: 2,
-                        borderRadius: 2,
-                        bgcolor: color.brand[600],
-                        transform: active ? 'scaleX(1)' : 'scaleX(0)',
-                        transformOrigin: 'center',
-                        transition: `transform ${motion.base} ${motion.ease}`,
-                      },
-                      '&:hover': { color: color.neutral[950] },
-                      '&:hover::after': { transform: 'scaleX(1)' },
+                      color: active ? color.neutral[900] : color.neutral[500],
+                      transition: `color ${motion.base} ${motion.ease}`,
+                      '&:hover': { color: color.neutral[900] },
                     }}
                   >
                     {item.label}
@@ -109,13 +112,26 @@ export default function Navbar() {
               })}
             </Stack>
 
-            <Box sx={{ flexGrow: 1, display: { lg: 'none' } }} />
+            <Stack
+              direction="row"
+              spacing={3}
+              sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center' }}
+            >
+              <MuiLink
+                component={RouterLink}
+                to="/#product"
+                sx={{
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  color: color.neutral[500],
+                  '&:hover': { color: color.neutral[900] },
+                }}
+              >
+                {CTA.navSecondary}
+              </MuiLink>
 
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              <Button to="/contact" endIcon={<ArrowRight size={15} />}>
-                {CTA.primary}
-              </Button>
-            </Box>
+              <Button to="/contact">{CTA.primary}</Button>
+            </Stack>
 
             <IconButton
               onClick={() => setOpen(true)}
@@ -123,9 +139,11 @@ export default function Navbar() {
               aria-expanded={open}
               sx={{
                 display: { lg: 'none' },
+                width: 40,
+                height: 40,
                 color: color.neutral[900],
                 border: `1px solid ${color.surface.line}`,
-                borderRadius: `${radius.sm}px`,
+                borderRadius: `${radius.md}px`,
                 bgcolor: 'rgba(255,255,255,0.7)',
               }}
             >
@@ -145,9 +163,7 @@ export default function Navbar() {
             sx: {
               width: { xs: '100%', sm: 400 },
               bgcolor: color.ink[900],
-              backgroundImage:
-                'radial-gradient(at 90% 4%, rgba(79,70,229,0.30) 0px, transparent 55%)',
-              color: '#fff',
+              color: color.ink.foreground,
               px: 3,
               py: 2,
             },
@@ -156,10 +172,19 @@ export default function Navbar() {
       >
         <Stack
           direction="row"
-          sx={{ alignItems: 'center', justifyContent: 'space-between', height: NAV_HEIGHT, mb: 3 }}
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            height: layout.navHeight,
+            mb: 3,
+          }}
         >
           <Logo onDark />
-          <IconButton onClick={() => setOpen(false)} aria-label="Close menu" sx={{ color: '#fff' }}>
+          <IconButton
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            sx={{ color: color.ink.foreground }}
+          >
             <X size={22} />
           </IconButton>
         </Stack>
@@ -177,7 +202,7 @@ export default function Navbar() {
                 sx={{
                   py: 2,
                   textDecoration: 'none',
-                  borderBottom: '1px solid rgba(255,255,255,0.08)',
+                  borderBottom: '1px solid rgba(243,245,249,0.10)',
                   opacity: 0,
                   animation: `navItemIn ${motion.slow} ${motion.ease} forwards`,
                   animationDelay: `${70 + i * 45}ms`,
@@ -192,9 +217,9 @@ export default function Navbar() {
                   sx={{
                     fontFamily: 'var(--font-display)',
                     fontSize: '1.375rem',
-                    fontWeight: 700,
-                    letterSpacing: '-0.025em',
-                    color: active ? '#A9B2FF' : '#fff',
+                    fontWeight: 600,
+                    letterSpacing: '-0.022em',
+                    color: active ? color.accent.sky : color.ink.foreground,
                   }}
                 >
                   {item.label}
@@ -208,9 +233,10 @@ export default function Navbar() {
           <Button to="/contact" size="lg" fullWidth onClick={() => setOpen(false)}>
             {CTA.primary}
           </Button>
+
           <Typography
             variant="caption"
-            sx={{ display: 'block', mt: 2.5, color: 'rgba(255,255,255,0.42)', lineHeight: 1.65 }}
+            sx={{ display: 'block', mt: 2.5, color: color.ink.muted, lineHeight: 1.65 }}
           >
             {brand.tagline}
           </Typography>

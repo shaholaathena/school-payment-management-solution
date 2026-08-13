@@ -2,132 +2,111 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Mail, MapPin, Phone } from 'lucide-react';
 import { Link as RouterLink } from 'react-router-dom';
-import Logo from './Logo';
+import Eyebrow from '../ui/Eyebrow';
 import { brand, CONTACT, FOOTER_LINKS, LEGAL_LINKS } from '../../content/site';
-import { color, motion, radius } from '../../theme/tokens';
+import { color, font, motion } from '../../theme/tokens';
 
 const linkSx = {
   fontSize: '0.875rem',
   textDecoration: 'none',
-  color: 'rgba(255,255,255,0.56)',
-  transition: `color ${motion.fast} ${motion.ease}`,
-  '&:hover': { color: '#fff' },
+  color: color.neutral[500],
+  transition: `color ${motion.base} ${motion.ease}`,
+  '&:hover': { color: color.brand[700] },
 } as const;
-
-const CONTACT_ROWS = [
-  { Icon: Mail, value: CONTACT.email },
-  { Icon: Phone, value: CONTACT.phone },
-  { Icon: MapPin, value: CONTACT.address },
-];
 
 export default function Footer() {
   return (
     <Box
       component="footer"
       sx={{
-        bgcolor: color.ink[900],
-        color: '#fff',
         mt: 'auto',
-        pt: { xs: 8, md: 11 },
-        pb: 4,
-        backgroundImage: 'radial-gradient(ellipse 60% 100% at 85% 0%, rgba(99,102,241,0.14), transparent 60%)',
+        bgcolor: color.surface.muted,
+        borderTop: `1px solid ${color.surface.line}`,
+        py: { xs: 7, lg: 8 },
       }}
     >
       <Container>
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              sm: 'repeat(2, minmax(0, 1fr))',
-              lg: 'minmax(0, 1.4fr) repeat(3, minmax(0, 1fr))',
-            },
-            gap: { xs: 5, lg: 6 },
+            gridTemplateColumns: { xs: '1fr', lg: '1.3fr 2fr' },
+            gap: 5,
           }}
         >
           <Box>
-            <Logo onDark />
+            <Typography
+              sx={{
+                fontFamily: font.display,
+                fontSize: '1.125rem',
+                fontWeight: 600,
+                letterSpacing: '-0.018em',
+                color: color.neutral[900],
+              }}
+            >
+              {brand.name}
+            </Typography>
 
             <Typography
               variant="body2"
-              sx={{ mt: 2.5, mb: 3.5, maxWidth: 320, color: 'rgba(255,255,255,0.48)', lineHeight: 1.7 }}
+              sx={{ mt: 1.5, maxWidth: 320, color: color.neutral[500] }}
             >
               {brand.tagline}
             </Typography>
 
-            <Stack spacing={1.5}>
-              {CONTACT_ROWS.map(({ Icon, value }) => (
-                <Stack key={value} direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
-                  <Icon size={14} color={color.neutral[500]} aria-hidden />
-                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.50)' }}>
-                    {value}
-                  </Typography>
-                </Stack>
-              ))}
-            </Stack>
+            <Typography variant="body2" sx={{ mt: 2.5, color: color.neutral[500] }}>
+              {CONTACT.address}
+              <br />
+              {CONTACT.email} · {CONTACT.phone}
+            </Typography>
           </Box>
 
-          {FOOTER_LINKS.map((group) => (
-            <Box key={group.heading}>
-              <Typography
-                variant="overline"
-                component="p"
-                sx={{ mb: 2.5, color: 'rgba(255,255,255,0.34)' }}
-              >
-                {group.heading}
-              </Typography>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, minmax(0, 1fr))' },
+              gap: 4,
+            }}
+          >
+            {FOOTER_LINKS.map((group) => (
+              <Box key={group.heading}>
+                <Eyebrow size="sm">{group.heading}</Eyebrow>
 
-              <Stack component="ul" spacing={1.5} sx={{ listStyle: 'none', m: 0, p: 0 }}>
-                {group.links.map((link) => (
-                  <Box component="li" key={`${group.heading}-${link.label}`}>
-                    <Box component={RouterLink} to={link.to} sx={linkSx}>
-                      {link.label}
+                <Stack component="ul" spacing={1.25} sx={{ listStyle: 'none', m: 0, p: 0, mt: 2 }}>
+                  {group.links.map((link) => (
+                    <Box component="li" key={`${group.heading}-${link.label}`}>
+                      <Box component={RouterLink} to={link.to} sx={linkSx}>
+                        {link.label}
+                      </Box>
                     </Box>
-                  </Box>
-                ))}
-              </Stack>
-            </Box>
-          ))}
+                  ))}
+                </Stack>
+              </Box>
+            ))}
+          </Box>
         </Box>
 
         <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          spacing={2}
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={1.5}
           sx={{
-            mt: { xs: 6, md: 8 },
+            mt: 6,
             pt: 3,
-            borderTop: '1px solid rgba(255,255,255,0.08)',
+            borderTop: `1px solid ${color.surface.line}`,
             justifyContent: 'space-between',
-            alignItems: { md: 'center' },
+            alignItems: { sm: 'center' },
           }}
         >
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.32)' }}>
+          <Typography variant="caption" sx={{ color: color.neutral[500] }}>
             © {new Date().getFullYear()} {brand.parent}. All rights reserved.
           </Typography>
 
-          <Stack
-            direction="row"
-            sx={{ flexWrap: 'wrap', gap: 2.5, alignItems: 'center' }}
-          >
-            <Box
-              sx={{
-                px: 1.25,
-                py: 0.5,
-                borderRadius: `${radius.sm}px`,
-                border: '1px solid rgba(255,255,255,0.11)',
-                fontSize: '0.6875rem',
-                fontWeight: 650,
-                color: 'rgba(255,255,255,0.46)',
-              }}
-            >
-              Payments by {brand.gateway}
-            </Box>
-
+          <Stack component="ul" direction="row" spacing={2.5} sx={{ listStyle: 'none', m: 0, p: 0 }}>
             {LEGAL_LINKS.map((l) => (
-              <Box key={l.label} component={RouterLink} to={l.to} sx={{ ...linkSx, fontSize: '0.78rem' }}>
-                {l.label}
+              <Box component="li" key={l.label}>
+                <Box component={RouterLink} to={l.to} sx={{ ...linkSx, fontSize: '0.75rem' }}>
+                  {l.label}
+                </Box>
               </Box>
             ))}
           </Stack>

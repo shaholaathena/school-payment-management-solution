@@ -1,5 +1,4 @@
 import {
-  BadgeCheck,
   Building2,
   Eye,
   GraduationCap,
@@ -9,31 +8,6 @@ import {
   Wallet,
   type LucideIcon,
 } from 'lucide-react';
-
-/**
- * ⚠️ STATS ARE UNVERIFIED PLACEHOLDERS.
- *
- * Every entry is marked `pending: true`, which makes StatCard render an
- * em-dash plus a visible "awaiting verified figure" marker instead of a
- * number. Supply real figures from product/marketing and set `pending: false`,
- * or delete the section. Do not invent values — a fabricated collection rate
- * on a payment product is a claim the company has to stand behind.
- */
-export interface Stat {
-  value: number;
-  label: string;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  pending: boolean;
-}
-
-export const STATS: Stat[] = [
-  { value: 500, suffix: '+', label: 'Institutions onboarded', pending: true },
-  { value: 1, suffix: 'M+', label: 'Payments processed', pending: true },
-  { value: 250000, suffix: '+', label: 'Students served', pending: true },
-  { value: 98, suffix: '%', label: 'Collection visibility', pending: true },
-];
 
 export interface Benefit {
   icon: LucideIcon;
@@ -157,10 +131,4 @@ export const USE_CASES: UseCase[] = [
     solution: 'Automated SMS and email notifications fire against payment events and due dates.',
     outcome: 'Consistent communication without manual effort.',
   },
-];
-
-/** Signals shown in the hero as floating cards. Illustrative, not live data. */
-export const HERO_SIGNALS = [
-  { icon: BadgeCheck, title: 'Payment received', meta: '৳ 9,200 · bKash', tone: 'success' as const },
-  { icon: Users, title: '34 reminders sent', meta: 'Class 9 · Section B', tone: 'brand' as const },
 ];

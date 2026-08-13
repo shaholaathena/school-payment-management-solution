@@ -1,40 +1,137 @@
+import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Building2, FileCheck2, Users, Wallet, type LucideIcon } from 'lucide-react';
-import { color, font, motion, radius, shadow } from '../../theme/tokens';
+import { Bell, Building2, GraduationCap, Users, Wallet, type LucideIcon } from 'lucide-react';
+import Eyebrow from '../ui/Eyebrow';
+import Panel from '../ui/Panel';
+import { color, radius } from '../../theme/tokens';
 
 /**
- * The hero visual: the four parties in a school payment, drawn as a single
- * closed loop rather than a collage of product screenshots.
+ * The hero visual: the four parties in a school payment orbiting one record.
  *
- * Geometry is expressed once, in a 0–100 coordinate space, and shared by the
- * SVG connector and the DOM nodes — the container is locked to a square aspect
- * ratio so percentage positions and viewBox units stay in register at every
- * breakpoint.
+ * Node placement is deliberately off-grid — a rigid 2×2 reads as a diagram,
+ * whereas the staggered positions read as a system.
+ *
+ * The orbit only works once the square is wide enough to seat two 190px cards
+ * either side of a 230px centre panel, which is roughly 600px. Below that the
+ * cards would sit on top of the centre panel and bury it, so the whole thing
+ * reflows to a plain stack: centre panel first, then the four nodes as a 2×2
+ * grid. Same DOM, same content, no duplicate markup for screen readers.
  */
-
 interface EcosystemNode {
   icon: LucideIcon;
   label: string;
   meta: string;
-  /** Position in the 0–100 coordinate space */
-  x: number;
-  y: number;
+  /** Offsets within the square, applied from `sm` up only. */
+  pos: { left?: number; right?: number; top?: number; bottom?: number };
 }
 
 const NODES: EcosystemNode[] = [
-  { icon: Building2, label: 'School', meta: 'Publishes the fee', x: 24, y: 24 },
-  { icon: Users, label: 'Parents', meta: 'Notified, then pay', x: 76, y: 24 },
-  { icon: Wallet, label: 'Payment', meta: 'Through SSLCOMMERZ', x: 76, y: 76 },
-  { icon: FileCheck2, label: 'Record', meta: 'Settled and traceable', x: 24, y: 76 },
+  { icon: Building2, label: 'School', meta: 'Fee structures & oversight', pos: { left: 0, top: 24 } },
+  { icon: Users, label: 'Parents', meta: 'Dues, reminders, payment', pos: { right: 0, top: 96 } },
+  { icon: Wallet, label: 'Payments', meta: 'Card · MFS · net banking', pos: { left: 8, bottom: 80 } },
+  {
+    icon: GraduationCap,
+    label: 'Records',
+    meta: 'Student & transaction history',
+    pos: { right: 8, bottom: 16 },
+  },
 ];
 
-/** Rounded square through the four node centres, drawn clockwise from due north. */
-const LOOP =
-  'M 50 24 H 58 A 18 18 0 0 1 76 42 V 58 A 18 18 0 0 1 58 76 H 42 A 18 18 0 0 1 24 58 V 42 A 18 18 0 0 1 42 24 Z';
+/** Spoke endpoints in the 400×400 viewBox, matching the node positions. */
+const SPOKES = [
+  [60, 74],
+  [348, 130],
+  [70, 300],
+  [340, 320],
+] as const;
 
-/** Measured length of LOOP — 64 units of straight edge plus four quarter arcs. */
-const LOOP_LENGTH = 177;
+/** Staggered so the four dots arrive one at a time rather than in a burst. */
+const FLOW_DELAY_MS = 1600;
+
+/** `undefined` below sm so the grid controls placement, then the orbit offset. */
+const atSm = (v: number | undefined) => (v === undefined ? undefined : { xs: 'auto', sm: v });
+
+function NodeCard({ icon: Icon, label, meta }: EcosystemNode) {
+  return (
+    <Panel lift fullHeight sx={{ px: 2, py: 1.75 }}>
+      <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center' }}>
+        <Box
+          sx={{
+            width: 32,
+            height: 32,
+            flexShrink: 0,
+            borderRadius: `${radius.sm}px`,
+            display: 'grid',
+            placeItems: 'center',
+            bgcolor: color.brand[100],
+            color: color.brand[900],
+          }}
+        >
+          <Icon size={16} strokeWidth={2} aria-hidden />
+        </Box>
+
+        <Typography
+          sx={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            letterSpacing: '-0.014em',
+            color: color.neutral[900],
+          }}
+        >
+          {label}
+        </Typography>
+      </Stack>
+
+      <Typography sx={{ mt: 1, fontSize: '0.75rem', lineHeight: 1.4, color: color.neutral[500] }}>
+        {meta}
+      </Typography>
+    </Panel>
+  );
+}
+
+function CentrePanel(): ReactNode {
+  return (
+    <Panel sx={{ px: 2.5, py: 2.5, textAlign: 'center' }}>
+      <Eyebrow size="sm">One platform</Eyebrow>
+
+      <Typography
+        sx={{
+          mt: 1,
+          fontFamily: 'var(--font-display)',
+          fontSize: '1.125rem',
+          fontWeight: 600,
+          lineHeight: 1.2,
+          letterSpacing: '-0.018em',
+          color: color.neutral[900],
+        }}
+      >
+        Fee collection, connected end to end
+      </Typography>
+
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          mt: 2,
+          px: 1.5,
+          py: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: `${radius.md}px`,
+          bgcolor: color.surface.well,
+        }}
+      >
+        <Bell size={14} color={color.brand[600]} aria-hidden />
+        <Typography sx={{ fontSize: '0.75rem', color: color.neutral[500] }}>
+          Dues · reminders · records
+        </Typography>
+      </Stack>
+    </Panel>
+  );
+}
 
 export default function EcosystemVisual() {
   return (
@@ -42,153 +139,111 @@ export default function EcosystemVisual() {
       sx={{
         position: 'relative',
         width: '100%',
-        maxWidth: { xs: 330, sm: 420, md: 520 },
+        maxWidth: { xs: 'none', sm: 520 },
         mx: 'auto',
-        aspectRatio: '1 / 1',
+        aspectRatio: { xs: 'auto', sm: '1 / 1' },
+        display: { xs: 'grid', sm: 'block' },
+        gridTemplateColumns: { xs: 'repeat(2, minmax(0, 1fr))', sm: 'none' },
+        gap: { xs: 1.5, sm: 0 },
       }}
     >
-      {/* Soft ground so the loop sits on light rather than floating on nothing */}
-      <Box
-        aria-hidden
-        sx={{
-          position: 'absolute',
-          inset: '-14%',
-          borderRadius: '50%',
-          background:
-            'radial-gradient(circle at 50% 45%, rgba(255,255,255,0.95) 0%, rgba(245,246,254,0.75) 42%, rgba(245,246,254,0) 70%)',
-        }}
-      />
-
       <Box
         component="svg"
-        viewBox="0 0 100 100"
+        viewBox="0 0 400 400"
         fill="none"
         aria-hidden
-        sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }}
-      >
-        {/* Spokes: every party resolves to the same record in the middle */}
-        {NODES.map((n) => (
-          <line
-            key={n.label}
-            x1="50"
-            y1="50"
-            x2={n.x}
-            y2={n.y}
-            stroke={color.brand[400]}
-            strokeWidth="0.4"
-            strokeOpacity="0.18"
-            strokeDasharray="1.5 2.5"
-          />
-        ))}
-
-        <path d={LOOP} stroke={color.brand[200]} strokeWidth="1.1" strokeLinecap="round" />
-
-        <Box
-          component="path"
-          d={LOOP}
-          className="ecosystem-pulse"
-          stroke={color.brand[600]}
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          sx={{ '--pulse-dash': `9 ${LOOP_LENGTH - 9}`, '--pulse-len': `${LOOP_LENGTH}` }}
-        />
-      </Box>
-
-      {/* Centre — the platform every party writes to */}
-      <Box
         sx={{
+          display: { xs: 'none', sm: 'block' },
           position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: { xs: 76, sm: 92, md: 108 },
-          height: { xs: 76, sm: 92, md: 108 },
-          borderRadius: '50%',
-          display: 'grid',
-          placeItems: 'center',
-          bgcolor: color.neutral[0],
-          border: `1px solid ${color.surface.line}`,
-          boxShadow: '0 18px 40px -18px rgba(30,27,75,0.30)',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          color: color.brand[600],
         }}
       >
-        <Box
-          sx={{
-            width: { xs: 40, sm: 48, md: 56 },
-            height: { xs: 40, sm: 48, md: 56 },
-            borderRadius: `${radius.lg}px`,
-            display: 'grid',
-            placeItems: 'center',
-            background: `linear-gradient(140deg, ${color.brand[600]} 0%, ${color.brand[500]} 55%, ${color.accent[500]} 100%)`,
-            color: color.neutral[0],
-            fontFamily: font.display,
-            fontWeight: 800,
-            fontSize: { xs: '0.9rem', md: '1.1rem' },
-            letterSpacing: '-0.04em',
-            boxShadow: '0 8px 18px -8px rgba(79,70,229,0.6)',
-          }}
-        >
-          EP
-        </Box>
+        <circle
+          className="eco-ring-breathe"
+          cx="200"
+          cy="200"
+          r="150"
+          stroke="currentColor"
+          strokeOpacity="0.14"
+        />
+        <circle
+          className="eco-ring-spin"
+          cx="200"
+          cy="200"
+          r="105"
+          stroke="currentColor"
+          strokeOpacity="0.2"
+          strokeDasharray="3 7"
+        />
+        <circle cx="200" cy="200" r="60" stroke="currentColor" strokeOpacity="0.12" />
+
+        <g stroke="currentColor" strokeOpacity="0.22" strokeWidth="1">
+          {SPOKES.map(([x, y]) => (
+            <path key={`${x}-${y}`} d={`M200 200 ${x} ${y}`} />
+          ))}
+        </g>
+
+        {/*
+          One dot per spoke, travelling from the node inward to the centre.
+          `offset-path` takes the same geometry as the spoke above, so the dot
+          cannot drift off the line if a node position is ever adjusted.
+        */}
+        {SPOKES.map(([x, y], i) => (
+          <Box
+            key={`flow-${x}-${y}`}
+            component="circle"
+            className="eco-flow"
+            cx="0"
+            cy="0"
+            r="3"
+            fill="currentColor"
+            sx={{
+              offsetPath: `path("M200 200 ${x} ${y}")`,
+              offsetRotate: '0deg',
+              animationDelay: `${i * FLOW_DELAY_MS}ms`,
+            }}
+          />
+        ))}
       </Box>
 
-      {NODES.map(({ icon: Icon, label, meta, x, y }) => (
+      {/* Centre — the record every party writes to */}
+      <Box
+        sx={{
+          position: { xs: 'static', sm: 'absolute' },
+          gridColumn: { xs: '1 / -1', sm: 'auto' },
+          order: { xs: -1, sm: 0 },
+          left: { sm: '50%' },
+          top: { sm: '50%' },
+          transform: { xs: 'none', sm: 'translate(-50%, -50%)' },
+          width: { xs: 'auto', sm: '54%' },
+          maxWidth: { xs: 'none', sm: 230 },
+        }}
+      >
+        <CentrePanel />
+      </Box>
+
+      {NODES.map((node, i) => (
         <Box
-          key={label}
+          key={node.label}
+          // Drift lives on the positioning wrapper so it cannot fight the
+          // card's own translateY on hover.
+          className="eco-float"
           sx={{
-            position: 'absolute',
-            left: `${x}%`,
-            top: `${y}%`,
-            transform: 'translate(-50%, -50%)',
-            width: { xs: 132, sm: 154, md: 176 },
-            px: { xs: 1.5, md: 2 },
-            py: { xs: 1.25, md: 1.75 },
-            borderRadius: `${radius.lg}px`,
-            bgcolor: color.neutral[0],
-            border: `1px solid ${color.surface.line}`,
-            boxShadow: '0 1px 2px rgba(15,23,42,0.04), 0 14px 28px -16px rgba(30,27,75,0.28)',
-            transition: `transform ${motion.base} ${motion.ease}, box-shadow ${motion.base} ${motion.ease}`,
-            '&:hover': {
-              transform: 'translate(-50%, -50%) translateY(-3px)',
-              boxShadow: shadow.lg,
-            },
+            position: { xs: 'static', sm: 'absolute' },
+            display: 'flex',
+            width: { xs: 'auto', sm: '46%' },
+            maxWidth: { xs: 'none', sm: 190 },
+            left: atSm(node.pos.left),
+            right: atSm(node.pos.right),
+            top: atSm(node.pos.top),
+            bottom: atSm(node.pos.bottom),
+            animationDelay: `${i * 900}ms`,
           }}
         >
-          <Box
-            sx={{
-              width: { xs: 28, md: 32 },
-              height: { xs: 28, md: 32 },
-              mb: 1,
-              borderRadius: `${radius.sm}px`,
-              display: 'grid',
-              placeItems: 'center',
-              bgcolor: color.brand[50],
-              color: color.brand[600],
-            }}
-          >
-            <Icon size={16} strokeWidth={1.9} aria-hidden />
-          </Box>
-
-          <Typography
-            sx={{
-              fontFamily: font.display,
-              fontSize: { xs: '0.8125rem', md: '0.9375rem' },
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              color: color.neutral[950],
-            }}
-          >
-            {label}
-          </Typography>
-          <Typography
-            sx={{
-              mt: 0.25,
-              fontSize: { xs: '0.6875rem', md: '0.75rem' },
-              lineHeight: 1.4,
-              color: color.neutral[500],
-            }}
-          >
-            {meta}
-          </Typography>
+          <NodeCard {...node} />
         </Box>
       ))}
     </Box>

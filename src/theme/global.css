@@ -7,47 +7,51 @@
 :root {
   color-scheme: light;
 
-  /* Brand */
-  --brand-50: #eef1ff;
-  --brand-100: #e0e4ff;
-  --brand-200: #c6ccfe;
-  --brand-300: #a3abfc;
-  --brand-400: #8287f8;
-  --brand-500: #6366f1;
-  --brand-600: #4f46e5;
-  --brand-700: #4338ca;
-  --brand-800: #3730a3;
-  --brand-950: #1e1b4b;
+  /* Brand — azure. 600 is the brand colour (fills, icons, graphics);
+     700 is the text-safe step for small text on light surfaces. */
+  --brand-50: #eff8fe;
+  --brand-100: #d8eefd;
+  --brand-200: #b0ddfb;
+  --brand-300: #74c6f8;
+  --brand-400: #2fadf5;
+  --brand-500: #0ba0f3;
+  --brand-600: #0099f2;
+  --brand-700: #0073bc;
+  --brand-800: #0a5f99;
+  --brand-900: #0d4e7c;
 
-  /* Accent */
-  --accent-300: #67e8f9;
-  --accent-400: #22d3ee;
-  --accent-500: #06b6d4;
+  /* Accents */
+  --accent-sky: #6fc5f7;
+  --accent-teal: #39b7cb;
 
   /* Dark surfaces */
-  --ink-700: #1b2340;
-  --ink-800: #131a32;
-  --ink-900: #0b1020;
+  --ink-700: #1e2842;
+  --ink-800: #16203c;
+  --ink-900: #0e172f;
+  --ink-foreground: #f3f5f9;
+  --ink-muted: #a3abbd;
 
   /* Neutrals */
   --neutral-0: #ffffff;
-  --neutral-50: #f8fafc;
-  --neutral-100: #f1f5f9;
-  --neutral-200: #e5eaf1;
-  --neutral-300: #cbd5e1;
-  --neutral-400: #94a3b8;
-  --neutral-500: #64748b;
-  --neutral-600: #475569;
-  --neutral-700: #334155;
-  --neutral-900: #0f172a;
-  --neutral-950: #080d1a;
+  --neutral-50: #fdfdff;
+  --neutral-100: #f3f6fb;
+  --neutral-200: #f0f2f8;
+  --neutral-300: #dfe3eb;
+  --neutral-400: #9aa1b1;
+  --neutral-500: #61697a;
+  --neutral-600: #4b5468;
+  --neutral-700: #333d52;
+  --neutral-900: #101a2f;
+  --neutral-950: #0b1426;
 
   /* Page surfaces */
-  --surface-canvas: #ffffff;
-  --surface-muted: #f7f9fc;
-  --surface-lavender: #f5f6fe;
-  --surface-line: #e8ecf3;
-  --surface-line-strong: #d9e0ea;
+  --surface-canvas: #fdfdff;
+  --surface-card: #ffffff;
+  --surface-muted: #f3f6fb;
+  --surface-well: #f0f2f8;
+  --surface-tint: #f1f9fe;
+  --surface-line: #dfe3eb;
+  --surface-line-strong: #d2d8e3;
 
   /* Status */
   --success-500: #10b981;
@@ -58,35 +62,31 @@
   --danger-600: #dc2626;
 
   /* Radii */
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 18px;
-  --radius-2xl: 24px;
-  --radius-3xl: 32px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-shot: 16px;
+  --radius-panel: 20px;
+  --radius-3xl: 24px;
   --radius-pill: 999px;
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 8px -2px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 12px 16px -4px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
-  --shadow-xl: 0 20px 24px -4px rgba(15, 23, 42, 0.09), 0 8px 8px -4px rgba(15, 23, 42, 0.03);
-  --shadow-2xl: 0 32px 64px -12px rgba(15, 23, 42, 0.16);
+  /* Shadows — resting and lifted */
+  --shadow-xs: 0 1px 2px rgba(16, 26, 47, 0.05);
+  --shadow-soft: 0 1px 2px rgba(16, 26, 47, 0.05), 0 12px 32px -18px rgba(16, 26, 47, 0.22);
+  --shadow-lift: 0 2px 4px rgba(16, 26, 47, 0.04), 0 28px 60px -30px rgba(16, 26, 47, 0.3);
   --shadow-on-dark: 0 24px 64px -12px rgba(0, 0, 0, 0.5);
-  --shadow-artifact: 0 2px 4px rgba(15, 23, 42, 0.04), 0 18px 32px -12px rgba(15, 23, 42, 0.14),
-    0 48px 80px -32px rgba(30, 27, 75, 0.22);
 
   /* Motion */
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 450ms;
+  --duration-base: 350ms;
+  --duration-slow: 700ms;
 
   /* Type */
-  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Manrope', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 * {
@@ -110,6 +110,115 @@ body {
   border-radius: var(--radius-sm);
 }
 
+/**
+ * The faint 64px lattice used behind the hero, the dark stakeholder panel and
+ * the final CTA. Opacity is set by the caller so one utility serves light and
+ * dark surfaces.
+ */
+.grid-faint {
+  background-image:
+    linear-gradient(to right, rgba(16, 26, 47, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 26, 47, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* On ink, the lattice has to be light to be visible at all */
+.grid-faint--on-dark {
+  background-image:
+    linear-gradient(to right, rgba(243, 245, 249, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(243, 245, 249, 0.16) 1px, transparent 1px);
+}
+
+/**
+ * Hero ecosystem motion.
+ *
+ * Four pieces, all decorative: the dashed ring turns, the outer ring breathes,
+ * a dot travels inward along each spoke (school, parents, payments and records
+ * all writing to one record), and the node cards drift.
+ *
+ * Every piece is opt-in via prefers-reduced-motion, and the diagram is complete
+ * and legible with all of it switched off — nothing here carries meaning that
+ * the static composition does not already state.
+ */
+@keyframes ecoSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ecoBreathe {
+  0%,
+  100% {
+    stroke-opacity: 0.1;
+  }
+  50% {
+    stroke-opacity: 0.22;
+  }
+}
+
+@keyframes ecoFlow {
+  0% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 1;
+  }
+  94% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  100% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+}
+
+@keyframes ecoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Hidden by default, so a browser without offset-path support shows nothing
+   rather than parking a stray dot at the viewBox origin. */
+.eco-flow {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .eco-ring-spin {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+    animation: ecoSpin 64s linear infinite;
+  }
+
+  .eco-ring-breathe {
+    animation: ecoBreathe 9s ease-in-out infinite;
+  }
+
+  @supports (offset-path: path('M0 0 L1 1')) {
+    .eco-flow {
+      animation: ecoFlow 6.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+  }
+}
+
+/* The cards only drift once the orbit layout is in play; below that they are
+   grid items and a floating grid reads as a glitch. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 600px) {
+  .eco-float {
+    animation: ecoFloat 7s ease-in-out infinite;
+  }
+}
+
 /* Scroll-reveal: initial state. `data-revealed` is set by useReveal(). */
 [data-reveal] {
   opacity: 0;
@@ -130,33 +239,5 @@ body {
     opacity: 1;
     transform: none;
     transition: none;
-  }
-}
-
-/**
- * Hero ecosystem loop. A short dash travels the connector path once every
- * cycle, reading as a payment moving between school, family and record.
- * Motion is opt-in: without the media query the dash simply sits still,
- * so the diagram is complete and legible with animation disabled.
- */
-.ecosystem-pulse {
-  stroke-dasharray: var(--pulse-dash);
-  stroke-dashoffset: var(--pulse-len);
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .ecosystem-pulse {
-    opacity: 1;
-    animation: ecosystemPulse 7s linear infinite;
-  }
-
-  @keyframes ecosystemPulse {
-    from {
-      stroke-dashoffset: var(--pulse-len);
-    }
-    to {
-      stroke-dashoffset: 0;
-    }
   }
 }

@@ -10,9 +10,9 @@ import SectionHeading from '../components/ui/SectionHeading';
 import CtaBand from '../components/sections/CtaBand';
 import PageHero from '../components/sections/PageHero';
 import BrowserFrame from '../components/product/BrowserFrame';
-import DashboardMockup from '../components/product/DashboardMockup';
 import { FEATURES, type Feature } from '../content/features';
 import { color, radius, shadow, motion } from '../theme/tokens';
+import dashboardHero from '../assets/images/dashboard-hero.png';
 
 function StatusNote({ status }: { status: Feature['status'] }) {
   if (status === 'confirmed') return null;
@@ -54,7 +54,7 @@ export default function Features() {
   const confirmed = FEATURES.filter((f) => f.status === 'confirmed').length;
   return <>
     <PageHero eyebrow="Features" title="Every payment workflow, connected." description="From fee creation to collection, visibility and reconciliation — give every team one clear place to manage school payments." tags={FEATURES.slice(0, 5).map((f) => f.category)}>
-      <Box sx={{ mt: { xs: 5, md: 7 }, position: 'relative' }}><Box sx={{ position: 'absolute', inset: '15% 5%', background: 'radial-gradient(circle, rgba(99,102,241,.22), transparent 65%)', filter: 'blur(28px)' }} /><Box sx={{ position: 'relative' }}><BrowserFrame onDark><DashboardMockup view="transactions" /></BrowserFrame></Box></Box>
+      <Box sx={{ mt: { xs: 5, md: 7 }, position: 'relative' }}><Box sx={{ position: 'absolute', inset: '15% 5%', background: 'radial-gradient(circle, rgba(99,102,241,.22), transparent 65%)', filter: 'blur(28px)' }} /><Box sx={{ position: 'relative' }}><BrowserFrame onDark><Box component="img" src={dashboardHero} alt="School portal dashboard showing payable and received amounts with a monthwise dues collection chart" loading="lazy" decoding="async" sx={{ display: 'block', width: '100%', height: 'auto' }} /></BrowserFrame></Box></Box>
     </PageHero>
 
     <Section tone="light">

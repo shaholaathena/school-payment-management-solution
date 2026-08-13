@@ -12,9 +12,9 @@ import UseCases from '../components/sections/UseCases';
 import ValueBar from '../components/sections/ValueBar';
 
 /**
- * Narrative order: clarity → trust → convenience → control → proof → conversion.
- * Section tone alternates light / subtle / dark so the page has a rhythm rather
- * than one continuous scroll of white cards.
+ * Section order and tone alternation follow the approved design: canvas and
+ * muted trade off down the page, with a single ink band at the payment journey
+ * and a second at the closing CTA.
  */
 export default function Home() {
   return (

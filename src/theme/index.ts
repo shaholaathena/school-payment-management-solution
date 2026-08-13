@@ -5,11 +5,11 @@ import { color, font, gradient, motion, radius, shadow } from './tokens';
 declare module '@mui/material/styles' {
   interface Palette {
     accent: Palette['primary'];
-    ink: { 700: string; 800: string; 900: string };
+    ink: { 700: string; 800: string; 900: string; foreground: string; muted: string };
   }
   interface PaletteOptions {
     accent?: PaletteOptions['primary'];
-    ink?: { 700: string; 800: string; 900: string };
+    ink?: { 700: string; 800: string; 900: string; foreground: string; muted: string };
   }
   interface TypeBackground {
     subtle: string;
@@ -17,6 +17,11 @@ declare module '@mui/material/styles' {
   }
 }
 
+/**
+ * Display type is Sora at 600 — the approved design uses semibold rather than
+ * a heavy weight, which is what keeps the headings editorial instead of shouty.
+ * Tracking is tight and negative across the display sizes.
+ */
 const theme = createTheme({
   cssVariables: true,
 
@@ -31,21 +36,27 @@ const theme = createTheme({
       main: color.brand[600],
       light: color.brand[500],
       dark: color.brand[700],
-      contrastText: color.neutral[0],
+      contrastText: color.surface.canvas,
     },
     secondary: {
       main: color.ink[900],
       light: color.ink[700],
-      dark: '#05070F',
-      contrastText: color.neutral[0],
+      dark: '#070C1B',
+      contrastText: color.ink.foreground,
     },
     accent: {
-      main: color.accent[500],
-      light: color.accent[400],
+      main: color.accent.teal,
+      light: color.accent.sky,
       dark: color.accent[600],
       contrastText: color.ink[900],
     },
-    ink: { 700: color.ink[700], 800: color.ink[800], 900: color.ink[900] },
+    ink: {
+      700: color.ink[700],
+      800: color.ink[800],
+      900: color.ink[900],
+      foreground: color.ink.foreground,
+      muted: color.ink.muted,
+    },
     success: { main: color.success[600], light: color.success[50], dark: color.success[700] },
     warning: { main: color.warning[600], light: color.warning[50], dark: color.warning[700] },
     error: { main: color.danger[600], light: color.danger[50], dark: color.danger[700] },
@@ -62,82 +73,87 @@ const theme = createTheme({
       900: color.neutral[900],
     },
     background: {
-      default: color.neutral[0],
-      paper: color.neutral[0],
-      subtle: color.neutral[50],
+      default: color.surface.canvas,
+      paper: color.surface.card,
+      subtle: color.surface.muted,
       dark: color.ink[900],
     },
     text: {
       primary: color.neutral[900],
-      secondary: color.neutral[600],
+      secondary: color.neutral[500],
       disabled: color.neutral[400],
     },
-    divider: color.neutral[200],
+    divider: color.surface.line,
   },
 
   typography: {
     fontFamily: font.body,
 
-    // Display — Plus Jakarta Sans, tight tracking, confident weights
+    // Display — Sora 600, tight negative tracking
     h1: {
       fontFamily: font.display,
-      fontSize: 'clamp(2.5rem, 1.4rem + 3.4vw, 4rem)',
-      fontWeight: 800,
-      lineHeight: 1.06,
-      letterSpacing: '-0.03em',
+      fontSize: 'clamp(2.6rem, 1.6rem + 2.6vw, 4.1rem)',
+      fontWeight: 600,
+      lineHeight: 1.02,
+      letterSpacing: '-0.025em',
     },
     h2: {
       fontFamily: font.display,
-      fontSize: 'clamp(1.875rem, 1.2rem + 2vw, 2.75rem)',
-      fontWeight: 800,
-      lineHeight: 1.14,
+      fontSize: 'clamp(1.875rem, 1.3rem + 1.7vw, 2.75rem)',
+      fontWeight: 600,
+      lineHeight: 1.1,
       letterSpacing: '-0.025em',
     },
     h3: {
       fontFamily: font.display,
-      fontSize: 'clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem)',
-      fontWeight: 700,
-      lineHeight: 1.24,
-      letterSpacing: '-0.02em',
+      fontSize: 'clamp(1.5rem, 1.2rem + 1vw, 2.1rem)',
+      fontWeight: 600,
+      lineHeight: 1.16,
+      letterSpacing: '-0.022em',
     },
     h4: {
       fontFamily: font.display,
-      fontSize: '1.25rem',
-      fontWeight: 700,
-      lineHeight: 1.32,
-      letterSpacing: '-0.015em',
+      fontSize: 'clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem)',
+      fontWeight: 600,
+      lineHeight: 1.28,
+      letterSpacing: '-0.018em',
     },
     h5: {
       fontFamily: font.display,
-      fontSize: '1.0625rem',
-      fontWeight: 700,
-      lineHeight: 1.4,
-      letterSpacing: '-0.01em',
+      fontSize: '1.125rem',
+      fontWeight: 600,
+      lineHeight: 1.36,
+      letterSpacing: '-0.014em',
     },
     h6: {
       fontFamily: font.display,
-      fontSize: '0.9375rem',
-      fontWeight: 700,
-      lineHeight: 1.45,
+      fontSize: '0.98rem',
+      fontWeight: 600,
+      lineHeight: 1.42,
+      letterSpacing: '-0.01em',
     },
 
     // Body
-    subtitle1: { fontSize: 'clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem)', lineHeight: 1.62, fontWeight: 400 },
-    subtitle2: { fontSize: '0.9375rem', lineHeight: 1.6, fontWeight: 600 },
-    body1: { fontSize: '1rem', lineHeight: 1.68 },
-    body2: { fontSize: '0.9375rem', lineHeight: 1.62 },
-    caption: { fontSize: '0.8125rem', lineHeight: 1.5 },
+    subtitle1: {
+      fontSize: 'clamp(1rem, 0.95rem + 0.25vw, 1.125rem)',
+      lineHeight: 1.65,
+      fontWeight: 400,
+    },
+    subtitle2: { fontSize: '0.9375rem', lineHeight: 1.6, fontWeight: 500 },
+    body1: { fontSize: '1rem', lineHeight: 1.65 },
+    body2: { fontSize: '0.875rem', lineHeight: 1.65 },
+    caption: { fontSize: '0.75rem', lineHeight: 1.6 },
 
-    // Labels / metadata
+    /** The `.eyebrow` label — every section opens with one of these. */
     overline: {
       fontFamily: font.body,
       fontSize: '0.75rem',
-      fontWeight: 700,
-      letterSpacing: '0.11em',
+      fontWeight: 600,
+      letterSpacing: '0.14em',
       lineHeight: 1.5,
       textTransform: 'uppercase',
     },
-    button: { fontFamily: font.body, fontWeight: 600, textTransform: 'none', letterSpacing: '-0.005em' },
+    button: { fontFamily: font.body, fontWeight: 600, textTransform: 'none', letterSpacing: '0' },
   },
 
   shape: { borderRadius: radius.lg },
@@ -156,6 +172,7 @@ const theme = createTheme({
         },
         html: { scrollBehavior: 'smooth', WebkitTextSizeAdjust: '100%' },
         body: {
+          backgroundColor: color.surface.canvas,
           WebkitFontSmoothing: 'antialiased',
           MozOsxFontSmoothing: 'grayscale',
           textRendering: 'optimizeLegibility',
@@ -167,24 +184,23 @@ const theme = createTheme({
     },
 
     MuiButton: {
-      defaultProps: { disableElevation: true, disableRipple: false },
+      defaultProps: { disableElevation: true },
       styleOverrides: {
         root: {
           borderRadius: radius.md,
-          fontSize: '0.9375rem',
-          padding: '10px 20px',
-          transition: `background ${motion.base} ${motion.ease}, box-shadow ${motion.base} ${motion.ease}, transform ${motion.fast} ${motion.ease}, border-color ${motion.base} ${motion.ease}`,
-          '&:active': { transform: 'translateY(1px)' },
+          fontSize: '0.95rem',
+          padding: '10px 28px',
+          transition: `background ${motion.base} ${motion.ease}, box-shadow ${motion.base} ${motion.ease}, border-color ${motion.base} ${motion.ease}`,
         },
-        sizeSmall: { padding: '7px 14px', fontSize: '0.875rem' },
-        sizeLarge: { padding: '14px 28px', fontSize: '1rem', borderRadius: radius.lg },
+        sizeSmall: { padding: '7px 18px', fontSize: '0.875rem' },
+        sizeLarge: { padding: '14px 28px', fontSize: '0.95rem' },
       },
     },
 
     MuiPaper: {
       styleOverrides: {
         root: { backgroundImage: 'none' },
-        rounded: { borderRadius: radius.xl },
+        rounded: { borderRadius: radius.panel },
       },
     },
 
@@ -192,9 +208,9 @@ const theme = createTheme({
       defaultProps: { elevation: 0 },
       styleOverrides: {
         root: {
-          borderRadius: radius.xl,
-          border: `1px solid ${color.neutral[200]}`,
-          boxShadow: shadow.sm,
+          borderRadius: radius.panel,
+          border: `1px solid ${color.surface.line}`,
+          boxShadow: shadow.soft,
           transition: `box-shadow ${motion.base} ${motion.ease}, transform ${motion.base} ${motion.ease}, border-color ${motion.base} ${motion.ease}`,
         },
       },
@@ -203,14 +219,18 @@ const theme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: { borderRadius: radius.sm, fontWeight: 600, fontSize: '0.8125rem' },
-        outlined: { borderColor: color.neutral[200] },
+        outlined: { borderColor: color.surface.line },
       },
     },
 
     MuiContainer: {
-      defaultProps: { maxWidth: 'lg' },
+      defaultProps: { maxWidth: false },
       styleOverrides: {
-        root: { paddingInline: '20px', '@media (min-width:900px)': { paddingInline: '32px' } },
+        root: {
+          maxWidth: 1280,
+          paddingInline: '20px',
+          '@media (min-width:1200px)': { paddingInline: '32px' },
+        },
       },
     },
 
@@ -218,10 +238,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: radius.md,
-          backgroundColor: color.neutral[0],
+          backgroundColor: color.surface.card,
           transition: `box-shadow ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease}`,
-          '& fieldset': { borderColor: color.neutral[300] },
-          '&:hover fieldset': { borderColor: color.neutral[400] },
+          '& fieldset': { borderColor: color.surface.line },
+          '&:hover fieldset': { borderColor: color.surface.lineStrong },
           '&.Mui-focused': { boxShadow: `0 0 0 4px ${color.brand[100]}` },
           '&.Mui-focused fieldset': { borderColor: color.brand[600], borderWidth: 1 },
         },
@@ -233,30 +253,30 @@ const theme = createTheme({
       styleOverrides: { root: { fontSize: '0.9375rem' } },
     },
 
+    /**
+     * FAQ items in the approved design are ruled rows, not bordered cards —
+     * a bottom hairline, no background, no radius.
+     */
     MuiAccordion: {
-      defaultProps: { elevation: 0, disableGutters: true, square: false },
+      defaultProps: { elevation: 0, disableGutters: true, square: true },
       styleOverrides: {
         root: {
-          border: `1px solid ${color.neutral[200]}`,
-          borderRadius: `${radius.lg}px !important`,
-          background: color.neutral[0],
-          overflow: 'hidden',
-          transition: `border-color ${motion.base} ${motion.ease}, box-shadow ${motion.base} ${motion.ease}`,
+          background: 'transparent',
+          borderBottom: `1px solid ${color.surface.line}`,
           '&::before': { display: 'none' },
-          '&.Mui-expanded': { borderColor: color.brand[200], boxShadow: shadow.sm },
         },
       },
     },
 
     MuiAccordionSummary: {
       styleOverrides: {
-        root: { padding: '4px 20px', minHeight: 60 },
-        content: { marginBlock: 14 },
+        root: { padding: 0, minHeight: 0 },
+        content: { marginBlock: '20px' },
       },
     },
 
     MuiAccordionDetails: {
-      styleOverrides: { root: { padding: '0 20px 20px' } },
+      styleOverrides: { root: { padding: '0 0 24px' } },
     },
 
     MuiLink: {

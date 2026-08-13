@@ -1,43 +1,32 @@
 import type { ReactNode } from 'react';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { color } from '../../theme/tokens';
 
 export interface EyebrowProps {
   children: ReactNode;
-  /** Use on dark / brand surfaces */
+  /** On ink surfaces the label switches from azure to sky */
   onDark?: boolean;
-  /** Leading rule — the editorial tick that anchors a left-aligned section */
-  rule?: boolean;
+  /** Smaller variant used inside cards and the hero centre panel */
+  size?: 'sm' | 'md';
 }
 
 /**
- * The one section label style. `SectionHeading` renders this internally; use it
- * directly when a block needs the label without a full heading (panel headers,
- * split layouts) so the two never drift apart.
+ * The one section label style: uppercase, 0.14em tracking, azure on light and
+ * sky on ink. Every section and most panels open with one of these, so it
+ * lives in a single component rather than being re-declared per section.
  */
-export default function Eyebrow({ children, onDark = false, rule = false }: EyebrowProps) {
+export default function Eyebrow({ children, onDark = false, size = 'md' }: EyebrowProps) {
   return (
-    <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.25 }}>
-      {rule && (
-        <Box
-          aria-hidden
-          sx={{
-            width: 22,
-            height: 2,
-            borderRadius: 2,
-            flexShrink: 0,
-            bgcolor: onDark ? 'rgba(169,178,255,0.7)' : color.brand[500],
-          }}
-        />
-      )}
-      <Typography
-        variant="overline"
-        component="span"
-        sx={{ color: onDark ? 'rgba(255,255,255,0.55)' : color.brand[600] }}
-      >
-        {children}
-      </Typography>
-    </Box>
+    <Typography
+      variant="overline"
+      component="p"
+      sx={{
+        fontSize: size === 'sm' ? '0.66rem' : '0.75rem',
+        letterSpacing: onDark ? '0.16em' : '0.14em',
+        color: onDark ? color.accent.sky : color.brand[700],
+      }}
+    >
+      {children}
+    </Typography>
   );
 }

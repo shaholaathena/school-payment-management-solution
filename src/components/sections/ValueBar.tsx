@@ -1,8 +1,11 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Banknote, Eye, Scale, ShieldCheck, type LucideIcon } from 'lucide-react';
+import { Eye, RefreshCw, ShieldCheck, Timer, type LucideIcon } from 'lucide-react';
+import BlobIcon from '../ui/BlobIcon';
 import Reveal from '../ui/Reveal';
-import { color, motion, radius } from '../../theme/tokens';
+import Section from '../ui/Section';
+import SectionHeading from '../ui/SectionHeading';
+import { color } from '../../theme/tokens';
 
 interface ValueItem {
   icon: LucideIcon;
@@ -11,103 +14,79 @@ interface ValueItem {
 }
 
 /**
- * Deliberately unquantified. Each line describes what the platform changes
- * about the work, not how much — there is no verified figure to cite yet.
+ * Deliberately unquantified — each line states what the platform changes about
+ * the work, not by how much, because there is no verified figure to cite.
  */
 const VALUES: ValueItem[] = [
   {
-    icon: Banknote,
+    icon: Timer,
     title: 'Faster collections',
-    description: 'Dues generate and reminders go out without manual chasing.',
+    description: 'Dues generate and chase themselves, without the manual follow-up.',
   },
   {
     icon: ShieldCheck,
     title: 'Secure payments',
-    description: 'Cardholder data stays with the gateway, not the platform.',
+    description: 'Every transaction settles through the SSLCOMMERZ gateway.',
   },
   {
     icon: Eye,
     title: 'Real-time visibility',
-    description: 'Received, outstanding and pending sit in a single view.',
+    description: 'Collections, outstanding and pending sit in one live view.',
   },
   {
-    icon: Scale,
+    icon: RefreshCw,
     title: 'Easier reconciliation',
-    description: 'Every payment ties back to a student, a fee and a method.',
+    description: 'Each payment ties back to a student, a fee and a method.',
   },
 ];
 
+/**
+ * Pintex `features-1`: a centred heading and subtitle over a four-column row of
+ * line-icon-on-blob features. The lightest possible structure — no cards, no
+ * rules — so it reads in a glance right after the hero.
+ */
 export default function ValueBar() {
   return (
-    <Box
-      component="section"
-      aria-label="Platform value summary"
-      sx={{ bgcolor: color.neutral[0], py: { xs: 6, md: 8 } }}
-    >
-      <Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 2.5, md: 4 } }}>
-        <Reveal>
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
-              borderRadius: `${radius['2xl']}px`,
-              border: `1px solid ${color.surface.line}`,
-              bgcolor: color.surface.muted,
-              overflow: 'hidden',
-            }}
-          >
-            {VALUES.map(({ icon: Icon, title, description }, i) => (
-              <Box
-                key={title}
-                sx={{
-                  p: { xs: 3, md: 3.5 },
-                  bgcolor: color.neutral[0],
-                  // Hairlines come from the parent background showing through a
-                  // 1px gap, so no divider doubles up at the wrap points.
-                  borderRight: {
-                    xs: 'none',
-                    sm: i % 2 === 0 ? `1px solid ${color.surface.line}` : 'none',
-                    lg: i < 3 ? `1px solid ${color.surface.line}` : 'none',
-                  },
-                  borderBottom: {
-                    xs: i < 3 ? `1px solid ${color.surface.line}` : 'none',
-                    sm: i < 2 ? `1px solid ${color.surface.line}` : 'none',
-                    lg: 'none',
-                  },
-                  transition: `background ${motion.base} ${motion.ease}`,
-                  '&:hover': { bgcolor: color.surface.lavender },
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 38,
-                    height: 38,
-                    mb: 2,
-                    borderRadius: `${radius.md}px`,
-                    display: 'grid',
-                    placeItems: 'center',
-                    bgcolor: color.brand[50],
-                    border: `1px solid ${color.brand[100]}`,
-                    color: color.brand[600],
-                  }}
-                >
-                  <Icon size={18} strokeWidth={1.9} aria-hidden />
-                </Box>
+    <Section id="features" tone="light" density="loose">
+      <SectionHeading
+        align="center"
+        title="Everything in one place"
+        description="Fee collection, payments, records and reporting — one platform instead of a drawer full of tools."
+      />
 
-                <Typography variant="h6" sx={{ mb: 0.75, color: color.neutral[950] }}>
-                  {title}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ color: color.neutral[600], fontSize: '0.875rem', lineHeight: 1.6 }}
-                >
-                  {description}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Reveal>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '1fr',
+            sm: 'repeat(2, minmax(0, 1fr))',
+            lg: 'repeat(4, minmax(0, 1fr))',
+          },
+          columnGap: { sm: 4, lg: 5 },
+          rowGap: { xs: 6, sm: 8 },
+        }}
+      >
+        {VALUES.map(({ icon, title, description }, i) => (
+          <Reveal key={title} delay={i * 90}>
+            <Box
+              sx={{
+                textAlign: 'center',
+                '&:hover .blob-icon': { transform: 'translateY(-4px)', bgcolor: color.brand[100] },
+              }}
+            >
+              <BlobIcon icon={icon} variant={i} sx={{ mx: 'auto', mb: 3 }} />
+
+              <Typography variant="h5" component="h3" sx={{ mb: 1.25, color: color.neutral[900] }}>
+                {title}
+              </Typography>
+
+              <Typography variant="body2" sx={{ maxWidth: '26ch', mx: 'auto', color: color.neutral[500] }}>
+                {description}
+              </Typography>
+            </Box>
+          </Reveal>
+        ))}
       </Box>
-    </Box>
+    </Section>
   );
 }

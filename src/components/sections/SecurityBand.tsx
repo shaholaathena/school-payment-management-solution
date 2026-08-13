@@ -1,219 +1,153 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { ArrowRight } from 'lucide-react';
-import Button from '../ui/Button';
 import Eyebrow from '../ui/Eyebrow';
+import Panel from '../ui/Panel';
 import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
-import { SECURITY_PILLARS, TECH_STACK } from '../../content/platform';
-import { color, motion, radius } from '../../theme/tokens';
+import SectionHeading from '../ui/SectionHeading';
+import { brand } from '../../content/site';
+import { PAYMENT_METHODS, SECURITY_PILLARS, TECH_STACK } from '../../content/platform';
+import { color, radius } from '../../theme/tokens';
 
 /**
- * Stands in for a testimonials section. There is no testimonial content in the
- * repository, and inventing one for a payment product is not an option — so the
- * page offers what can actually be checked instead.
+ * Security, technology and payment methods.
+ *
+ * Every claim here comes verbatim from `content/platform.ts`, which carries an
+ * explicit warning against adding platform-level certification claims. The
+ * gateway's own certification is a separate statement and is not made here.
  */
-const VERIFIABLE = [
-  'The working platform, walked through against your own fee structure',
-  'Gateway records reviewed alongside institutional fee data',
-  'Role-based access demonstrated for each type of user',
-];
-
 export default function SecurityBand() {
   return (
-    <Section id="security" tone="dark" density="loose">
+    <Section id="security" tone="subtle">
+      <SectionHeading
+        eyebrow="Technology & security"
+        title="Trust built into how it runs."
+        description={`Payments settle through the ${brand.gateway} gateway, access is governed by role, and every transaction stays traceable to a student and a fee.`}
+      />
+
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 0.85fr) minmax(0, 1.15fr)' },
-          gap: { xs: 6, lg: 9 },
-          alignItems: 'start',
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
+          gap: 3,
         }}
       >
-        <Reveal>
-          <Box sx={{ position: { lg: 'sticky' }, top: { lg: 120 } }}>
-            <Box sx={{ mb: 2.5 }}>
-              <Eyebrow onDark rule>
-                Security &amp; technology
-              </Eyebrow>
-            </Box>
+        {SECURITY_PILLARS.map((p, i) => (
+          <Reveal key={p.title} delay={(i % 3) * 70} sx={{ display: 'flex' }}>
+            <Panel lift sx={{ flex: 1, p: 3.5 }}>
+              <Box sx={{ color: color.brand[600] }}>
+                <p.icon size={20} strokeWidth={2} aria-hidden />
+              </Box>
 
-            <Typography variant="h2" component="h2" sx={{ color: '#fff', maxWidth: '15ch', mb: 2.5 }}>
-              Confidence that survives a finance review.
-            </Typography>
-
-            <Typography
-              variant="subtitle1"
-              sx={{ color: 'rgba(255,255,255,0.62)', maxWidth: '44ch', mb: 4.5 }}
-            >
-              What the platform does about payment handling, access and traceability — described
-              only as far as the product actually goes.
-            </Typography>
-
-            <Box
-              sx={{
-                p: { xs: 2.5, md: 3 },
-                borderRadius: `${radius.xl}px`,
-                bgcolor: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.10)',
-              }}
-            >
               <Typography
-                variant="overline"
-                component="p"
-                sx={{ mb: 2, color: 'rgba(255,255,255,0.42)' }}
+                sx={{
+                  mt: 2.5,
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '1.05rem',
+                  fontWeight: 600,
+                  letterSpacing: '-0.014em',
+                  color: color.neutral[900],
+                }}
               >
-                Technology
+                {p.title}
               </Typography>
 
-              <Stack component="dl" spacing={0} sx={{ m: 0 }}>
-                {TECH_STACK.map((row, i) => (
-                  <Stack
-                    key={row.layer}
-                    direction={{ xs: 'column', sm: 'row' }}
-                    spacing={{ xs: 0.25, sm: 2 }}
-                    sx={{
-                      py: 1.375,
-                      justifyContent: 'space-between',
-                      borderTop: i === 0 ? 'none' : '1px solid rgba(255,255,255,0.07)',
-                    }}
-                  >
-                    <Typography
-                      component="dt"
-                      sx={{ fontSize: '0.8125rem', fontWeight: 600, color: 'rgba(255,255,255,0.88)' }}
-                    >
-                      {row.layer}
-                    </Typography>
-                    <Typography
-                      component="dd"
-                      sx={{
-                        m: 0,
-                        fontSize: '0.8125rem',
-                        color: 'rgba(255,255,255,0.52)',
-                        textAlign: { sm: 'right' },
-                      }}
-                    >
-                      {row.value}
-                    </Typography>
-                  </Stack>
-                ))}
-              </Stack>
-            </Box>
-          </Box>
-        </Reveal>
+              <Typography variant="body2" sx={{ mt: 1.25, color: color.neutral[500] }}>
+                {p.description}
+              </Typography>
+            </Panel>
+          </Reveal>
+        ))}
+      </Box>
 
-        <Box>
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
-              gap: 2,
-            }}
-          >
-            {SECURITY_PILLARS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 60} sx={{ display: 'flex' }}>
-                <Box
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', lg: '1.1fr 0.9fr' },
+          gap: 3,
+          mt: 3,
+        }}
+      >
+        <Reveal sx={{ display: 'flex' }}>
+          <Panel sx={{ flex: 1, p: { xs: 3.5, lg: 4.5 } }}>
+            <Eyebrow>Technology stack</Eyebrow>
+
+            <Box component="dl" sx={{ m: 0, mt: 3 }}>
+              {TECH_STACK.map((row, i) => (
+                <Stack
+                  key={row.layer}
+                  direction="row"
+                  spacing={2}
                   sx={{
-                    flex: 1,
-                    p: 3,
-                    borderRadius: `${radius.xl}px`,
-                    bgcolor: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.10)',
-                    transition: `transform ${motion.base} ${motion.ease}, background ${motion.base} ${motion.ease}, border-color ${motion.base} ${motion.ease}`,
-                    '&:hover': {
-                      transform: 'translateY(-3px)',
-                      bgcolor: 'rgba(255,255,255,0.07)',
-                      borderColor: 'rgba(255,255,255,0.20)',
-                    },
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between',
+                    py: 1.5,
+                    borderTop: i === 0 ? 'none' : `1px solid ${color.surface.line}`,
                   }}
                 >
-                  <Box
-                    sx={{
-                      width: 40,
-                      height: 40,
-                      mb: 2.5,
-                      borderRadius: `${radius.md}px`,
-                      display: 'grid',
-                      placeItems: 'center',
-                      bgcolor: 'rgba(99,102,241,0.20)',
-                      color: '#A9B2FF',
-                    }}
-                  >
-                    <p.icon size={19} strokeWidth={1.9} aria-hidden />
-                  </Box>
-
-                  <Typography variant="h5" sx={{ color: '#fff', mb: 1 }}>
-                    {p.title}
+                  <Typography component="dt" variant="body2" sx={{ color: color.neutral[500] }}>
+                    {row.layer}
                   </Typography>
                   <Typography
+                    component="dd"
                     variant="body2"
-                    sx={{ color: 'rgba(255,255,255,0.60)', fontSize: '0.875rem', lineHeight: 1.7 }}
+                    sx={{ m: 0, fontWeight: 500, color: color.neutral[900] }}
                   >
-                    {p.description}
+                    {row.value}
                   </Typography>
-                </Box>
-              </Reveal>
-            ))}
-          </Box>
+                </Stack>
+              ))}
+            </Box>
+          </Panel>
+        </Reveal>
 
-          <Reveal delay={80}>
+        <Reveal delay={80} sx={{ display: 'flex' }}>
+          <Panel sx={{ flex: 1, p: { xs: 3.5, lg: 4.5 } }}>
+            <Eyebrow>Payment methods</Eyebrow>
+
             <Box
+              component="ul"
               sx={{
-                mt: 2,
-                p: { xs: 3, md: 4 },
-                borderRadius: `${radius.xl}px`,
-                border: '1px solid rgba(255,255,255,0.10)',
-                backgroundImage:
-                  'linear-gradient(135deg, rgba(99,102,241,0.20) 0%, rgba(6,182,212,0.08) 100%)',
+                listStyle: 'none',
+                m: 0,
+                p: 0,
+                mt: 3,
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
+                gap: 1.5,
               }}
             >
-              <Typography variant="h5" sx={{ color: '#fff', mb: 1.5 }}>
-                Proof instead of testimonials
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: 'rgba(255,255,255,0.66)', maxWidth: '54ch', mb: 3, lineHeight: 1.7 }}
-              >
-                We would rather show the product than quote someone about it. A demo covers three
-                things end to end:
-              </Typography>
-
-              <Stack component="ul" spacing={1.5} sx={{ listStyle: 'none', m: 0, p: 0, mb: 3.5 }}>
-                {VERIFIABLE.map((item, i) => (
-                  <Stack
-                    key={item}
-                    component="li"
-                    direction="row"
-                    spacing={1.75}
-                    sx={{ alignItems: 'flex-start' }}
-                  >
-                    <Typography
-                      component="span"
-                      sx={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.6875rem',
-                        fontWeight: 700,
-                        color: color.accent[300],
-                        mt: '3px',
-                        flexShrink: 0,
-                      }}
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.82)' }}>
-                      {item}
-                    </Typography>
-                  </Stack>
-                ))}
-              </Stack>
-
-              <Button to="/contact" variant="inverse" endIcon={<ArrowRight size={16} />}>
-                Book a Demo
-              </Button>
+              {PAYMENT_METHODS.map((m) => (
+                <Stack
+                  key={m.name}
+                  component="li"
+                  direction="row"
+                  spacing={1.5}
+                  title={m.category}
+                  sx={{
+                    alignItems: 'center',
+                    px: 1.75,
+                    py: 1.5,
+                    borderRadius: `${radius.md}px`,
+                    border: `1px solid ${color.surface.line}`,
+                  }}
+                >
+                  <Box sx={{ display: 'grid', placeItems: 'center', color: color.brand[600], flexShrink: 0 }}>
+                    <m.icon size={17} strokeWidth={2} aria-hidden />
+                  </Box>
+                  <Typography sx={{ fontSize: '0.875rem', fontWeight: 500, color: color.neutral[900] }}>
+                    {m.name}
+                  </Typography>
+                </Stack>
+              ))}
             </Box>
-          </Reveal>
-        </Box>
+
+            <Typography variant="caption" sx={{ display: 'block', mt: 2.5, color: color.neutral[500] }}>
+              Availability follows the {brand.gateway} merchant configuration for your institution.
+            </Typography>
+          </Panel>
+        </Reveal>
       </Box>
     </Section>
   );

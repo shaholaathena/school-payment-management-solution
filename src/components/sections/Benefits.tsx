@@ -1,174 +1,112 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Check } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import MuiLink from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
+import BlobIcon from '../ui/BlobIcon';
+import Panel from '../ui/Panel';
 import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import { BENEFITS } from '../../content/home';
-import { color, motion, radius, shadow } from '../../theme/tokens';
+import { color, motion } from '../../theme/tokens';
 
 /**
- * Supporting detail for the featured card only. Each line is a capability
- * already described in `src/content/features.ts` — the bento gives the lead
- * benefit more room, not more claims.
+ * A bento rather than four equal cards: the lead benefit takes a tall column on
+ * the left and carries the section's call to action, while the remaining three
+ * stack as wide rows beside it.
  */
-const FEATURED_DETAIL = [
-  'Dues generated against published fee structures',
-  'SMS and email reminders on due dates',
-  'Push notifications through the mobile apps',
-];
-
-/** span-2 cards sit at either end of the two rows, so neither row reads as a grid of equals. */
-const SPAN: Record<number, number> = { 0: 2, 1: 1, 2: 1, 3: 2 };
-
 export default function Benefits() {
+  const [lead, ...rest] = BENEFITS;
+
   return (
-    <Section id="benefits" tone="light" density="loose">
+    <Section id="benefits" tone="subtle" density="loose">
       <SectionHeading
-        align="left"
-        eyebrow="Why institutions choose it"
-        title="Less chasing. More visibility."
-        description="The platform is judged on four things: how quickly money arrives, how clearly it can be seen, how it feels to families, and whether it holds up under scrutiny."
-        titleMaxWidth="14ch"
+        align="center"
+        eyebrow="Capabilities"
+        title="What changes once it is running"
+        description="Four things institutions feel first once the platform is collecting fees for them."
       />
 
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' },
-          gap: { xs: 2, md: 2.5 },
+          gridTemplateColumns: { xs: '1fr', lg: 'repeat(3, minmax(0, 1fr))' },
+          gap: 3,
         }}
       >
-        {BENEFITS.map((b, i) => {
-          const featured = i === 0;
+        <Reveal sx={{ display: 'flex', gridRow: { lg: 'span 3' } }}>
+          <Panel
+            lift
+            sx={{
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              p: { xs: 4, lg: 5 },
+            }}
+          >
+            <Box>
+              <BlobIcon icon={lead.icon} size="lg" variant={0} />
 
-          return (
-            <Reveal
-              key={b.title}
-              delay={i * 70}
+              <Typography
+                variant="h3"
+                component="h3"
+                sx={{ mt: 3.5, fontSize: { xs: '1.5rem', lg: '1.75rem' } }}
+              >
+                {lead.title}
+              </Typography>
+
+              <Typography sx={{ mt: 2, fontSize: '1rem', lineHeight: 1.65, color: color.neutral[500] }}>
+                {lead.description}
+              </Typography>
+            </Box>
+
+            <MuiLink
+              component={RouterLink}
+              to="/contact"
               sx={{
-                display: 'flex',
-                gridColumn: { lg: `span ${SPAN[i]}` },
-                ...(featured && { gridColumn: { sm: 'span 2', lg: 'span 2' } }),
+                display: 'inline-flex',
+                width: 'fit-content',
+                alignItems: 'center',
+                gap: 1,
+                mt: 5,
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                color: color.brand[700],
+                '&:hover svg': { transform: 'translateX(3px)' },
+                '& svg': { transition: `transform ${motion.base} ${motion.ease}` },
               }}
             >
-              <Box
-                sx={{
-                  flex: 1,
-                  position: 'relative',
-                  overflow: 'hidden',
-                  p: { xs: 3, md: featured ? 4.5 : 3.5 },
-                  minHeight: { md: featured ? 340 : 260 },
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderRadius: `${radius['2xl']}px`,
-                  bgcolor: featured ? color.ink[900] : color.neutral[0],
-                  color: featured ? '#fff' : color.neutral[950],
-                  border: `1px solid ${featured ? 'rgba(255,255,255,0.08)' : color.surface.line}`,
-                  boxShadow: featured ? shadow.lg : 'none',
-                  transition: `transform ${motion.base} ${motion.ease}, box-shadow ${motion.base} ${motion.ease}, border-color ${motion.base} ${motion.ease}`,
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: featured ? shadow.xl : shadow.lg,
-                    borderColor: featured ? 'rgba(255,255,255,0.16)' : color.brand[200],
-                  },
-                }}
-              >
-                {featured && (
-                  <Box
-                    aria-hidden
-                    sx={{
-                      position: 'absolute',
-                      inset: 0,
-                      backgroundImage:
-                        'radial-gradient(at 88% 4%, rgba(79,70,229,0.36) 0px, transparent 50%), radial-gradient(at 6% 96%, rgba(6,182,212,0.14) 0px, transparent 45%)',
-                    }}
-                  />
-                )}
+              Book a Demo
+              <ArrowRight size={15} strokeWidth={2.25} aria-hidden />
+            </MuiLink>
+          </Panel>
+        </Reveal>
 
-                <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                  <Box
-                    sx={{
-                      width: featured ? 52 : 44,
-                      height: featured ? 52 : 44,
-                      mb: 2.5,
-                      borderRadius: `${radius.md}px`,
-                      display: 'grid',
-                      placeItems: 'center',
-                      bgcolor: featured ? 'rgba(255,255,255,0.09)' : color.brand[50],
-                      border: `1px solid ${featured ? 'rgba(255,255,255,0.14)' : color.brand[100]}`,
-                      color: featured ? '#A9B2FF' : color.brand[600],
-                    }}
-                  >
-                    <b.icon size={featured ? 23 : 20} strokeWidth={1.9} aria-hidden />
-                  </Box>
+        {rest.map((b, i) => (
+          <Reveal
+            key={b.title}
+            delay={(i + 1) * 70}
+            sx={{ display: 'flex', gridColumn: { lg: 'span 2 / -1' } }}
+          >
+            <Panel lift sx={{ flex: 1, p: 3.5 }}>
+              <Stack direction="row" spacing={2.5} sx={{ alignItems: 'center' }}>
+                <BlobIcon icon={b.icon} size="sm" variant={i + 1} />
 
-                  <Typography
-                    variant={featured ? 'h3' : 'h4'}
-                    component="h3"
-                    sx={{ mb: 1.5, color: 'inherit', maxWidth: featured ? '14ch' : 'none' }}
-                  >
+                <Box>
+                  <Typography variant="h5" component="h3">
                     {b.title}
                   </Typography>
-
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: featured ? 'rgba(255,255,255,0.64)' : color.neutral[600],
-                      maxWidth: '46ch',
-                      lineHeight: 1.7,
-                    }}
-                  >
+                  <Typography variant="body2" sx={{ mt: 1, color: color.neutral[500] }}>
                     {b.description}
                   </Typography>
-
-                  {featured && (
-                    <Stack
-                      component="ul"
-                      spacing={1.25}
-                      sx={{
-                        listStyle: 'none',
-                        m: 0,
-                        p: 0,
-                        mt: 'auto',
-                        pt: 4,
-                      }}
-                    >
-                      {FEATURED_DETAIL.map((d) => (
-                        <Stack
-                          key={d}
-                          component="li"
-                          direction="row"
-                          spacing={1.25}
-                          sx={{ alignItems: 'center' }}
-                        >
-                          <Box
-                            sx={{
-                              width: 18,
-                              height: 18,
-                              flexShrink: 0,
-                              borderRadius: '50%',
-                              display: 'grid',
-                              placeItems: 'center',
-                              bgcolor: 'rgba(103,232,249,0.14)',
-                              color: color.accent[300],
-                            }}
-                          >
-                            <Check size={11} strokeWidth={3} aria-hidden />
-                          </Box>
-                          <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.78)' }}>
-                            {d}
-                          </Typography>
-                        </Stack>
-                      ))}
-                    </Stack>
-                  )}
                 </Box>
-              </Box>
-            </Reveal>
-          );
-        })}
+              </Stack>
+            </Panel>
+          </Reveal>
+        ))}
       </Box>
     </Section>
   );

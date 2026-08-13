@@ -15,11 +15,16 @@ export interface NavItem {
   to: string;
 }
 
+/**
+ * Navigation labels follow the approved design. Targets keep the existing
+ * routes reachable rather than collapsing the site into a single page: the two
+ * landing-page anchors point at `/#…`, and the rest resolve to real routes.
+ */
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Home', to: '/' },
-  { label: 'Features', to: '/features' },
-  { label: 'How It Works', to: '/how-it-works' },
-  { label: 'Technology', to: '/how-it-works#technology' },
+  { label: 'Platform', to: '/#platform' },
+  { label: 'How it works', to: '/how-it-works' },
+  { label: 'Product', to: '/#product' },
+  { label: 'Security', to: '/how-it-works#technology' },
   { label: 'FAQ', to: '/faq' },
 ];
 
@@ -71,4 +76,6 @@ export const CONTACT = {
 export const CTA = {
   primary: 'Book a Demo',
   secondary: 'Explore Features',
+  /** Quiet text link beside the navbar's primary action */
+  navSecondary: 'See the product',
 } as const;

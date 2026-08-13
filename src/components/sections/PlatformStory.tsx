@@ -1,202 +1,115 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import {
-  Bell,
-  FileBarChart,
-  Landmark,
-  Receipt,
-  Users,
-  Wallet,
-  type LucideIcon,
-} from 'lucide-react';
-import Eyebrow from '../ui/Eyebrow';
-import Reveal from '../ui/Reveal';
+import { ShieldCheck } from 'lucide-react';
 import Section from '../ui/Section';
-import TextLink from '../ui/TextLink';
+import ContentRow from '../ui/ContentRow';
+import { brand } from '../../content/site';
 import { color, motion, radius, shadow } from '../../theme/tokens';
-
-/** The everyday tools a fee cycle currently leaks into. */
-const SCATTERED = ['Spreadsheets', 'Cash at the office', 'Paper receipts', 'Phone follow-ups', 'Bank slips'];
-
-const MODULES: { icon: LucideIcon; label: string }[] = [
-  { icon: Landmark, label: 'Fee structures' },
-  { icon: Wallet, label: 'Collection' },
-  { icon: Receipt, label: 'Transactions' },
-  { icon: Bell, label: 'Reminders' },
-  { icon: FileBarChart, label: 'Reporting' },
-  { icon: Users, label: 'Student information' },
-];
+import dashboardHero from '../../assets/images/dashboard-hero.png';
 
 /**
- * The section's visual argument: five loose, unconnected places a fee cycle
- * currently lives, funnelled into one system holding six modules.
+ * A single honest accent pill floating over the screenshot — states a
+ * capability the platform genuinely has, with no invented amount or metric
+ * (unlike the template's "$89,942.32" style cards, which would be fabricated
+ * financial data on a real payment product).
  */
-function ConsolidationDiagram() {
+function FloatingChip() {
   return (
-    <Box
+    <Stack
+      direction="row"
+      spacing={1.25}
       sx={{
-        p: { xs: 2.5, sm: 3.5, md: 4.5 },
-        borderRadius: `${radius['3xl']}px`,
-        bgcolor: color.surface.muted,
+        position: 'absolute',
+        bottom: { xs: 14, md: 22 },
+        left: { xs: -8, md: -26 },
+        zIndex: 2,
+        alignItems: 'center',
+        px: 1.75,
+        py: 1.25,
+        borderRadius: `${radius.lg}px`,
+        bgcolor: color.surface.card,
         border: `1px solid ${color.surface.line}`,
+        boxShadow: shadow.lift,
       }}
     >
-      <Typography variant="overline" component="p" sx={{ mb: 2.5, color: color.neutral[400] }}>
-        Scattered across tools
-      </Typography>
-
-      <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
-        {SCATTERED.map((item) => (
-          <Box
-            key={item}
-            sx={{
-              px: 1.75,
-              py: 0.875,
-              borderRadius: `${radius.md}px`,
-              border: `1px dashed ${color.surface.lineStrong}`,
-              bgcolor: 'rgba(255,255,255,0.6)',
-              fontSize: '0.8125rem',
-              fontWeight: 600,
-              color: color.neutral[500],
-            }}
-          >
-            {item}
-          </Box>
-        ))}
-      </Stack>
-
-      {/* Funnel — five inputs resolving to one */}
-      <Box
-        component="svg"
-        viewBox="0 0 200 44"
-        fill="none"
-        preserveAspectRatio="none"
-        aria-hidden
-        sx={{ display: 'block', width: '100%', height: { xs: 34, md: 44 }, my: { xs: 2, md: 2.5 } }}
-      >
-        {[16, 58, 100, 142, 184].map((x) => (
-          <path
-            key={x}
-            d={`M ${x} 0 C ${x} 24, 100 20, 100 44`}
-            stroke={color.brand[300]}
-            strokeWidth="1"
-            strokeOpacity="0.55"
-          />
-        ))}
-      </Box>
-
       <Box
         sx={{
-          p: { xs: 2.5, md: 3 },
-          borderRadius: `${radius['2xl']}px`,
-          bgcolor: color.neutral[0],
-          border: `1px solid ${color.brand[100]}`,
-          boxShadow: shadow.md,
+          width: 34,
+          height: 34,
+          borderRadius: '50%',
+          display: 'grid',
+          placeItems: 'center',
+          bgcolor: color.brand[50],
+          color: color.brand[700],
         }}
       >
-        <Typography variant="overline" component="p" sx={{ mb: 2.5, color: color.brand[600] }}>
-          One system of record
-        </Typography>
-
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
-            gap: 1,
-          }}
-        >
-          {MODULES.map(({ icon: Icon, label }) => (
-            <Stack
-              key={label}
-              direction="row"
-              spacing={1.25}
-              sx={{
-                alignItems: 'center',
-                px: 1.5,
-                py: 1.25,
-                borderRadius: `${radius.md}px`,
-                bgcolor: color.surface.muted,
-                transition: `background ${motion.base} ${motion.ease}`,
-                '&:hover': { bgcolor: color.brand[50] },
-              }}
-            >
-              <Box sx={{ display: 'grid', placeItems: 'center', color: color.brand[600], flexShrink: 0 }}>
-                <Icon size={16} strokeWidth={1.9} aria-hidden />
-              </Box>
-              <Typography
-                sx={{ fontSize: '0.8125rem', fontWeight: 650, color: color.neutral[800] }}
-              >
-                {label}
-              </Typography>
-            </Stack>
-          ))}
-        </Box>
+        <ShieldCheck size={17} strokeWidth={2} aria-hidden />
       </Box>
-    </Box>
+      <Box>
+        <Typography sx={{ fontSize: '0.8125rem', fontWeight: 700, color: color.neutral[900], lineHeight: 1.2 }}>
+          Secured by {brand.gateway}
+        </Typography>
+        <Typography sx={{ fontSize: '0.6875rem', color: color.neutral[500] }}>
+          Cardholder data stays with the gateway
+        </Typography>
+      </Box>
+    </Stack>
   );
 }
 
 export default function PlatformStory() {
-  return (
-    <Section id="platform" tone="light" density="loose">
+  const screenshot = (
+    <Box sx={{ position: 'relative' }}>
       <Box
         sx={{
-          display: 'grid',
-          gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 1.15fr) minmax(0, 0.85fr)' },
-          gap: { xs: 6, lg: 9 },
-          alignItems: 'center',
+          borderRadius: `${radius.shot}px`,
+          overflow: 'hidden',
+          border: `1px solid rgba(16,26,47,0.10)`,
+          boxShadow: shadow.lift,
+          '&:hover img': { transform: 'scale(1.015)' },
         }}
       >
-        <Reveal>
-          <ConsolidationDiagram />
-        </Reveal>
-
-        <Reveal delay={90}>
-          <Box sx={{ mb: 2.5 }}>
-            <Eyebrow rule>One platform</Eyebrow>
-          </Box>
-
-          <Typography variant="h2" component="h2" sx={{ maxWidth: '15ch', mb: 2.5 }}>
-            One payment system. Less operational noise.
-          </Typography>
-
-          <Typography variant="subtitle1" sx={{ color: color.neutral[600], maxWidth: '46ch', mb: 4 }}>
-            A fee cycle usually spreads across spreadsheets, receipts and follow-up calls. The
-            platform holds all of it — from the structure a fee is built on to the report at the end
-            of the period.
-          </Typography>
-
-          <Stack
-            component="ul"
-            spacing={0}
-            sx={{ listStyle: 'none', m: 0, p: 0, mb: 4, borderTop: `1px solid ${color.surface.line}` }}
-          >
-            {[
-              'Fee structures defined once, by class, section and campus',
-              'Collection tracked against every structure you publish',
-              'Transactions traceable to a student, a fee and a method',
-              'Reminders, reporting and student records in the same system',
-            ].map((line) => (
-              <Box
-                key={line}
-                component="li"
-                sx={{
-                  py: 1.75,
-                  borderBottom: `1px solid ${color.surface.line}`,
-                  fontSize: '0.9375rem',
-                  lineHeight: 1.6,
-                  color: color.neutral[700],
-                }}
-              >
-                {line}
-              </Box>
-            ))}
-          </Stack>
-
-          <TextLink to="/features">See every capability</TextLink>
-        </Reveal>
+        <Box
+          component="img"
+          src={dashboardHero}
+          alt="School portal dashboard showing payable and received amounts with a monthwise dues collection chart"
+          loading="lazy"
+          decoding="async"
+          sx={{
+            display: 'block',
+            width: '100%',
+            height: 'auto',
+            transition: `transform ${motion.slow} ${motion.ease}`,
+          }}
+        />
       </Box>
+      <FloatingChip />
+    </Box>
+  );
+
+  return (
+    <Section id="platform" tone="subtle" density="loose">
+      <ContentRow
+        eyebrow="One platform"
+        title={
+          <>
+            One payment system.
+            <Box component="br" sx={{ display: { xs: 'none', sm: 'block' } }} /> Less operational
+            noise.
+          </>
+        }
+        lead="Fee structures, collection, transactions, reminders, reporting and student information stop living in separate spreadsheets, inboxes and counters."
+        subheading="Fewer places for a fee to hide"
+        bullets={[
+          'Fee structures defined once, by class, section and campus',
+          'Every payment traceable to a student, a fee and a method',
+          'Reminders, reporting and records in the same system',
+        ]}
+        cta={{ label: 'Explore all capabilities', to: '/features' }}
+        image={screenshot}
+        dotted="br"
+      />
     </Section>
   );
 }
