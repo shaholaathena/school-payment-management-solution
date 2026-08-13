@@ -21,9 +21,9 @@ export interface DottedGridProps {
 export default function DottedGrid({
   cols = 7,
   rows = 7,
-  dot = 3,
+  dot = 3.4,
   gap = 16,
-  color: dotColor = color.brand[200],
+  color: dotColor = color.brand[300],
   sx,
 }: DottedGridProps) {
   return (

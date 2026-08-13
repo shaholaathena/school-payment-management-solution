@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import BlobIcon from '../ui/BlobIcon';
 import Eyebrow from '../ui/Eyebrow';
 import Panel from '../ui/Panel';
 import Reveal from '../ui/Reveal';
@@ -8,7 +9,7 @@ import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import { brand } from '../../content/site';
 import { PAYMENT_METHODS, SECURITY_PILLARS, TECH_STACK } from '../../content/platform';
-import { color, radius } from '../../theme/tokens';
+import { color, radius, vivid } from '../../theme/tokens';
 
 /**
  * Security, technology and payment methods.
@@ -19,10 +20,11 @@ import { color, radius } from '../../theme/tokens';
  */
 export default function SecurityBand() {
   return (
-    <Section id="security" tone="subtle">
+    <Section id="security" tone="light" sx={{ bgcolor: vivid.tint.sky }}>
       <SectionHeading
+        align="center"
         eyebrow="Technology & security"
-        title="Trust built into how it runs."
+        title="Trust built into how it runs"
         description={`Payments settle through the ${brand.gateway} gateway, access is governed by role, and every transaction stays traceable to a student and a fee.`}
       />
 
@@ -36,16 +38,14 @@ export default function SecurityBand() {
         {SECURITY_PILLARS.map((p, i) => (
           <Reveal key={p.title} delay={(i % 3) * 70} sx={{ display: 'flex' }}>
             <Panel lift sx={{ flex: 1, p: 3.5 }}>
-              <Box sx={{ color: color.brand[600] }}>
-                <p.icon size={20} strokeWidth={2} aria-hidden />
-              </Box>
+              <BlobIcon icon={p.icon} size="sm" variant={i} />
 
               <Typography
                 sx={{
                   mt: 2.5,
                   fontFamily: 'var(--font-display)',
                   fontSize: '1.05rem',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   letterSpacing: '-0.014em',
                   color: color.neutral[900],
                 }}

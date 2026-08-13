@@ -119,12 +119,40 @@ export const gradient = {
   `,
   /** Subtle light-section wash */
   lightSurface: `linear-gradient(180deg, ${color.surface.muted} 0%, ${color.surface.canvas} 100%)`,
+  /** Vivid primary gradient — used on banners and gradient text. */
+  vividPrimary: 'linear-gradient(120deg, #0077C4 0%, #0099F2 55%, #39B7CB 100%)',
 } as const;
 
 export const font = {
-  display: '"Sora", "Plus Jakarta Sans", system-ui, sans-serif',
+  /** Rounder, friendlier display face — heavier weights carry the vivid look. */
+  display: '"Plus Jakarta Sans", "Sora", system-ui, sans-serif',
   body: '"Manrope", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif',
   mono: 'ui-monospace, "SF Mono", Menlo, monospace',
+} as const;
+
+/**
+ * Vivid gradient set — the "go vivid" direction. All azure-anchored but reaching
+ * into cyan and lavender so a row of icons has variety, like the inspiration.
+ * `glow` is the matching low-opacity colour for each gradient's drop shadow.
+ */
+export const vivid = {
+  gradients: [
+    'linear-gradient(135deg, #0099F2 0%, #39B7CB 100%)', // azure → cyan
+    'linear-gradient(135deg, #2FADF5 0%, #6FC5F7 100%)', // azure → sky
+    'linear-gradient(135deg, #0077C4 0%, #9D9BE7 100%)', // deep azure → lavender
+    'linear-gradient(135deg, #06B6D4 0%, #0099F2 100%)', // cyan → azure
+  ],
+  glows: [
+    'rgba(0,153,242,0.42)',
+    'rgba(47,173,245,0.40)',
+    'rgba(120,120,220,0.40)',
+    'rgba(6,182,212,0.42)',
+  ],
+  /** Soft tinted section backgrounds, alternating with white/muted. */
+  tint: {
+    sky: '#EAF5FE',
+    lavender: '#F1F0FE',
+  },
 } as const;
 
 /** 8px base scale. MUI `spacing(n)` = n * 8px. */

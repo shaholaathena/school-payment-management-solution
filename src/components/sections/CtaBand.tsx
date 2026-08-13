@@ -39,7 +39,7 @@ export default function CtaBand({
               position: 'relative',
               overflow: 'hidden',
               borderRadius: `${radius['3xl']}px`,
-              backgroundImage: `linear-gradient(115deg, ${color.brand[900]} 0%, ${color.brand[800]} 44%, ${color.brand[600]} 100%)`,
+              backgroundImage: `linear-gradient(120deg, ${color.brand[900]} 0%, ${color.brand[700]} 38%, ${color.brand[600]} 66%, ${color.accent.teal} 120%)`,
               boxShadow: shadow.lift,
             }}
           >

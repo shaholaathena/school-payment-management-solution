@@ -5,9 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import '@fontsource/manrope/400.css';
 import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/600.css';
-import '@fontsource/sora/400.css';
-import '@fontsource/sora/600.css';
-import '@fontsource/sora/700.css';
+import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/plus-jakarta-sans/700.css';
+import '@fontsource/plus-jakarta-sans/800.css';
 
 import './theme/global.css';
 import App from './App';

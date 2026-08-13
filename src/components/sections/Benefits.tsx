@@ -10,7 +10,7 @@ import Reveal from '../ui/Reveal';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import { BENEFITS } from '../../content/home';
-import { color, motion } from '../../theme/tokens';
+import { color, motion, vivid } from '../../theme/tokens';
 
 /**
  * A bento rather than four equal cards: the lead benefit takes a tall column on
@@ -21,7 +21,7 @@ export default function Benefits() {
   const [lead, ...rest] = BENEFITS;
 
   return (
-    <Section id="benefits" tone="subtle" density="loose">
+    <Section id="benefits" tone="light" density="loose" sx={{ bgcolor: vivid.tint.lavender }}>
       <SectionHeading
         align="center"
         eyebrow="Capabilities"

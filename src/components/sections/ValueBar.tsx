@@ -71,7 +71,7 @@ export default function ValueBar() {
             <Box
               sx={{
                 textAlign: 'center',
-                '&:hover .blob-icon': { transform: 'translateY(-4px)', bgcolor: color.brand[100] },
+                '&:hover .blob-icon': { transform: 'translateY(-5px) scale(1.04)' },
               }}
             >
               <BlobIcon icon={icon} variant={i} sx={{ mx: 'auto', mb: 3 }} />

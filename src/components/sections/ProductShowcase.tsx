@@ -1,8 +1,32 @@
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import ContentRow, { type ContentRowProps } from '../ui/ContentRow';
 import ScreenArtifact, { type ScreenArtifactProps } from '../product/ScreenArtifact';
+
+/** A real screenshot on a vivid gradient halo, so the proof shots match the
+ *  illustrated sections' energy rather than sitting flat on white. */
+function VividShot(props: ScreenArtifactProps) {
+  return (
+    <Box sx={{ position: 'relative' }}>
+      <Box
+        aria-hidden
+        sx={{
+          position: 'absolute',
+          inset: '-10% -12%',
+          borderRadius: '46% 54% 52% 48% / 52% 46% 54% 48%',
+          background:
+            'linear-gradient(140deg, rgba(0,153,242,0.18) 0%, rgba(57,183,203,0.12) 55%, rgba(157,155,231,0.16) 100%)',
+          filter: 'blur(10px)',
+        }}
+      />
+      <Box sx={{ position: 'relative' }}>
+        <ScreenArtifact {...props} />
+      </Box>
+    </Box>
+  );
+}
 import dashboard from '../../assets/images/dashboard.png';
 import paymentSummary from '../../assets/images/payment-summary.png';
 import studentsList from '../../assets/images/students-list.png';
@@ -98,7 +122,7 @@ export default function ProductShowcase() {
             bullets={panel.bullets}
             reversed={panel.reversed}
             dotted={panel.dotted}
-            image={<ScreenArtifact {...panel.artifact} />}
+            image={<VividShot {...panel.artifact} />}
           />
         ))}
       </Stack>

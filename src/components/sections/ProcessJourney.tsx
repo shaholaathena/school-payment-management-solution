@@ -7,7 +7,7 @@ import SectionHeading from '../ui/SectionHeading';
 import ScreenArtifact from '../product/ScreenArtifact';
 import DottedGrid from '../ui/DottedGrid';
 import { JOURNEY } from '../../content/platform';
-import { color, font, radius } from '../../theme/tokens';
+import { color, font, radius, vivid } from '../../theme/tokens';
 import paymentSummary from '../../assets/images/payment-summary-hero.png';
 
 /**
@@ -17,7 +17,7 @@ import paymentSummary from '../../assets/images/payment-summary-hero.png';
  */
 export default function ProcessJourney() {
   return (
-    <Section id="how-it-works" tone="subtle" density="loose">
+    <Section id="how-it-works" tone="light" density="loose" sx={{ bgcolor: vivid.tint.sky }}>
       <SectionHeading
         align="center"
         eyebrow="Payment journey"
@@ -36,6 +36,18 @@ export default function ProcessJourney() {
       >
         <Reveal>
           <Box sx={{ position: 'relative', width: 'fit-content', mx: { xs: 'auto', lg: 0 } }}>
+            {/* Vivid gradient halo behind the device */}
+            <Box
+              aria-hidden
+              sx={{
+                position: 'absolute',
+                inset: '-14% -18%',
+                borderRadius: '46% 54% 52% 48% / 52% 46% 54% 48%',
+                background:
+                  'linear-gradient(140deg, rgba(0,153,242,0.22) 0%, rgba(57,183,203,0.16) 55%, rgba(157,155,231,0.20) 100%)',
+                filter: 'blur(8px)',
+              }}
+            />
             <DottedGrid
               sx={{
                 position: 'absolute',
@@ -70,12 +82,12 @@ export default function ProcessJourney() {
                         borderRadius: '50%',
                         display: 'grid',
                         placeItems: 'center',
-                        bgcolor: color.brand[600],
-                        color: color.surface.canvas,
+                        backgroundImage: vivid.gradients[i % vivid.gradients.length],
+                        color: '#fff',
                         fontFamily: font.display,
                         fontSize: '0.9375rem',
-                        fontWeight: 700,
-                        boxShadow: '0 10px 20px -8px rgba(0,153,242,0.55)',
+                        fontWeight: 800,
+                        boxShadow: `0 12px 22px -8px ${vivid.glows[i % vivid.glows.length]}`,
                       }}
                     >
                       {String(step.step).padStart(2, '0')}

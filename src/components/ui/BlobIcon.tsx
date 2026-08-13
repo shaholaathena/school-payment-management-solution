@@ -1,50 +1,35 @@
 import Box from '@mui/material/Box';
 import type { SxProps, Theme } from '@mui/material/styles';
 import type { LucideIcon } from 'lucide-react';
-import { color, motion } from '../../theme/tokens';
+import { motion, vivid } from '../../theme/tokens';
 
-export type BlobTone = 'brand' | 'ink';
 export type BlobSize = 'sm' | 'md' | 'lg';
 
 export interface BlobIconProps {
   icon: LucideIcon;
-  tone?: BlobTone;
   size?: BlobSize;
-  /** Index into the shape set — alternates the organic outline down a row. */
+  /** Cycles the gradient + glow + outline so a row of icons has variety. */
   variant?: number;
   sx?: SxProps<Theme>;
 }
 
 /**
- * A line icon sitting on a soft, organic "blob" — the signature icon treatment
- * of the Pintex layout. The blob is an eight-value border-radius rather than an
- * image, so it scales cleanly and costs nothing; four variants keep a row of
- * them from reading as identical stamps.
+ * A vivid gradient icon disc — the inspiration's signature icon: a white line
+ * icon on a gradient circle with a matching coloured glow. Four gradients cycle
+ * by `variant` (azure → cyan / sky / lavender / cyan) so a row is lively rather
+ * than four identical stamps, all still anchored on the azure brand.
  *
- * Kept on the azure brand ramp (not Pintex's magenta) per the project's palette.
+ * The rounded-squircle radius keeps it friendly rather than a hard circle.
  */
-const SHAPES = [
-  '42% 58% 60% 40% / 52% 44% 56% 48%',
-  '58% 42% 44% 56% / 44% 56% 44% 56%',
-  '50% 50% 56% 44% / 56% 48% 52% 44%',
-  '46% 54% 48% 52% / 48% 56% 44% 52%',
-] as const;
-
-const DIMS: Record<BlobSize, { box: number; icon: number }> = {
-  sm: { box: 56, icon: 24 },
-  md: { box: 72, icon: 30 },
-  lg: { box: 84, icon: 34 },
+const DIMS: Record<BlobSize, { box: number; icon: number; radius: number }> = {
+  sm: { box: 52, icon: 23, radius: 18 },
+  md: { box: 66, icon: 28, radius: 22 },
+  lg: { box: 80, icon: 34, radius: 26 },
 };
 
-export default function BlobIcon({
-  icon: Icon,
-  tone = 'brand',
-  size = 'md',
-  variant = 0,
-  sx,
-}: BlobIconProps) {
+export default function BlobIcon({ icon: Icon, size = 'md', variant = 0, sx }: BlobIconProps) {
   const d = DIMS[size];
-  const onInk = tone === 'ink';
+  const i = variant % vivid.gradients.length;
 
   return (
     <Box
@@ -56,15 +41,16 @@ export default function BlobIcon({
           flexShrink: 0,
           display: 'grid',
           placeItems: 'center',
-          borderRadius: SHAPES[variant % SHAPES.length],
-          bgcolor: onInk ? 'rgba(0,153,242,0.16)' : color.brand[50],
-          color: onInk ? color.accent.sky : color.brand[700],
-          transition: `transform ${motion.base} ${motion.ease}, background-color ${motion.base} ${motion.ease}`,
+          borderRadius: `${d.radius}px`,
+          backgroundImage: vivid.gradients[i],
+          color: '#fff',
+          boxShadow: `0 14px 26px -10px ${vivid.glows[i]}`,
+          transition: `transform ${motion.base} ${motion.ease}, box-shadow ${motion.base} ${motion.ease}`,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
-      <Icon size={d.icon} strokeWidth={1.7} aria-hidden />
+      <Icon size={d.icon} strokeWidth={2} aria-hidden />
     </Box>
   );
 }
