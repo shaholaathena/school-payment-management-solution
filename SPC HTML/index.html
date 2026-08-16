@@ -1,0 +1,1218 @@
+<!doctype html>
+<!-- Education Payments — School Fee Collection & Digital Payments (built on the Pintex template by Jthemes, https://www.jthemes.com) -->
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+
+
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="author" content="SSLWIRELESS">
+		<meta name="description" content="Education Payments — fee collection, digital payments and financial visibility for schools, colleges and madrasahs. Powered by the PCI-DSS certified SSLCOMMERZ gateway.">
+		<meta name="keywords" content="school fee collection, education payments, digital payments Bangladesh, SSLCOMMERZ, fee management, student payments">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- SITE TITLE -->
+		<title>Education Payments — Simplify Every School Payment</title>
+
+		<!-- FAVICON AND TOUCH ICONS -->
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" sizes="152x152" href="images/apple-touch-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="images/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+		<link rel="icon" href="images/apple-touch-icon.png" type="image/x-icon">
+
+		<!-- GOOGLE FONTS -->
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+		<!-- BOOTSTRAP CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- FONT ICONS -->
+		<link href="css/flaticon.css" rel="stylesheet">
+
+		<!-- PLUGINS STYLESHEET -->
+		<link href="css/menu.css" rel="stylesheet">
+		<link id="effect" href="css/dropdown-effects/fade-down.css" media="all" rel="stylesheet">
+		<link href="css/magnific-popup.css" rel="stylesheet">
+		<link href="css/owl.carousel.min.css" rel="stylesheet">
+		<link href="css/owl.theme.default.min.css" rel="stylesheet">
+		<link href="css/lunar.css" rel="stylesheet">
+
+		<!-- ON SCROLL ANIMATION -->
+		<link href="css/animate.css" rel="stylesheet">
+
+		<!-- TEMPLATE CSS -->
+		<link href="css/purple-theme.css" rel="stylesheet">
+
+		<!-- Style Switcher CSS -->
+		<link href="css/blue-theme.css" rel="alternate stylesheet" title="blue-theme">
+		<link href="css/indigo-theme.css" rel="alternate stylesheet" title="indigo-theme">
+		<link href="css/orchid-theme.css" rel="alternate stylesheet" title="orchid-theme">
+		<link href="css/pink-theme.css" rel="alternate stylesheet" title="pink-theme">
+		<link href="css/skyblue-theme.css" rel="alternate stylesheet" title="skyblue-theme">
+		<link href="css/violet-red-theme.css" rel="alternate stylesheet" title="violet-red-theme">
+
+		<!-- RESPONSIVE CSS -->
+		<link href="css/responsive.css" rel="stylesheet">
+
+		<!-- WARM EDUCATION PALETTE OVERRIDE ==========================================
+		     Single point of control: the whole template accent is driven by these two
+		     CSS variables. Indigo = trust (payments), amber = warmth (school). Kept last
+		     in <head> so it wins over any theme stylesheet the style-switcher enables. -->
+		<style>
+			:root {
+				--theme-color: #4f46e5;           /* indigo — trust, matches the product app */
+				--theme-color-secondary: #f59e0b;  /* amber — warm, school / stationery */
+			}
+			/* soft warm tint for section-id eyebrow labels */
+			.section-id { color: var(--theme-color); }
+			/* placeholder markers kept visually honest, not hidden */
+			.pending-figure { color: var(--theme-color-secondary); font-weight: 600; }
+			.placeholder-note { display:inline-block; font-size:.72rem; letter-spacing:.02em; text-transform:uppercase;
+				color: var(--theme-color-secondary); border:1px dashed var(--theme-color-secondary);
+				border-radius:6px; padding:2px 8px; margin-top:8px; }
+		</style>
+
+	</head>
+
+
+
+	<body>
+
+
+
+
+		<!-- PRELOADER SPINNER
+		============================================= -->
+		<div id="loading">
+			<div id="loader" class="loading--theme">
+				<div class="cssload-spinner"></div>
+			</div>
+		</div>
+
+
+
+
+		<!-- PAGE CONTENT
+		============================================= -->
+		<div id="page" class="page">
+
+
+
+
+			<!-- HEADER
+			============================================= -->
+			<header id="header" class="tra-menu navbar-dark white-scroll">
+				<div class="header-wrapper">
+
+
+					<!-- MOBILE HEADER -->
+				    <div class="wsmobileheader clearfix">
+				    	<span class="smllogo">
+				    		<a href="#hero-11">
+					    		<img class="lt-img" src="images/logo.png" alt="Education Payments">
+					    		<img class="dt-img" src="images/logo-white.png" alt="Education Payments">
+					    	</a>
+				    	</span>
+				    	<a id="wsnavtoggle" class="wsanimated-arrow"><span></span></a>
+				 	</div>
+
+
+				 	<!-- NAVIGATION MENU -->
+				  	<div class="wsmainfull menu clearfix">
+	    				<div class="wsmainwp clearfix">
+
+
+	    					<!-- HEADER BLACK LOGO -->
+	    					<div class="desktoplogo">
+	    						<a href="#hero-11" class="logo-black">
+	    							<img class="lt-img" src="images/logo.png" alt="Education Payments">
+	    							<img class="dt-img" src="images/logo-white.png" alt="Education Payments">
+	    						</a>
+	    					</div>
+
+
+	    					<!-- HEADER WHITE LOGO -->
+	    					<div class="desktoplogo">
+	    						<a href="#hero-11" class="logo-white"><img src="images/logo-white.png" alt="Education Payments"></a>
+	    					</div>
+
+
+	    					<!-- MAIN MENU -->
+	      					<nav class="wsmenu clearfix">
+	        					<ul class="wsmenu-list nav-theme">
+
+
+	        						<!-- SIMPLE NAVIGATION LINK -->
+							    	<li class="nl-simple" aria-haspopup="true">
+							    		<a href="#features" class="h-link">Features</a>
+							    	</li>
+
+
+							    	<!-- SIMPLE NAVIGATION LINK -->
+							    	<li class="nl-simple" aria-haspopup="true">
+							    		<a href="#stakeholders" class="h-link">Who It's For</a>
+							    	</li>
+
+
+							    	<!-- SIMPLE NAVIGATION LINK -->
+							    	<li class="nl-simple" aria-haspopup="true">
+							    		<a href="#how-it-works" class="h-link">How It Works</a>
+							    	</li>
+
+
+							    	<!-- SIMPLE NAVIGATION LINK -->
+							    	<li class="nl-simple" aria-haspopup="true">
+							    		<a href="#payments" class="h-link">Payments</a>
+							    	</li>
+
+
+							    	<!-- SIMPLE NAVIGATION LINK -->
+							    	<li class="nl-simple" aria-haspopup="true">
+							    		<a href="#faqs" class="h-link">FAQ</a>
+							    	</li>
+
+
+								    <!-- BOOK A DEMO BUTTON -->
+								    <li class="nl-simple mobile-last-link" aria-haspopup="true">
+								    	<a href="contacts.html" class="btn r-10 btn--theme hover--black last-link">Book a Demo</a>
+								    </li>
+
+	        					</ul>
+	        				</nav>	<!-- END MAIN MENU -->
+
+
+	    				</div>
+	    			</div>	<!-- END NAVIGATION MENU -->
+
+
+				</div>     <!-- End header-wrapper -->
+			</header>	<!-- END HEADER -->
+
+
+
+
+			<!-- HERO
+			============================================= -->
+			<section id="hero-11" class="hero-section division">
+				<div class="container">
+					<div class="row d-flex align-items-center">
+
+
+						<!-- HERO TEXT -->
+						<div class="col-md-6">
+							<div class="hero-11-txt wow animate__animated animate__fadeInRight">
+
+								<!-- Eyebrow -->
+								<span class="section-id">Powered by SSLCOMMERZ</span>
+
+								<!-- Title -->
+								<h2>Simplify every <span class="color--theme-2">school payment</span></h2>
+
+								<!-- Text -->
+								<p class="p-lg">Automate fee collection, give parents a payment journey they will actually
+								   finish, and see your institution's finances in real time.
+								</p>
+
+								<!-- BUTTONS -->
+								<div class="btns-group">
+									<a href="contacts.html" class="btn r-10 btn--theme hover--black">Book a Demo</a>
+									<a href="#features" class="btn r-10 btn--tra-black hover--theme">Explore Features</a>
+								</div>
+
+								<!-- Trust line -->
+								<p class="p-sm btn-txt ico-15">
+									<span class="flaticon-shield color--theme"></span> PCI-DSS certified SSLCOMMERZ gateway. Cardholder data never touches the platform.
+								</p>
+
+							</div>
+						</div>	<!-- END HERO TEXT -->
+
+
+						<!-- HERO IMAGE -->
+						<div class="col-md-6">
+							<div class="hero-11-img wow animate__animated animate__fadeInLeft">
+								<img class="img-fluid lt-img" src="images/img-12.png" alt="Education Payments dashboard">
+								<img class="img-fluid dt-img" src="images/img-12d.png" alt="Education Payments dashboard">
+							</div>
+						</div>
+
+
+					</div>    <!-- End row -->
+				</div>	   <!-- End container -->
+			</section>	<!-- END HERO -->
+
+
+
+
+			<!-- FEATURES / BENEFITS
+			============================================= -->
+			<section id="features" class="py-100 features-1 features-section division">
+				<div class="container">
+
+
+					<!-- SECTION TITLE -->
+					<div class="row justify-content-center">
+						<div class="col-md-10 col-lg-9">
+							<div class="section-title text-center mb-80">
+
+								<!-- Title -->
+								<h2 class="h2-xl">Why institutions choose Education Payments</h2>
+
+								<!-- Text -->
+								<p class="p-lg">Everything fee collection needs — generation, payment, tracking and communication — in one place.</p>
+
+							</div>
+						</div>
+					</div>
+
+
+					<!-- FEATURES WRAPPER -->
+					<div class="fbox-wrapper text-center">
+						<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+
+
+							<!-- BENEFIT #1 — Faster Collection -->
+		 					<div class="col">
+		 						<div class="fbox-1 fb-1 wow animate__animated animate__fadeInUp animate__delay-1">
+									<div class="fbox-ico ico-60">
+										<div class="shape-ico color--theme-2">
+											<span class="flaticon-time"></span>
+											<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+											  <path d="M66.1,-32.6C77.9,-17.7,74.4,11.6,60.8,35.7C47.2,59.7,23.6,78.5,2.8,76.9C-18,75.2,-35.9,53.2,-47.7,30.1C-59.5,7.1,-65.1,-16.9,-56.1,-30.1C-47.1,-43.4,-23.6,-46,1.8,-47C27.2,-48.1,54.3,-47.6,66.1,-32.6Z" transform="translate(100 100)" />
+											</svg>
+										</div>
+									</div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">Faster Collection</h6>
+										<p>Automated fee generation and reminders reduce the manual follow-up that slows collection down.</p>
+									</div>
+		 						</div>
+		 					</div>	<!-- END BENEFIT #1 -->
+
+
+		 					<!-- BENEFIT #2 — Complete Visibility -->
+		 					<div class="col">
+		 						<div class="fbox-1 fb-2 wow animate__animated animate__fadeInUp animate__delay-2">
+									<div class="fbox-ico ico-60">
+										<div class="shape-ico color--theme-2">
+											<span class="flaticon-pie-chart"></span>
+											<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+											  <path d="M66.1,-32.6C77.9,-17.7,74.4,11.6,60.8,35.7C47.2,59.7,23.6,78.5,2.8,76.9C-18,75.2,-35.9,53.2,-47.7,30.1C-59.5,7.1,-65.1,-16.9,-56.1,-30.1C-47.1,-43.4,-23.6,-46,1.8,-47C27.2,-48.1,54.3,-47.6,66.1,-32.6Z" transform="translate(100 100)" />
+											</svg>
+										</div>
+									</div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">Complete Visibility</h6>
+										<p>Collections, pending dues and transaction records sit in one place instead of across spreadsheets.</p>
+									</div>
+		 						</div>
+		 					</div>	<!-- END BENEFIT #2 -->
+
+
+		 					<!-- BENEFIT #3 — Better Parent Experience -->
+		 					<div class="col">
+		 						<div class="fbox-1 fb-3 wow animate__animated animate__fadeInUp animate__delay-3">
+									<div class="fbox-ico ico-60">
+										<div class="shape-ico color--theme-2">
+											<span class="flaticon-smartphone"></span>
+											<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+											  <path d="M66.1,-32.6C77.9,-17.7,74.4,11.6,60.8,35.7C47.2,59.7,23.6,78.5,2.8,76.9C-18,75.2,-35.9,53.2,-47.7,30.1C-59.5,7.1,-65.1,-16.9,-56.1,-30.1C-47.1,-43.4,-23.6,-46,1.8,-47C27.2,-48.1,54.3,-47.6,66.1,-32.6Z" transform="translate(100 100)" />
+											</svg>
+										</div>
+									</div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">Better Parent Experience</h6>
+										<p>Guardians see what they owe and pay through the channel they already use — card, mobile banking or net banking.</p>
+									</div>
+		 						</div>
+		 					</div>	<!-- END BENEFIT #3 -->
+
+
+		 					<!-- BENEFIT #4 — Secure by Design -->
+		 					<div class="col">
+		 						<div class="fbox-1 fb-4 wow animate__animated animate__fadeInUp animate__delay-4">
+									<div class="fbox-ico ico-60">
+										<div class="shape-ico color--theme-2">
+											<span class="flaticon-shield"></span>
+											<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+											  <path d="M66.1,-32.6C77.9,-17.7,74.4,11.6,60.8,35.7C47.2,59.7,23.6,78.5,2.8,76.9C-18,75.2,-35.9,53.2,-47.7,30.1C-59.5,7.1,-65.1,-16.9,-56.1,-30.1C-47.1,-43.4,-23.6,-46,1.8,-47C27.2,-48.1,54.3,-47.6,66.1,-32.6Z" transform="translate(100 100)" />
+											</svg>
+										</div>
+									</div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">Secure by Design</h6>
+										<p>Payments run through the SSLCOMMERZ gateway with role-based access controls across the platform.</p>
+									</div>
+		 						</div>
+		 					</div>	<!-- END BENEFIT #4 -->
+
+
+						</div>  <!-- End row -->
+					</div>	<!-- END FEATURES WRAPPER -->
+
+
+				</div>     <!-- End container -->
+			</section>	<!-- END FEATURES -->
+
+
+
+
+			<!-- DIVIDER LINE -->
+			<hr class="divider">
+
+
+
+
+			<!-- WHO IT'S FOR — STAKEHOLDER #1 : SCHOOL ADMIN
+			============================================= -->
+			<section id="stakeholders" class="pt-100 ct-01 content-section division">
+				<div class="container">
+					<div class="row d-flex align-items-center">
+
+
+						<!-- IMAGE BLOCK -->
+						<div class="col-md-6">
+							<div class="img-block left-column wow animate__animated animate__fadeInRight">
+								<img class="img-fluid lt-img" src="images/img-13.png" alt="School admin portal">
+								<img class="img-fluid dt-img" src="images/img-13d.png" alt="School admin portal">
+							</div>
+						</div>
+
+
+						<!-- TEXT BLOCK -->
+						<div class="col-md-6">
+							<div class="txt-block right-column wow animate__animated animate__fadeInLeft">
+
+						 		<span class="section-id">For School Admins</span>
+								<h2 class="h2-md">Run fee collection for the whole institution</h2>
+								<p>One portal for fee structures, collections, student records and reporting — administrative
+								   control over every area, with clearer oversight.
+								</p>
+
+								<ul class="simple-list">
+									<li class="list-item"><p>Define fee structures and schedules by class, section or campus</p></li>
+									<li class="list-item"><p>Track collections and outstanding dues in real time</p></li>
+									<li class="list-item"><p>Manage student records and user roles</p></li>
+									<li class="list-item"><p class="mb-0">Generate reports and SSLCOMMERZ gateway records</p></li>
+								</ul>
+
+							</div>
+						</div>	<!-- END TEXT BLOCK -->
+
+
+					</div>    <!-- End row -->
+				</div>	   <!-- End container -->
+			</section>	<!-- END STAKEHOLDER #1 -->
+
+
+
+
+			<!-- WHO IT'S FOR — STAKEHOLDER #2 : PARENTS & GUARDIANS
+			============================================= -->
+			<section class="pt-100 ct-01 content-section division">
+				<div class="container">
+					<div class="row d-flex align-items-center">
+
+
+						<!-- TEXT BLOCK -->
+						<div class="col-md-6 order-last order-md-2">
+							<div class="txt-block left-columnt wow animate__animated animate__fadeInRight">
+
+						 		<span class="section-id">For Parents &amp; Guardians</span>
+								<h2 class="h2-md">See what's owed and settle it in minutes</h2>
+								<p>No trip to the office. Guardians pay through the channel they already use and keep a
+								   clean record of every payment.
+								</p>
+
+								<div class="cbox-7 mb-10">
+		 							<div class="cbox-7-ico ico-15"><span class="flaticon-check color--theme"></span></div>
+									<div class="cbox-7-txt"><p>View outstanding dues and full breakdown</p></div>
+								</div>
+								<div class="cbox-7 mb-10">
+		 							<div class="cbox-7-ico ico-15"><span class="flaticon-check color--theme"></span></div>
+									<div class="cbox-7-txt"><p>Receive SMS and email reminders</p></div>
+								</div>
+								<div class="cbox-7 mb-10">
+		 							<div class="cbox-7-ico ico-15"><span class="flaticon-check color--theme"></span></div>
+									<div class="cbox-7-txt"><p>Pay by card, mobile banking or net banking</p></div>
+								</div>
+								<div class="cbox-7">
+		 							<div class="cbox-7-ico ico-15"><span class="flaticon-check color--theme"></span></div>
+									<div class="cbox-7-txt"><p>Keep a record of every payment</p></div>
+								</div>
+
+							</div>
+						</div>	<!-- END TEXT BLOCK -->
+
+
+						<!-- IMAGE BLOCK -->
+						<div class="col-md-6 order-first order-md-2">
+							<div class="img-block right-column wow animate__animated animate__fadeInLeft">
+								<img class="img-fluid lt-img" src="images/img-11.png" alt="Guardian payment app">
+								<img class="img-fluid dt-img" src="images/img-11d.png" alt="Guardian payment app">
+							</div>
+						</div>
+
+
+					</div>    <!-- End row -->
+				</div>	   <!-- End container -->
+			</section>	<!-- END STAKEHOLDER #2 -->
+
+
+
+
+			<!-- WHO IT'S FOR — STAKEHOLDER #3 : STUDENTS
+			============================================= -->
+			<section class="pt-100 ct-01 content-section division">
+				<div class="container">
+					<div class="row d-flex align-items-center">
+
+
+						<!-- IMAGE BLOCK -->
+						<div class="col-md-6">
+							<div class="img-block left-column wow animate__animated animate__fadeInRight">
+								<img class="img-fluid lt-img" src="images/img-14.png" alt="Student portal">
+								<img class="img-fluid dt-img" src="images/img-14d.png" alt="Student portal">
+							</div>
+						</div>
+
+
+						<!-- TEXT BLOCK -->
+						<div class="col-md-6">
+							<div class="txt-block right-column wow animate__animated animate__fadeInLeft">
+
+						 		<span class="section-id">For Students</span>
+								<h2 class="h2-md">Fee information and history, always to hand</h2>
+								<p>Students access their dues, payment status and academic records from the web portal or
+								   the mobile app.
+								</p>
+
+								<ul class="simple-list">
+									<li class="list-item"><p>Check dues and payment status</p></li>
+									<li class="list-item"><p>Review full transaction history</p></li>
+									<li class="list-item"><p>Access academic and attendance records</p></li>
+									<li class="list-item"><p class="mb-0">Use the web portal or the Android / iOS app</p></li>
+								</ul>
+
+							</div>
+						</div>	<!-- END TEXT BLOCK -->
+
+
+					</div>    <!-- End row -->
+				</div>	   <!-- End container -->
+			</section>	<!-- END STAKEHOLDER #3 -->
+
+
+
+
+			<!-- HOW IT WORKS
+			============================================= -->
+			<section id="how-it-works" class="pt-100 ct-01 content-section division">
+				<div class="container">
+
+
+					<!-- SECTION TITLE -->
+					<div class="row justify-content-center">
+						<div class="col-md-10 col-lg-9">
+							<div class="section-title text-center mb-60">
+								<span class="section-id">How It Works</span>
+								<h2 class="h2-xl">From fee due to reconciled — in five steps</h2>
+								<p class="p-lg">A single, repeatable flow across the institution, the guardian and the gateway.</p>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row d-flex align-items-center">
+
+
+						<!-- IMAGE BLOCK -->
+						<div class="col-md-6">
+							<div class="img-block left-column wow animate__animated animate__fadeInRight">
+								<img class="img-fluid lt-img" src="images/img-19.png" alt="Payment journey">
+								<img class="img-fluid dt-img" src="images/img-19d.png" alt="Payment journey">
+							</div>
+						</div>
+
+
+						<!-- PROCESS STEPS -->
+						<div class="col-md-6">
+							<div class="txt-block right-column wow animate__animated animate__fadeInLeft">
+
+
+								<!-- STEP #1 -->
+								<div class="cbox-1 process-step">
+									<div class="ico-wrap">
+										<div class="cbox-1-ico bg--theme-2 color--white">1</div>
+										<span class="cbox-1-line"></span>
+									</div>
+									<div class="cbox-1-txt">
+										<h5 class="h5-md">Create Fee</h5>
+										<p>The institution defines the fee structure and publishes dues against the relevant class, section or campus.</p>
+									</div>
+								</div>	<!-- END STEP #1 -->
+
+
+								<!-- STEP #2 -->
+								<div class="cbox-1 process-step">
+									<div class="ico-wrap">
+										<div class="cbox-1-ico bg--theme-2 color--white">2</div>
+										<span class="cbox-1-line"></span>
+									</div>
+									<div class="cbox-1-txt">
+										<h5 class="h5-md">Notify Parent</h5>
+										<p>Guardians receive an SMS and email that a due is available, with the amount and deadline.</p>
+									</div>
+								</div>	<!-- END STEP #2 -->
+
+
+								<!-- STEP #3 -->
+								<div class="cbox-1 process-step">
+									<div class="ico-wrap">
+										<div class="cbox-1-ico bg--theme-2 color--white">3</div>
+										<span class="cbox-1-line"></span>
+									</div>
+									<div class="cbox-1-txt">
+										<h5 class="h5-md">Parent Pays</h5>
+										<p>The guardian reviews the breakdown and pays by card, mobile financial service or net banking.</p>
+									</div>
+								</div>	<!-- END STEP #3 -->
+
+
+								<!-- STEP #4 -->
+								<div class="cbox-1 process-step">
+									<div class="ico-wrap">
+										<div class="cbox-1-ico bg--theme-2 color--white">4</div>
+										<span class="cbox-1-line"></span>
+									</div>
+									<div class="cbox-1-txt">
+										<h5 class="h5-md">Payment Confirmed</h5>
+										<p>SSLCOMMERZ confirms the transaction, the due is marked settled, and a confirmation goes back to the guardian.</p>
+									</div>
+								</div>	<!-- END STEP #4 -->
+
+
+								<!-- STEP #5 -->
+								<div class="cbox-1 process-step">
+									<div class="ico-wrap">
+										<div class="cbox-1-ico bg--theme-2 color--white">5</div>
+									</div>
+									<div class="cbox-1-txt">
+										<h5 class="h5-md">Reconcile &amp; Report</h5>
+										<p>The payment appears against the student record and collection reports reflect the updated position.</p>
+									</div>
+								</div>	<!-- END STEP #5 -->
+
+
+							</div>
+						</div>	<!-- END PROCESS STEPS -->
+
+
+					</div>    <!-- End row -->
+				</div>	   <!-- End container -->
+			</section>	<!-- END HOW IT WORKS -->
+
+
+
+
+			<!-- STATISTIC
+			     ⚠️ PLACEHOLDER FIGURES — do NOT publish invented numbers on a payment
+			     product. Replace each em-dash with a verified figure from product /
+			     marketing, then delete the .placeholder-note markers.
+			============================================= -->
+			<div class="py-100 statistic-1 statistic-section division">
+				<div class="container">
+
+
+					<!-- STATISTIC WRAPPER -->
+					<div class="statistic-1-wrapper">
+						<div class="row justify-content-md-center row-cols-1 row-cols-md-2 row-cols-lg-4">
+
+
+							<!-- STAT #1 -->
+							<div class="col">
+								<div class="animate__animated animate__fadeInUp">
+									<div class="statistic-block">
+										<div class="statistic-block-digit text-center">
+											<h2 class="h2-xl statistic-number"><span class="pending-figure">&mdash;</span></h2>
+										</div>
+										<div class="statistic-block-txt color--gray">
+											<p class="p-md">Institutions onboarded</p>
+											<span class="placeholder-note">figure pending</span>
+										</div>
+									</div>
+								</div>
+							</div>	<!-- END STAT #1 -->
+
+
+							<!-- STAT #2 -->
+							<div class="col">
+								<div class="animate__animated animate__fadeInUp">
+									<div class="statistic-block">
+										<div class="statistic-block-digit text-center">
+											<h2 class="h2-xl statistic-number"><span class="pending-figure">&mdash;</span></h2>
+										</div>
+										<div class="statistic-block-txt color--gray">
+											<p class="p-md">Payments processed</p>
+											<span class="placeholder-note">figure pending</span>
+										</div>
+									</div>
+								</div>
+							</div>	<!-- END STAT #2 -->
+
+
+							<!-- STAT #3 -->
+							<div class="col">
+								<div class="animate__animated animate__fadeInUp">
+									<div class="statistic-block">
+										<div class="statistic-block-digit text-center">
+											<h2 class="h2-xl statistic-number"><span class="pending-figure">&mdash;</span></h2>
+										</div>
+										<div class="statistic-block-txt color--gray">
+											<p class="p-md">Students served</p>
+											<span class="placeholder-note">figure pending</span>
+										</div>
+									</div>
+								</div>
+							</div>	<!-- END STAT #3 -->
+
+
+							<!-- STAT #4 -->
+							<div class="col">
+								<div class="animate__animated animate__fadeInUp">
+									<div class="statistic-block">
+										<div class="statistic-block-digit text-center">
+											<h2 class="h2-xl statistic-number"><span class="pending-figure">&mdash;</span></h2>
+										</div>
+										<div class="statistic-block-txt color--gray">
+											<p class="p-md">Collection visibility</p>
+											<span class="placeholder-note">figure pending</span>
+										</div>
+									</div>
+								</div>
+							</div>	<!-- END STAT #4 -->
+
+
+						</div>  <!-- End row -->
+					</div>	<!-- END STATISTIC WRAPPER -->
+
+
+				</div>	 <!-- End container -->
+			</div>	 <!-- END STATISTIC -->
+
+
+
+
+			<!-- DIVIDER LINE -->
+			<hr class="divider">
+
+
+
+
+			<!-- PAYMENT METHODS
+			============================================= -->
+			<section id="payments" class="pt-100 features-1 features-section division">
+				<div class="container">
+
+
+					<!-- SECTION TITLE -->
+					<div class="row justify-content-center">
+						<div class="col-md-10 col-lg-9">
+							<div class="section-title text-center mb-70">
+								<span class="section-id">Accepted Payment Methods</span>
+								<h2 class="h2-xl">Pay the way families already move money</h2>
+								<p class="p-lg">All transactions are processed through the PCI-DSS certified SSLCOMMERZ gateway. The live list follows your institution's merchant configuration.</p>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- METHODS WRAPPER -->
+					<div class="fbox-wrapper text-center">
+						<div class="row justify-content-center row-cols-2 row-cols-md-3 row-cols-lg-5">
+
+
+							<!-- METHOD — Visa -->
+		 					<div class="col">
+		 						<div class="fbox-1 wow animate__animated animate__fadeInUp">
+									<div class="fbox-ico ico-50"><div class="color--theme"><span class="flaticon-credit-card"></span></div></div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">Visa</h6>
+										<p>Card</p>
+									</div>
+		 						</div>
+		 					</div>
+
+
+							<!-- METHOD — Mastercard -->
+		 					<div class="col">
+		 						<div class="fbox-1 wow animate__animated animate__fadeInUp">
+									<div class="fbox-ico ico-50"><div class="color--theme"><span class="flaticon-credit-card-1"></span></div></div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">Mastercard</h6>
+										<p>Card</p>
+									</div>
+		 						</div>
+		 					</div>
+
+
+							<!-- METHOD — bKash -->
+		 					<div class="col">
+		 						<div class="fbox-1 wow animate__animated animate__fadeInUp">
+									<div class="fbox-ico ico-50"><div class="color--theme-2"><span class="flaticon-smartphone"></span></div></div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">bKash</h6>
+										<p>Mobile financial service</p>
+									</div>
+		 						</div>
+		 					</div>
+
+
+							<!-- METHOD — Nagad -->
+		 					<div class="col">
+		 						<div class="fbox-1 wow animate__animated animate__fadeInUp">
+									<div class="fbox-ico ico-50"><div class="color--theme-2"><span class="flaticon-smartphone-1"></span></div></div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">Nagad</h6>
+										<p>Mobile financial service</p>
+									</div>
+		 						</div>
+		 					</div>
+
+
+							<!-- METHOD — Net Banking -->
+		 					<div class="col">
+		 						<div class="fbox-1 wow animate__animated animate__fadeInUp">
+									<div class="fbox-ico ico-50"><div class="color--theme"><span class="flaticon-money-1"></span></div></div>
+									<div class="fbox-txt">
+										<h6 class="h6-lg">Net Banking</h6>
+										<p>Direct bank payment</p>
+									</div>
+		 						</div>
+		 					</div>
+
+
+						</div>  <!-- End row -->
+					</div>	<!-- END METHODS WRAPPER -->
+
+
+				</div>     <!-- End container -->
+			</section>	<!-- END PAYMENT METHODS -->
+
+
+
+
+			<!-- REVIEWS / TESTIMONIALS
+			     ⚠️ PLACEHOLDER QUOTES — replace with real, attributable customer quotes
+			     (name, role, institution) with written permission before publishing.
+			     Do NOT ship invented testimonials on a payment product.
+			============================================= -->
+			<section id="reviews" class="pt-100 features-1 features-section division">
+				<div class="container">
+
+
+					<!-- SECTION TITLE -->
+					<div class="row justify-content-center">
+						<div class="col-md-10 col-lg-9">
+							<div class="section-title text-center mb-70">
+								<span class="section-id">What Institutions Say</span>
+								<h2 class="h2-xl">Trusted by schools across Bangladesh</h2>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- REVIEWS WRAPPER -->
+					<div class="fbox-wrapper text-center">
+						<div class="row row-cols-1 row-cols-md-3">
+
+
+							<!-- REVIEW #1 -->
+		 					<div class="col">
+		 						<div class="fbox-1 wow animate__animated animate__fadeInUp">
+									<div class="fbox-ico ico-25"><div class="color--theme-2"><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span></div></div>
+									<div class="fbox-txt">
+										<p>&ldquo;[PLACEHOLDER — real customer quote]&rdquo;</p>
+										<h6 class="h6-md">[Name], [Role]</h6>
+										<p class="p-sm">[Institution]</p>
+										<span class="placeholder-note">quote pending</span>
+									</div>
+		 						</div>
+		 					</div>
+
+
+							<!-- REVIEW #2 -->
+		 					<div class="col">
+		 						<div class="fbox-1 wow animate__animated animate__fadeInUp">
+									<div class="fbox-ico ico-25"><div class="color--theme-2"><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span></div></div>
+									<div class="fbox-txt">
+										<p>&ldquo;[PLACEHOLDER — real customer quote]&rdquo;</p>
+										<h6 class="h6-md">[Name], [Role]</h6>
+										<p class="p-sm">[Institution]</p>
+										<span class="placeholder-note">quote pending</span>
+									</div>
+		 						</div>
+		 					</div>
+
+
+							<!-- REVIEW #3 -->
+		 					<div class="col">
+		 						<div class="fbox-1 wow animate__animated animate__fadeInUp">
+									<div class="fbox-ico ico-25"><div class="color--theme-2"><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span><span class="flaticon-star"></span></div></div>
+									<div class="fbox-txt">
+										<p>&ldquo;[PLACEHOLDER — real customer quote]&rdquo;</p>
+										<h6 class="h6-md">[Name], [Role]</h6>
+										<p class="p-sm">[Institution]</p>
+										<span class="placeholder-note">quote pending</span>
+									</div>
+		 						</div>
+		 					</div>
+
+
+						</div>  <!-- End row -->
+					</div>	<!-- END REVIEWS WRAPPER -->
+
+
+				</div>     <!-- End container -->
+			</section>	<!-- END REVIEWS -->
+
+
+
+
+			<!-- FAQs
+			============================================= -->
+			<section id="faqs" class="pt-100 faqs-1 faqs-section division">
+				<div class="container">
+
+
+					<!-- SECTION TITLE -->
+					<div class="row justify-content-center">
+						<div class="col-md-9 col-lg-8">
+							<div class="section-title text-center mb-60">
+								<h2 class="h2-xl">Questions? Look here.</h2>
+								<p class="p-lg">The essentials on how Education Payments works, who it's for and how it keeps payments secure.</p>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- FAQs QUESTIONS -->
+					<div class="faqs-1-questions">
+						<div class="row justify-content-center">
+
+
+							<!-- QUESTIONS ACCORDION -->
+							<div class="col-xl-11">
+					 			<div class="accordion-wrapper">
+									<ul class="accordion">
+
+
+										<!-- QUESTION #1 -->
+										<li class="accordion-item is-active wow animate__animated animate__fadeInUp">
+											<div class="accordion-thumb"><h5>What is the Education Payment Management Solution?</h5></div>
+											<div class="accordion-panel">
+												<p>A centralized platform for educational institutions to manage fee structures, collect payments digitally, hold student information, and handle payment-related communication — across a web portal and mobile applications.</p>
+											</div>
+										</li>	<!-- END QUESTION #1 -->
+
+
+										<!-- QUESTION #2 -->
+										<li class="accordion-item wow animate__animated animate__fadeInUp">
+											<div class="accordion-thumb"><h5>Who can use the platform?</h5></div>
+											<div class="accordion-panel">
+												<p>It is built around four groups: institutions and their administrators, finance and operations staff, students, and parents or guardians. Each group works through a portal scoped to their role.</p>
+											</div>
+										</li>	<!-- END QUESTION #2 -->
+
+
+										<!-- QUESTION #3 -->
+										<li class="accordion-item wow animate__animated animate__fadeInUp">
+											<div class="accordion-thumb"><h5>How do payments actually work?</h5></div>
+											<div class="accordion-panel">
+												<p>The institution publishes a fee due. The guardian is notified, opens the due in the portal or mobile app, and pays through the SSLCOMMERZ gateway. On confirmation, the due is marked settled and the payment is recorded against the student.</p>
+											</div>
+										</li>	<!-- END QUESTION #3 -->
+
+
+										<!-- QUESTION #4 -->
+										<li class="accordion-item wow animate__animated animate__fadeInUp">
+											<div class="accordion-thumb"><h5>Which payment methods are supported?</h5></div>
+											<div class="accordion-panel">
+												<p>Cards including Visa and Mastercard, mobile financial services including bKash, Nagad and Rocket, and direct bank payments via net banking. The exact live list follows the SSLCOMMERZ merchant configuration for your institution.</p>
+											</div>
+										</li>	<!-- END QUESTION #4 -->
+
+
+										<!-- QUESTION #5 -->
+										<li class="accordion-item wow animate__animated animate__fadeInUp">
+											<div class="accordion-thumb"><h5>Is the platform secure?</h5></div>
+											<div class="accordion-panel">
+												<p>Payments are processed by the SSLCOMMERZ gateway, which is PCI-DSS certified, so cardholder data is handled by the gateway rather than stored on the education platform. The platform itself applies role-based access controls so users only reach what their role permits.</p>
+											</div>
+										</li>	<!-- END QUESTION #5 -->
+
+
+										<!-- QUESTION #6 -->
+										<li class="accordion-item acc-last-item wow animate__animated animate__fadeInUp">
+											<div class="accordion-thumb"><h5>How do we get started?</h5></div>
+											<div class="accordion-panel">
+												<p>Request a demo and we will walk through fee structures, payment methods and reporting against your institution's actual setup. Onboarding timelines depend on the size of the institution and the state of your existing student records — we will scope that with you directly.</p>
+											</div>
+										</li>	<!-- END QUESTION #6 -->
+
+
+									</ul>
+								</div>
+					 		</div>	<!-- END QUESTIONS ACCORDION -->
+
+
+					 		<!-- MORE QUESTIONS -->
+							<div class="more-questions clearfix">
+								<div class="more-questions-holder wow animate__animated animate__fadeInUp">
+									<div class="more-questions-txt">
+										<h6 class="h6-xl">Can't find the answer to your question?</h6>
+										<p class="p-sm">Contact us and we'll get back to you as soon as we can.</p>
+									</div>
+									<div class="more-questions-btn">
+										<a href="contacts.html" class="btn r-10 btn--tra-black hover--theme">Contact Us</a>
+									</div>
+								</div>
+							</div>
+
+
+						</div>  <!-- End row -->
+					</div>	<!-- END FAQs QUESTIONS -->
+
+
+				</div>	   <!-- End container  -->
+			</section>	<!-- END FAQs -->
+
+
+
+
+			<!-- CTA BANNER
+			============================================= -->
+			<section id="contact" class="pt-100 banner-1 banner-section">
+				<div class="container">
+
+
+					<!-- BANNER WRAPPER -->
+					<div class="banner-1-wrapper bg--01 bg--fixed r-24">
+						<div class="banner-overlay">
+							<div class="row d-flex align-items-center">
+
+
+								<!-- BANNER TEXT -->
+								<div class="col-md-8">
+									<div class="banner-1-txt color--white">
+										<h2 class="h2-xl">Ready to simplify fee collection?</h2>
+										<p class="p-lg">Book a demo and we'll walk through fee structures, payment methods and reporting against your institution's actual setup.</p>
+										<a href="contacts.html" class="btn r-10 btn-md btn--theme-2 hover--tra-white">Book a Demo</a>
+										<p class="p-sm btns-group-txt ico-15">
+											<span class="flaticon-shield"></span> Powered by the PCI-DSS certified SSLCOMMERZ gateway.
+										</p>
+									</div>
+								</div>	<!-- END BANNER TEXT -->
+
+
+							</div>   <!-- End row -->
+						</div>   <!-- End banner overlay -->
+					</div>    <!-- END BANNER WRAPPER -->
+
+
+				</div>     <!-- End container -->
+			</section>	<!-- END CTA BANNER -->
+
+
+
+
+			<!-- FOOTER
+			============================================= -->
+			<footer class="pt-100 footer-1 footer ft-2-rows division">
+				<div class="container">
+
+
+					<!-- FOOTER CONTENT -->
+					<div class="row footer-links clearfix">
+
+
+						<!-- FOOTER BRAND -->
+					 	<div class="col-md-4">
+					 		<div class="fl-1">
+						        <h6 class="d-title">Education Payments</h6>
+						        <h6 class="m-title">Education Payments</h6>
+								<p class="p-sm">Fee collection, digital payments and financial visibility for educational institutions.</p>
+								<p class="p-sm">A SSLWIRELESS product · Powered by SSLCOMMERZ.</p>
+							</div>
+					    </div>	<!-- END FOOTER BRAND -->
+
+
+					   <!-- FOOTER LINKS — PRODUCT -->
+						<div class="col-md-3 col-lg-2">
+							<div class="fl-2">
+								<h6 class="d-title">Product</h6>
+						        <h6 class="m-title">Product</h6>
+								<ul class="foo-links clearfix">
+									<li><p><a href="#features">Features</a></p></li>
+									<li><p><a href="#how-it-works">How It Works</a></p></li>
+									<li><p><a href="#payments">Payment Methods</a></p></li>
+									<li><p><a href="#features">Technology &amp; Security</a></p></li>
+								</ul>
+							</div>
+						</div>	<!-- END FOOTER LINKS — PRODUCT -->
+
+
+						<!-- FOOTER LINKS — COMPANY -->
+					 	<div class="col-md-2">
+					 		<div class="fl-3">
+						        <h6 class="d-title">Company</h6>
+						        <h6 class="m-title">Company</h6>
+						     	<ul class="foo-links clearfix">
+						     	 	<li><p><a href="contacts.html">About SSLWIRELESS</a></p></li>
+						     	 	<li><p><a href="#payments">SSLCOMMERZ Gateway</a></p></li>
+						     	 	<li><p><a href="contacts.html">Contact</a></p></li>
+						     	 	<li><p><a href="contacts.html">Request a Demo</a></p></li>
+								</ul>
+							</div>
+					    </div>	<!-- END FOOTER LINKS — COMPANY -->
+
+
+					    <!-- FOOTER LINKS — RESOURCES + CONTACT -->
+					 	<div class="col-md-3 col-lg-3">
+					 		<div class="fl-4">
+						        <h6 class="d-title">Resources</h6>
+						        <h6 class="m-title">Resources</h6>
+						     	<ul class="foo-links clearfix">
+									<li><p><a href="#faqs">FAQ</a></p></li>
+									<li><p><a href="#stakeholders">For Schools</a></p></li>
+									<li><p><a href="#stakeholders">For Guardians</a></p></li>
+								</ul>
+								<!-- ⚠️ PLACEHOLDER contact — use the official support line only, never a personal number. -->
+								<ul class="foo-links clearfix">
+									<li><p><a href="mailto:[SUPPORT_EMAIL]">[SUPPORT_EMAIL]</a></p></li>
+									<li><p>[SUPPORT_PHONE]</p></li>
+									<li><p>Dhaka, Bangladesh</p></li>
+								</ul>
+							</div>
+					 	</div>	<!-- END FOOTER LINKS — RESOURCES -->
+
+
+					</div>	<!-- END FOOTER CONTENT -->
+
+
+					<hr>	<!-- FOOTER DIVIDER LINE -->
+
+
+					<!-- BOTTOM FOOTER -->
+					<div class="bottom-footer">
+						<div class="row row-cols-1 row-cols-md-2 d-flex align-items-center">
+
+
+							<!-- FOOTER COPYRIGHT -->
+							<div class="col">
+								<div class="footer-copyright copyright-logo">
+									<div class="footer-copyright-logo">
+										<img class="footer-logo lt-img" src="images/logo.png" alt="Education Payments">
+										<img class="footer-logo dt-img" src="images/logo-white.png" alt="Education Payments">
+									</div>
+									<p class="p-sm">&copy; 2026 Education Payments. <span>A SSLWIRELESS product. All Rights Reserved.</span></p>
+									<p class="p-sm"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></p>
+								</div>
+							</div>
+
+
+							<!-- FOOTER SOCIALS -->
+							<div class="col">
+								<ul class="bottom-footer-socials ico-20 text-end">
+									<li><a href="#"><span class="flaticon-facebook"></span></a></li>
+									<li><a href="#"><span class="flaticon-linkedin"></span></a></li>
+								</ul>
+							</div>
+
+
+						</div>  <!-- End row -->
+					</div>	<!-- END BOTTOM FOOTER -->
+
+
+				</div>     <!-- End container -->
+			</footer>   <!-- END FOOTER -->
+
+
+
+		</div>	<!-- END PAGE CONTENT -->
+
+
+
+
+		<!-- EXTERNAL SCRIPTS
+		============================================= -->
+		<script src="js/jquery-3.7.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/modernizr.custom.js"></script>
+		<script src="js/jquery.easing.min.js"></script>
+		<script src="js/jquery.appear.js"></script>
+		<script src="js/menu.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+		<script src="js/isotope.pkgd.min.js"></script>
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<script src="js/quick-form.js"></script>
+		<script src="js/jquery.validate.min.js"></script>
+		<script src="js/jquery.ajaxchimp.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/lunar.js"></script>
+		<script src="js/wow.js"></script>
+		<script src="js/cookies-message.js"></script>
+
+		<!-- Custom Script -->
+		<script src="js/custom.js"></script>
+
+		<!-- COOKIES MESSAGE -->
+        <script>
+        	$(document).ready(function () {
+        		setTimeout(function () {
+	      			$.CookiesMessage();
+	      		}, 1800)
+	      	});
+	    </script>
+
+		<!-- STYLE SWITCHER -->
+		<div id="stlChanger">
+			<div class="blockChanger bgChanger">
+            	<a href="#" class="chBut"><span class="flaticon-color-palette"></span></a>
+                <div class="chBody">
+
+                	<div class="stBlock text-center">
+						<div class="stBgs">
+							<p class="switch"></p>
+							<p>Color Scheme</p>
+							<a class="stB1" href="javascript:chooseStyle('blue-theme', 60)"><img src="images/color-scheme/blue.jpg" alt=""></a>
+							<a class="stB1" href="javascript:chooseStyle('pink-theme', 60)"><img src="images/color-scheme/pink.jpg" alt=""></a>
+							<a class="stB3" href="javascript:chooseStyle('orchid-theme', 60)"><img src="images/color-scheme/orchid.jpg" alt=""></a>
+							<a class="stB4" href="javascript:chooseStyle('skyblue-theme', 60)"><img src="images/color-scheme/skyblue.jpg" alt=""></a>
+							<a class="stB5" href="javascript:chooseStyle('violet-red-theme', 60)"><img src="images/color-scheme/violet-red.jpg" alt=""></a>
+							<a class="stB6" href="javascript:chooseStyle('indigo-theme', 60)"><img src="images/color-scheme/indigo.jpg" alt=""></a>
+						</div>
+					</div>
+
+					<div class="stBlock1 text-center">
+						<a class="btn r-06 btn--theme hover--tra-white" href="javascript:chooseStyle('none', 60)">Reset Color</a>
+					</div>
+
+				</div>
+			</div>
+		</div>	  <!-- END STYLE SWITCHER -->
+
+
+	</body>
+</html>
