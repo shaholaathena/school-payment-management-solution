@@ -37,8 +37,8 @@ export default function TextLink({
         gap: 0.75,
         fontSize: '0.9375rem',
         fontWeight: 600,
-        color: onDark ? '#A9B2FF' : color.brand[600],
-        '&:hover': { color: onDark ? '#C6CCFE' : color.brand[700] },
+        color: onDark ? color.brand[300] : color.brand[600],
+        '&:hover': { color: onDark ? color.brand[200] : color.brand[700] },
         '&:hover svg': { transform: 'translateX(3px)' },
         '& svg': { transition: `transform ${motion.base} ${motion.ease}` },
       }}

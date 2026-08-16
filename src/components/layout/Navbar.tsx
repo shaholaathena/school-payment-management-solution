@@ -143,7 +143,7 @@ export default function Navbar() {
               width: { xs: '100%', sm: 400 },
               bgcolor: color.ink[900],
               backgroundImage:
-                'radial-gradient(at 80% 0%, rgba(79,70,229,0.30) 0px, transparent 55%)',
+                'radial-gradient(at 80% 0%, rgba(0,153,242,0.30) 0px, transparent 55%)',
               color: '#fff',
               px: 3,
               py: 2.5,
@@ -188,7 +188,7 @@ export default function Navbar() {
                   fontSize: '1.375rem',
                   fontWeight: 700,
                   letterSpacing: '-0.02em',
-                  color: isActive(item.to) ? '#A9B2FF' : '#fff',
+                  color: isActive(item.to) ? color.brand[300] : '#fff',
                 }}
               >
                 {item.label}

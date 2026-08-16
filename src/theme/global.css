@@ -7,17 +7,17 @@
 :root {
   color-scheme: light;
 
-  /* Brand */
-  --brand-50: #eef1ff;
-  --brand-100: #e0e4ff;
-  --brand-200: #c6ccfe;
-  --brand-300: #a3abfc;
-  --brand-400: #8287f8;
-  --brand-500: #6366f1;
-  --brand-600: #4f46e5;
-  --brand-700: #4338ca;
-  --brand-800: #3730a3;
-  --brand-950: #1e1b4b;
+  /* Brand — azure, anchored at #0099f2 */
+  --brand-50: #eff8fe;
+  --brand-100: #d8eefd;
+  --brand-200: #b0ddfb;
+  --brand-300: #74c6f8;
+  --brand-400: #2fadf5;
+  --brand-500: #0ba0f3;
+  --brand-600: #0099f2;
+  --brand-700: #0073bc;
+  --brand-800: #0a5f99;
+  --brand-950: #0a3352;
 
   /* Accent */
   --accent-300: #67e8f9;

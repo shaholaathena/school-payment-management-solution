@@ -5,26 +5,25 @@
  *   1. `src/theme/index.ts`   → the MUI theme (component styling)
  *   2. `src/theme/global.css` → CSS custom properties (raw CSS access)
  *
- * ⚠️ BRAND: the indigo below is a considered placeholder, not an approved
- * brand palette. Confirm against official SSLCOMMERZ / SSLWIRELESS brand
- * guidelines before launch and change `brand` here — everything downstream
- * follows automatically.
+ * ⚠️ BRAND: primary is set to #0099F2 per explicit instruction. Confirm
+ * against official SSLCOMMERZ / SSLWIRELESS brand guidelines before launch —
+ * everything downstream follows automatically from `brand` here.
  */
 
 export const color = {
-  /** Deep indigo — primary brand ramp */
+  /** Azure — primary brand ramp, anchored at #0099F2 */
   brand: {
-    50: '#EEF1FF',
-    100: '#E0E4FF',
-    200: '#C6CCFE',
-    300: '#A3ABFC',
-    400: '#8287F8',
-    500: '#6366F1',
-    600: '#4F46E5',
-    700: '#4338CA',
-    800: '#3730A3',
-    900: '#2E2A7A',
-    950: '#1E1B4B',
+    50: '#EFF8FE',
+    100: '#D8EEFD',
+    200: '#B0DDFB',
+    300: '#74C6F8',
+    400: '#2FADF5',
+    500: '#0BA0F3',
+    600: '#0099F2',
+    700: '#0073BC',
+    800: '#0A5F99',
+    900: '#0D4E7C',
+    950: '#0A3352',
   },
   /** Cyan — used only for the accent gradient terminus and small highlights */
   accent: {
@@ -62,12 +61,12 @@ export const gradient = {
   /** Primary action / emphasis */
   brand: `linear-gradient(135deg, ${color.brand[600]} 0%, ${color.brand[500]} 100%)`,
   /** Display text emphasis on dark surfaces */
-  displayOnDark: `linear-gradient(105deg, #A9B2FF 0%, ${color.accent[300]} 100%)`,
+  displayOnDark: `linear-gradient(105deg, ${color.brand[300]} 0%, ${color.accent[300]} 100%)`,
   /** Large dark surface wash — restrained, three low-opacity blooms */
   darkSurface: `
-    radial-gradient(at 16% 12%, rgba(79,70,229,0.34) 0px, transparent 52%),
+    radial-gradient(at 16% 12%, rgba(0,153,242,0.34) 0px, transparent 52%),
     radial-gradient(at 84% 24%, rgba(6,182,212,0.20) 0px, transparent 50%),
-    radial-gradient(at 52% 96%, rgba(99,102,241,0.18) 0px, transparent 55%)
+    radial-gradient(at 52% 96%, rgba(11,160,243,0.18) 0px, transparent 55%)
   `,
   /** Subtle light-section wash */
   lightSurface: `linear-gradient(180deg, ${color.neutral[50]} 0%, ${color.neutral[0]} 100%)`,
@@ -118,7 +117,7 @@ export const shadow = {
   /** For product UI floating over dark surfaces */
   onDark: '0 24px 64px -12px rgba(0,0,0,0.5)',
   /** Brand-tinted lift for primary buttons */
-  brand: '0 8px 20px -6px rgba(79,70,229,0.45)',
+  brand: '0 8px 20px -6px rgba(0,153,242,0.45)',
 } as const;
 
 /** One easing, three durations. Consistency is the point. */

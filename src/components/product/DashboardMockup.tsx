@@ -109,14 +109,14 @@ export default function DashboardMockup({ view = 'overview', compact = false }: 
                     px: 1,
                     py: 0.625,
                     borderRadius: '6px',
-                    bgcolor: active ? 'rgba(99,102,241,0.24)' : 'transparent',
+                    bgcolor: active ? 'rgba(11,160,243,0.24)' : 'transparent',
                   }}
                 >
                   <Typography
                     sx={{
                       fontSize: 8.75,
                       fontWeight: active ? 600 : 400,
-                      color: active ? '#A9B2FF' : 'rgba(255,255,255,0.46)',
+                      color: active ? color.brand[300] : 'rgba(255,255,255,0.46)',
                     }}
                     noWrap
                   >

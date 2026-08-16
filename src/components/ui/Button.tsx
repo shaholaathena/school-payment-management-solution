@@ -29,7 +29,7 @@ const variantSx: Record<ButtonVariant, SxProps<Theme>> = {
     boxShadow: shadow.brand,
     '&:hover': {
       background: `linear-gradient(135deg, ${color.brand[700]} 0%, ${color.brand[600]} 100%)`,
-      boxShadow: '0 10px 24px -6px rgba(79,70,229,0.55)',
+      boxShadow: '0 10px 24px -6px rgba(0,153,242,0.55)',
     },
     '&.Mui-disabled': { background: color.neutral[200], color: color.neutral[400], boxShadow: 'none' },
   },

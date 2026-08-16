@@ -214,8 +214,8 @@ export default function HowItWorks() {
                       borderRadius: `${radius.md}px`,
                       display: 'grid',
                       placeItems: 'center',
-                      bgcolor: 'rgba(99,102,241,0.22)',
-                      color: '#A9B2FF',
+                      bgcolor: 'rgba(11,160,243,0.22)',
+                      color: color.brand[300],
                     }}
                   >
                     <Box component={p.icon} sx={{ width: 20, height: 20 }} aria-hidden />

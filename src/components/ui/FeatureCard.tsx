@@ -74,9 +74,9 @@ export default function FeatureCard({
             display: 'grid',
             placeItems: 'center',
             flexShrink: 0,
-            bgcolor: inverse ? 'rgba(99,102,241,0.20)' : color.brand[50],
+            bgcolor: inverse ? 'rgba(11,160,243,0.20)' : color.brand[50],
             border: `1px solid ${inverse ? 'rgba(255,255,255,0.10)' : color.brand[100]}`,
-            color: inverse ? '#A9B2FF' : color.brand[600],
+            color: inverse ? color.brand[300] : color.brand[600],
             transition: `transform ${motion.base} ${motion.ease}`,
           }}
         >
@@ -125,7 +125,7 @@ export default function FeatureCard({
             sx={{
               display: 'block',
               fontWeight: 600,
-              color: inverse ? '#A9B2FF' : color.brand[600],
+              color: inverse ? color.brand[300] : color.brand[600],
             }}
           >
             {outcome}

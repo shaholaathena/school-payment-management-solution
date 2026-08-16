@@ -148,7 +148,7 @@ export default function HomeHero() {
                   position: 'absolute',
                   inset: '-12% -8%',
                   background:
-                    'radial-gradient(ellipse at 50% 50%, rgba(99,102,241,0.28) 0%, transparent 68%)',
+                    'radial-gradient(ellipse at 50% 50%, rgba(11,160,243,0.28) 0%, transparent 68%)',
                   filter: 'blur(28px)',
                   pointerEvents: 'none',
                 }}

@@ -37,9 +37,9 @@ export default function CtaBand({
             color: '#fff',
             backgroundColor: color.ink[900],
             backgroundImage: `
-              radial-gradient(at 12% 8%, rgba(79,70,229,0.55) 0px, transparent 55%),
+              radial-gradient(at 12% 8%, rgba(0,153,242,0.55) 0px, transparent 55%),
               radial-gradient(at 88% 22%, rgba(6,182,212,0.32) 0px, transparent 52%),
-              radial-gradient(at 50% 100%, rgba(99,102,241,0.30) 0px, transparent 58%)
+              radial-gradient(at 50% 100%, rgba(11,160,243,0.30) 0px, transparent 58%)
             `,
           }}
         >

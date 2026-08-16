@@ -30,7 +30,7 @@ const steps = [
 export default function Home() {
   return (
     <>
-      <Box sx={{ position: 'relative', overflow: 'hidden', pt: { xs: 13, md: 16 }, pb: { xs: 10, md: 14 }, color: '#fff', backgroundColor: color.ink[900], backgroundImage: `${gradient.darkSurface}, radial-gradient(circle at 50% 70%, rgba(99,102,241,.12), transparent 38%)` }}>
+      <Box sx={{ position: 'relative', overflow: 'hidden', pt: { xs: 13, md: 16 }, pb: { xs: 10, md: 14 }, color: '#fff', backgroundColor: color.ink[900], backgroundImage: `${gradient.darkSurface}, radial-gradient(circle at 50% 70%, rgba(11,160,243,.12), transparent 38%)` }}>
         <Box aria-hidden sx={{ position: 'absolute', inset: 0, opacity: .35, backgroundImage: 'linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px)', backgroundSize: '64px 64px', maskImage: 'linear-gradient(to bottom, black, transparent 85%)' }} />
         <Container sx={{ position: 'relative' }}>
           <Grid container spacing={{ xs: 6, md: 8 }} sx={{ alignItems: 'center' }}>
@@ -53,7 +53,7 @@ export default function Home() {
             <Grid size={{ xs: 12, md: 6 }}>
               <Reveal delay={140}>
                 <Box sx={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
-                  <Box sx={{ position: 'absolute', width: 340, height: 340, borderRadius: '50%', background: 'rgba(99,102,241,.18)', filter: 'blur(55px)', top: '10%', right: '10%' }} />
+                  <Box sx={{ position: 'absolute', width: 340, height: 340, borderRadius: '50%', background: 'rgba(11,160,243,.18)', filter: 'blur(55px)', top: '10%', right: '10%' }} />
                   <Box sx={{ position: 'relative', width: '100%', maxWidth: 650, borderRadius: `${radius['2xl']}px`, overflow: 'hidden', border: '1px solid rgba(255,255,255,.13)', boxShadow: shadow.onDark, background: 'rgba(255,255,255,.05)', backdropFilter: 'blur(8px)', p: { xs: .75, md: 1.25 } }}>
                     <DashboardMockup view="overview" />
                   </Box>
@@ -85,7 +85,7 @@ export default function Home() {
 
       <Section tone="light"><Grid container spacing={{ xs: 6, md: 9 }} sx={{ alignItems: 'center' }}><Grid size={{ xs: 12, md: 6 }}><Reveal><Box sx={{ display: 'flex', justifyContent: 'center' }}><PhoneMockup width={300} onDark={false} /></Box></Reveal></Grid><Grid size={{ xs: 12, md: 6 }}><Reveal delay={100}><Typography variant="overline" sx={{ color: color.brand[600] }}>Guardian experience</Typography><Typography variant="h2" sx={{ mt: 1.5 }}>Send money and make payments without the friction.</Typography><Typography variant="subtitle1" sx={{ mt: 2.5, color: color.neutral[600] }}>A focused mobile-first experience makes outstanding fees, payment methods and confirmation easy to understand.</Typography><Stack direction="row" spacing={3} sx={{ mt: 3.5 }}>{[['7.8k', 'payments'], ['76%', 'digital adoption'], ['4.93', 'experience score']].map(([value, label]) => <Box key={label}><Typography sx={{ fontFamily: 'var(--font-display)', fontSize: '1.7rem', fontWeight: 800 }}>{value}</Typography><Typography variant="caption" sx={{ color: color.neutral[500] }}>{label}</Typography></Box>)}</Stack></Reveal></Grid></Grid></Section>
 
-      <Section tone="dark"><SectionHeading onDark eyebrow="Questions? Look here." title="Frequently asked questions" description="A few of the questions teams usually ask before moving payment collection online." /><Grid container spacing={2}>{['How do we get started?', 'Which payment methods can guardians use?', 'How are payments confirmed?', 'Can finance teams export reports?'].map((q, i) => <Grid size={{ xs: 12, md: 6 }} key={q}><Reveal delay={i * 60}><Box sx={{ p: 2.5, borderRadius: `${radius.lg}px`, border: '1px solid rgba(255,255,255,.12)', bgcolor: 'rgba(255,255,255,.045)' }}><Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}><BellRing size={18} color="#A9B2FF" /><Typography variant="h5" sx={{ color: '#fff' }}>{q}</Typography></Stack><Typography variant="body2" sx={{ mt: 1.5, color: 'rgba(255,255,255,.58)' }}>See the FAQ page for the full answer and implementation details.</Typography></Box></Reveal></Grid>)}</Grid></Section>
+      <Section tone="dark"><SectionHeading onDark eyebrow="Questions? Look here." title="Frequently asked questions" description="A few of the questions teams usually ask before moving payment collection online." /><Grid container spacing={2}>{['How do we get started?', 'Which payment methods can guardians use?', 'How are payments confirmed?', 'Can finance teams export reports?'].map((q, i) => <Grid size={{ xs: 12, md: 6 }} key={q}><Reveal delay={i * 60}><Box sx={{ p: 2.5, borderRadius: `${radius.lg}px`, border: '1px solid rgba(255,255,255,.12)', bgcolor: 'rgba(255,255,255,.045)' }}><Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}><BellRing size={18} color={color.brand[300]} /><Typography variant="h5" sx={{ color: '#fff' }}>{q}</Typography></Stack><Typography variant="body2" sx={{ mt: 1.5, color: 'rgba(255,255,255,.58)' }}>See the FAQ page for the full answer and implementation details.</Typography></Box></Reveal></Grid>)}</Grid></Section>
 
       <CtaBand title="Get started with a simpler payment experience." description="See how the platform can fit your institution's fee collection workflow." />
     </>
