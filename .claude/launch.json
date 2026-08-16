@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 5173
+    },
+    {
+      "name": "spc-html",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["SPC HTML/serve-spc.cjs"],
+      "port": 8791
     }
   ]
 }
