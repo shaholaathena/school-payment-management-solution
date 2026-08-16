@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { CheckCircle2, LockKeyhole, ReceiptText, WalletCards } from 'lucide-react';
@@ -8,15 +7,20 @@ import HomeFaq from '../components/sections/HomeFaq';
 import HomeHero from '../components/sections/HomeHero';
 import PlatformStory from '../components/sections/PlatformStory';
 import ProcessJourney from '../components/sections/ProcessJourney';
+import ProductPreviewBand from '../components/sections/ProductPreviewBand';
 import ProductShowcase from '../components/sections/ProductShowcase';
 import SecurityBand from '../components/sections/SecurityBand';
 import Stakeholders from '../components/sections/Stakeholders';
+import Testimonials from '../components/sections/Testimonials';
 import TrustBar from '../components/sections/TrustBar';
 import UseCases from '../components/sections/UseCases';
 import ValueBar from '../components/sections/ValueBar';
+import BlobIcon from '../components/ui/BlobIcon';
+import Panel from '../components/ui/Panel';
 import Reveal from '../components/ui/Reveal';
 import Section from '../components/ui/Section';
-import { color, radius, shadow } from '../theme/tokens';
+import SectionHeading from '../components/ui/SectionHeading';
+import { color } from '../theme/tokens';
 
 const quickBenefits = [
   { icon: WalletCards, title: 'Quick payments', text: 'Let guardians settle tuition and other fees through a simple digital payment flow.' },
@@ -35,20 +39,28 @@ export default function Home() {
       <ValueBar />
       <TrustBar />
 
-      {/* Refined homepage: compact benefit cards for fast scanning */}
-      <Section tone="light" density="tight">
-        <Typography variant="overline" component="p" sx={{ textAlign: 'center', color: color.neutral[400], mb: 3.5 }}>
-          Everything in one place
-        </Typography>
-        <Grid container spacing={2}>
+      {/* "Everything in one place" — Pintex features-1 treatment: centered
+          heading + a row of blob-icon cards (kept on the azure system). */}
+      <Section tone="light">
+        <SectionHeading
+          align="center"
+          eyebrow="Platform"
+          title="Everything in one place"
+          description="The essentials of fee collection — payments, reporting, verification and security — in one system."
+        />
+        <Grid container spacing={3}>
           {quickBenefits.map(({ icon: Icon, title, text }, i) => (
             <Grid size={{ xs: 12, sm: 6, md: 3 }} key={title}>
-              <Reveal delay={i * 60}>
-                <Box sx={{ p: 2.5, height: '100%', border: `1px solid ${color.neutral[200]}`, borderRadius: `${radius.lg}px`, bgcolor: '#fff', transition: 'transform 250ms ease, box-shadow 250ms ease', '&:hover': { transform: 'translateY(-4px)', boxShadow: shadow.lg } }}>
-                  <Box sx={{ width: 42, height: 42, display: 'grid', placeItems: 'center', borderRadius: `${radius.md}px`, bgcolor: color.brand[50], color: color.brand[600], mb: 2 }}><Icon size={20} /></Box>
-                  <Typography variant="h5">{title}</Typography>
-                  <Typography variant="body2" sx={{ mt: 1, color: color.neutral[600] }}>{text}</Typography>
-                </Box>
+              <Reveal delay={i * 60} sx={{ display: 'flex' }}>
+                <Panel
+                  lift
+                  fullHeight
+                  sx={{ flex: 1, p: { xs: 3, lg: 3.5 }, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+                >
+                  <BlobIcon icon={Icon} size="md" variant={i} />
+                  <Typography variant="h5" component="h3" sx={{ mt: 3 }}>{title}</Typography>
+                  <Typography variant="body2" sx={{ mt: 1.25, color: color.neutral[500] }}>{text}</Typography>
+                </Panel>
               </Reveal>
             </Grid>
           ))}
@@ -58,6 +70,7 @@ export default function Home() {
       {/* Master product story and stakeholder value */}
       <PlatformStory />
       <Stakeholders />
+      <ProductPreviewBand />
 
       {/* Master journey strengthened by the refined product-first presentation */}
       <ProcessJourney />
@@ -65,8 +78,9 @@ export default function Home() {
       <Benefits />
       <UseCases />
 
-      {/* Master security, FAQ and conversion close */}
+      {/* Master security, social proof, FAQ and conversion close */}
       <SecurityBand />
+      <Testimonials />
       <HomeFaq />
       <CtaBand title="Get started with a simpler payment experience." description="See how the platform can fit your institution's fee collection workflow." />
     </>
